@@ -11,32 +11,54 @@ nav {
   width: 100%;
   height: 13rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 4fr 2fr 2fr;
-  gap: 4rem;
+  grid-template-columns: 1fr 1fr 1fr 9fr 1fr 1fr;
+  gap: 2rem;
 }
 
 nav a {
-  margin: 2rem 4rem 0rem 8rem;
-  padding-left: 2rem;
+  margin: 2rem 0rem 0rem 8rem;
   text-decoration: none;
   max-height: 13rem;
 }
 
+.comkub {
+  margin-top: 0.5rem;
+  padding-left: 10rem;
+  height: 10rem;
+}
+
+.article {
+  margin-top: 0.5rem;
+}
+
+.review {
+  margin-top: 0.5rem;
+}
+
 .search-section {
-  justify-self: flex-end;
-  max-height: 13rem;
+  justify-self: right;
+  height: 13rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .category-btn {
   height: 7rem;
   width: 7rem;
-  justify-self: flex-end;
-  margin-top: 3.5rem;
+  justify-self: right;
+  margin-top: 2rem;
   margin-right: 3rem;
+  background-color: orange;
+  border: 0rem;
 }
 
-.category {
-  height: 6rem;
+.category-icon {
+  height: 7rem;
+  margin-top: 3.5rem;
+}
+
+.searchbar-section {
+  margin-top: 6rem;
 }
 
 .search-icon {
@@ -46,47 +68,51 @@ nav a {
 }
 
 .search-bar {
-  margin: 3.5rem 3rem 0rem 1rem;
+  margin: 0rem 0rem 0rem 1rem;
+  padding-top: 0rem;
 } 
 
 input {
-  height: 5rem;
+  height: 6rem;
   width: 50rem;
   text-align: end;
   font-size: 3.5rem;
 }
 
 .darkmode-section {
-  justify-self: flex-end;
+  justify-self: flex-start;
   height: 13rem;
 }
 
 .darkmode-btn {
-  height: 9rem;
-  width: 9rem;
+  height: 7rem;
+  width: 7rem;
   border-radius: 50%;
-  margin-top: 2rem;
+  margin-top: 5rem;
+  background-color: orange;
+  border: 0rem;
 }
 
 .darkmode-icon {
-  height: 9rem;
+  height: 7rem;
 }
 
 .account-section {
   justify-self: flex-end;
   padding-right: 2rem;
-  max-height: 13rem;
+  height: 13rem;
 }
 
 .account-btn {
-  height: 12rem;
-  width: 12rem;
-  margin-top: 3.5rem;
+  height: 11rem;
+  width: 11rem;
   margin-right: 3rem;
+  margin-top: 1rem;
   border-radius: 50%;
+  background-color: white;
+  border: 0rem;
 }
 
 .account-icon {
-  height: 12rem;
-
+  height: 10rem;
 }
