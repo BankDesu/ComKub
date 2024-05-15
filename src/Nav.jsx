@@ -25,9 +25,10 @@ function Nav() {
         </a>
         {/* Review */}
         <div className="search-section">
+          <div className="category-section">
           <button className="category-btn">
             <img className="category-icon" src={category}></img>
-          </button>
+          </button></div>
           <div className="searchbar-section">
             <img className="search-icon" src={search} />
             <input className="search-bar" type="search" />
