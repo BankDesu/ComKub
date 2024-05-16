@@ -7,28 +7,28 @@ import category from "./assets/category.png";
 import search from "./assets/search.png";
 import account from "./assets/account.png";
 import moon from "./assets/moon.png";
+import { Link } from "react-router-dom";
 
 function Nav() {
   return (
     <>
       <nav>
-        <a href="#">
+        <Link to="/">
           <img className="comkub" src={comkub} height="150" />
-        </a>
-        {/*Home */}
-        <a href="#">
+        </Link>
+        <Link to="/article">
           <img className="article" src={paper2} height="150" />
-        </a>{" "}
-        {/* Article */}
-        <a href="#">
+        </Link>{" "}
+        <Link to="/review">
           <img className="review" src={review} height="150" />
-        </a>
+        </Link>
         {/* Review */}
         <div className="search-section">
           <div className="category-section">
-          <button className="category-btn">
-            <img className="category-icon" src={category}></img>
-          </button></div>
+            <button className="category-btn">
+              <img className="category-icon" src={category}></img>
+            </button>
+          </div>
           <div className="searchbar-section">
             <img className="search-icon" src={search} />
             <input className="search-bar" type="search" />
@@ -40,9 +40,11 @@ function Nav() {
           </button>
         </div>
         <div className="account-section">
-          <button className="account-btn">
-            <img className="account-icon" src={account} />
-          </button>
+          <Link to="/Account">
+            <button className="account-btn">
+              <img className="account-icon" src={account} />
+            </button>
+          </Link>
         </div>
       </nav>
     </>

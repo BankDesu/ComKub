@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  box-sizing: border-box;
+}
+
+body {
+  justify-content: center;
+  width: 100%;
+}
+
+.content-container-article {
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  margin: 2rem 0rem 0rem 0rem;
+}
+
+.data-article {
+  justify-self: center;
+  text-align: center;
+  vertical-align: middle;
+  border: 0.1rem solid black;
+  height: 15rem;
+  width: 60rem;
+  margin: 2rem;
+  padding: 6rem;
+}
