@@ -4,40 +4,99 @@
   box-sizing: border-box;
 }
 
-nav {
-  background-color: orange;
-  margin-top: 1.5rem;
+#root{
   width: 100%;
-  height: 4.2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 10fr 1fr 1fr;
-  gap: 2rem;
+}
 
+nav {
+  background-color: white;
+  width: 100%;
+  height: 4.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   position: -webkit-sticky; 
   position: sticky;
   overflow: hidden;
   top: 0;
+  filter: drop-shadow(grey 0px -7px 5px);
 }
 
 nav a {
   text-decoration: none;
   max-height: 4rem;
+  text-align: center;
+}
+
+.flex-start{
+  display: flex;
+  align-items: center;
 }
 
 .comkub {
-  margin: 0.75rem 0rem 0rem 1rem;
+  margin: 0.75rem 2.5rem 0rem 5rem;
   padding-left: 2rem;
-  height: 3rem;
+  height: 2rem;
+  filter: sepia(200%) hue-rotate(169deg) brightness(35%) saturate(7500%);
 }
 
-.article {
-  margin: 0.5rem 0rem 0rem 1rem;
-  height: 3rem;
+.article-img {
+  margin: 0.2rem 2.5rem 0rem 0rem;
+  height: 1.7rem;
 }
 
-.review {
-  margin: 0.5rem 0rem 0rem 1rem;
+/* .article-text,
+.article-text {
+  font-size: 0.75rem;
+  color: black;
+} */
+
+.review-img {
+  margin: 0.3rem 0rem 0rem 0rem;
+  height: 2rem;
+}
+
+.flex-end{
+  display: flex;
+  align-items: center;
+}
+
+.darkmode-section {
+  height: 2rem;
+  justify-self: end;
+  margin: 0rem 2.5rem 0rem 0rem;
+}
+
+.darkmode-btn {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  border: 0rem;
+  background-color: white;
+}
+
+.darkmode-icon {
+  height: 2rem;
+}
+
+.account-section {
+  padding:0rem 2rem 0rem 0rem ;
   height: 3rem;
+  justify-self: flex-end;
+}
+
+.account-btn {
+  height: 2.5rem;
+  width: 2.5rem;
+  margin: 0.2rem 0rem 0rem 0rem;
+  border-radius: 50%;
+  border: 0.1rem solid black;
+  background-color: white;
+  text-align: center;
+}
+
+.account-icon {
+  height: 2rem;
 }
 
 .search-section {
@@ -55,7 +114,7 @@ nav a {
 .category-btn {
   height: 2.5rem;
   width: 2.5rem;
-  background-color: orange;
+  background-color: white;
   border: 0rem;
   margin: 1.4rem 1.5rem 0rem 0rem;
 }
@@ -89,41 +148,4 @@ input {
   width: 10rem;
   text-align: end;
   font-size: 3.5rem;
-}
-
-.darkmode-section {
-  justify-self: flex-start;
-  height: 2rem;
-}
-
-.darkmode-btn {
-  height: 2rem;
-  width: 2rem;
-  border-radius: 50%;
-  border: 0rem;
-  background-color: orange;
-  margin:1.4rem 0rem 0rem 0rem ;
-}
-
-.darkmode-icon {
-  height: 2rem;
-}
-
-.account-section {
-  justify-self: flex-end;
-  padding:0rem 2rem 0rem 0rem ;
-  height: 3rem;
-}
-
-.account-btn {
-  height: 2.5rem;
-  width: 2.5rem;
-  margin: 0.75rem 0rem 0rem 0rem;
-  border-radius: 50%;
-  border: 0rem;
-  background-color: white;
-}
-
-.account-icon {
-  height: 2.5rem;
 }

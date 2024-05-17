@@ -1,50 +1,42 @@
 import { useState } from "react";
 import "./App.css";
 import comkub from "./assets/comkub.png";
-import paper2 from "./assets/paper2.png";
-import review from "./assets/review.png";
-import category from "./assets/category.png";
-import search from "./assets/search.png";
-import account from "./assets/account.png";
-import moon from "./assets/moon.png";
 import { Link } from "react-router-dom";
 
 function Nav() {
   return (
     <>
       <nav>
-        <Link to="/">
-          <img className="comkub" src={comkub} height="150" />
-        </Link>
-        <Link to="/article">
-          <img className="article" src={paper2} height="150" />
-        </Link>{" "}
-        <Link to="/review">
-          <img className="review" src={review} height="150" />
-        </Link>
-        {/* Review */}
-        <div className="search-section">
-          <div className="category-section">
-            <button className="category-btn">
-              <img className="category-icon" src={category}></img>
-            </button>
-          </div>
-          <div className="searchbar-section">
-            <img className="search-icon" src={search} />
-            <input className="search-bar" type="search" />
-          </div>
-        </div>
-        <div className="darkmode-section">
-          <button className="darkmode-btn">
-            <img className="darkmode-icon" src={moon} />
-          </button>
-        </div>
-        <div className="account-section">
-          <Link to="/Account">
-            <button className="account-btn">
-              <img className="account-icon" src={account} />
-            </button>
+        <div className="flex-start">
+          <Link to="/">
+            <img className="comkub" src={comkub} height="150" />
           </Link>
+          <Link to="/article" className="article">
+            <img
+              className="article-img"
+              src="https://icons.veryicon.com/png/o/miscellaneous/shaanxi-left-column-icon/article-management-3.png"
+            />
+            {/* <p className="article-text">บทความ</p> */}
+          </Link>{" "}
+          <Link to="/review" className="review">
+            <img className="review-img" src="https://cdn-icons-png.flaticon.com/512/2701/2701190.png" />
+            {/* <p className="article-text">รีวิว</p> */}
+          </Link>
+        </div>
+
+        <div className="flex-end">
+          <div className="darkmode-section">
+            <button className="darkmode-btn">
+              <img className="darkmode-icon" src="https://static-00.iconduck.com/assets.00/moon-icon-512x512-fm9crgpt.png" />
+            </button>
+          </div>
+          <div className="account-section">
+            <Link to="/Account">
+              <button className="account-btn">
+                <img className="account-icon" src="https://www.svgrepo.com/show/456992/account.svg" />
+              </button>
+            </Link>
+          </div>
         </div>
       </nav>
     </>
