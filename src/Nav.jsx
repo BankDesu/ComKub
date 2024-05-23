@@ -9,7 +9,7 @@ function Nav() {
       <nav>
         <div className="flex-start">
           <Link to="/">
-            <img className="comkub" src={comkub} height="150" />
+            <img className="comkub" src={comkub} />
           </Link>
           <Link to="/article" className="article">
             <img

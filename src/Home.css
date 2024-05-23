@@ -26,10 +26,11 @@ body {
   width: 20rem;
   margin: 1.5rem;
   padding: 6rem;
+  transition: transform 0.15s;
 }
 
 .slideset1 {
-  height: 21rem;
+  height: 22rem;
   position: relative;
   overflow: hidden;
 }
@@ -40,22 +41,42 @@ body {
   animation: 15s autoplay1 infinite ease-in-out;
 }
 @keyframes autoplay1 {
-  0% {left: -100%}
-  4% {left: 27.5%}
-  33.33% {left: 27.5%}
-  37.33% {left: 100%}
-  100% {left: 100%}
+  0% {
+    left: -100%;
+  }
+  4% {
+    left: 27.5%;
+  }
+  33.33% {
+    left: 27.5%;
+  }
+  37.33% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
-.slideset1 > *:nth-child(1) {animation-delay: 0s}
-.slideset1 > *:nth-child(2) {animation-delay: 5s}
-.slideset1 > *:nth-child(3) {animation-delay: 10s}
+.slideset1 > *:nth-child(1) {
+  animation-delay: 0s;
+}
+.slideset1 > *:nth-child(2) {
+  animation-delay: 5s;
+}
+.slideset1 > *:nth-child(3) {
+  animation-delay: 10s;
+}
 
 .slide1,
 .slide2,
-.slide3{
+.slide3 {
   border: 2px solid black;
   height: 17rem;
   width: 40rem;
   text-align: center;
   padding: 3rem 0rem 0rem 0rem;
+  background-color: white;
+  filter: drop-shadow(20px 15px 4px grey);
+  transition: transform 0.15s;
 }
+

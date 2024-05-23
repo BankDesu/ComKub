@@ -20,6 +20,7 @@ nav {
   overflow: hidden;
   top: 0;
   filter: drop-shadow(grey 0px -7px 5px);
+  z-index: 2;
 }
 
 nav a {
@@ -34,15 +35,17 @@ nav a {
 }
 
 .comkub {
-  margin: 0.75rem 2.5rem 0rem 5rem;
+  margin: 0.5rem 2.5rem 0rem 3rem;
   padding-left: 2rem;
-  height: 2rem;
+  height: 2.5rem;
   filter: sepia(200%) hue-rotate(169deg) brightness(35%) saturate(7500%);
+  transition: transform 0.15s;
 }
 
 .article-img {
   margin: 0.2rem 2.5rem 0rem 0rem;
-  height: 1.7rem;
+  height: 2rem;
+  transition: transform 0.15s;
 }
 
 /* .article-text,
@@ -53,7 +56,8 @@ nav a {
 
 .review-img {
   margin: 0.3rem 0rem 0rem 0rem;
-  height: 3rem;
+  height: 3.5rem;
+  transition: transform 0.15s;
 }
 
 .flex-end {
@@ -73,10 +77,11 @@ nav a {
   border-radius: 50%;
   border: 0rem;
   background-color: white;
+  transition: transform 0.15s;
 }
 
 .darkmode-icon {
-  height: 1.5rem;
+  height: 1.7rem;
 }
 
 .account-section {
@@ -93,6 +98,7 @@ nav a {
   border: 0.1rem solid black;
   background-color: white;
   text-align: center;
+  transition: transform 0.15s;
 }
 
 .account-icon {
@@ -117,6 +123,7 @@ nav a {
   border: 0rem;
   margin: 1.6rem 0.5rem 0rem 0rem;
   background-color: rgb(153, 244, 244);
+  transition: transform 0.15s;
 }
 
 .category-icon {
@@ -138,6 +145,7 @@ nav a {
   margin: 0.6rem 0rem 0rem 0rem;
   background-color: white;
   border: none;
+  transition: transform 0.15s;
 }
 
 .search-icon {
@@ -166,3 +174,19 @@ input[type="search"]::-webkit-search-results-decoration {
     display: none;
 }
 
+.slide1:hover,
+.slide2:hover,
+.slide3:hover,
+.data-home:hover,
+.comkub:hover { 
+  transform: scale(1.1);
+}
+
+.article-img:hover,
+.review-img:hover,
+.darkmode-btn:hover,
+.account-btn:hover,
+.category-btn:hover,
+.search-btn:hover {
+  transform: scale(1.2);
+}
