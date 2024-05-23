@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import "./Account.css";
-import account from "./assets/account.png";
 import { Link } from "react-router-dom";
 
 function Radio({ value, label, onChange, current }) {
