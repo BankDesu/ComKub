@@ -33,9 +33,6 @@ function Home() {
         <div className="slide1">
           <h1>This is slide 1</h1>
           <p>Slide 1</p>
-          <p>
-            It has a <a href="./">link.</a>
-          </p>
         </div>
         <div className="slide2">
           <h1>This is the second slide</h1>
@@ -62,6 +59,14 @@ function Home() {
         <div className="data-home">11</div>
         <div className="data-home">12</div>
         <div className="data-home">13</div>
+      </div>
+      <div className="about-section">
+        <h3>เกี่ยวกับ Comkub</h3>
+        <a>เกี่ยวกับเรา</a>
+        <p>ติดตามเรา</p>
+        <div className="contact">
+          <img className="fb" src='https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png'/>
+        </div>
       </div>
     </>
   );

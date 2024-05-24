@@ -16,18 +16,16 @@ function Nav() {
               className="article-img"
               src="https://icons.veryicon.com/png/o/miscellaneous/shaanxi-left-column-icon/article-management-3.png"
             />
-            {/* <p className="article-text">บทความ</p> */}
           </Link>{" "}
           <Link to="/review" className="review">
             <img className="review-img" src="https://cdn-icons-png.flaticon.com/512/2701/2701190.png" />
-            {/* <p className="article-text">รีวิว</p> */}
           </Link>
         </div>
 
         <div className="flex-end">
           <div className="darkmode-section">
             <button className="darkmode-btn">
-              <img className="darkmode-icon" src="https://static-00.iconduck.com/assets.00/moon-icon-512x512-fm9crgpt.png" />
+              <img className="darkmode-icon" src="https://www.svgrepo.com/show/315691/dark-mode.svg" />
             </button>
           </div>
           <div className="account-section">

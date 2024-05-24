@@ -20,7 +20,7 @@ nav {
   overflow: hidden;
   top: 0;
   filter: drop-shadow(grey 0px -7px 5px);
-  z-index: 2;
+  z-index: 100;
 }
 
 nav a {
@@ -37,7 +37,7 @@ nav a {
 .comkub {
   margin: 0.5rem 2.5rem 0rem 3rem;
   padding-left: 2rem;
-  height: 2.5rem;
+  height: 2.2rem;
   filter: sepia(200%) hue-rotate(169deg) brightness(35%) saturate(7500%);
   transition: transform 0.15s;
 }
@@ -81,7 +81,7 @@ nav a {
 }
 
 .darkmode-icon {
-  height: 1.7rem;
+  height: 2rem;
 }
 
 .account-section {
@@ -110,7 +110,7 @@ nav a {
   width: 100%;
   height: 5rem;
   justify-content: center;
-  background-color: rgb(153, 244, 244);
+  background-color: rgb(174, 235, 235);
 }
 
 .category-section {
@@ -122,7 +122,7 @@ nav a {
   width: 2.5rem;
   border: 0rem;
   margin: 1.6rem 0.5rem 0rem 0rem;
-  background-color: rgb(153, 244, 244);
+  background-color: rgb(174, 235, 235);
   transition: transform 0.15s;
 }
 
@@ -133,7 +133,7 @@ nav a {
 
 .searchbar-section {
   height: 2.5rem;
-  width: 20rem;
+  width: 28rem;
   background-color: white;
   margin: 1.5rem 0rem 0rem 0rem;
   display: flex;
@@ -155,11 +155,11 @@ nav a {
 
 .search-bar {
   height: 2.2rem;
-  width: 18rem;
+  width: 26rem;
   font-size: 15px;
   text-align: left;
   margin: 0;
-  padding: 0.5rem 0rem 0rem 0.5rem;
+  padding: 0.5rem 0rem 0rem 0.8rem;
   border: 0;
 }
 
@@ -174,19 +174,20 @@ input[type="search"]::-webkit-search-results-decoration {
     display: none;
 }
 
-.slide1:hover,
-.slide2:hover,
-.slide3:hover,
-.data-home:hover,
-.comkub:hover { 
-  transform: scale(1.1);
-}
+
 
 .article-img:hover,
 .review-img:hover,
 .darkmode-btn:hover,
 .account-btn:hover,
 .category-btn:hover,
-.search-btn:hover {
-  transform: scale(1.2);
+.search-btn:hover,
+.comkub:hover  {
+  transform: scale(1.1);
+}
+
+.data-home:hover{
+  transform: scale(1.05);
+  background-color: white;
+  filter: drop-shadow(5px 5px 4px grey);
 }

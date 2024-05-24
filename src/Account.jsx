@@ -49,7 +49,7 @@ function Account() {
           src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
         />
       </Link>
-      <img className="sign-in-icon" src={account} />
+      <img className="sign-in-icon" src='https://static.vecteezy.com/system/resources/thumbnails/021/079/672/small/user-account-icon-for-your-design-only-free-png.png' />
       <h1 className="sign-in">SIGN IN</h1>
       <form className="form">
         <input
