@@ -29,14 +29,6 @@ body {
   transition: transform 0.15s;
 }
 
-.about-section {
-  height: 20rem;
-  width: 100%;
-  background-color: rgb(174, 235, 235);
-  margin: 1rem 0rem;
-  padding: 2rem;
-}
-
 .slideset1 {
   height: 22rem;
   position: relative;
@@ -101,3 +93,28 @@ body {
 .about-section>a {
   padding: 3rem 0rem 0rem 0rem;
 }
+
+.about-section {
+  height: 16rem;
+  width: 100%;
+  background-color: rgb(33, 62, 121);
+  margin: 1rem 0rem 0rem 0rem;
+  position: relative
+}
+
+.wave {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.about {
+  z-index: 2;
+  position: absolute;
+  color: white;
+  top: 10%;
+  left: 2.5%;
+  height: 12rem;
+  display: flex;
+}
+

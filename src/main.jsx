@@ -5,7 +5,7 @@ import './index.css'
 import Home from './Home';
 import Article from './Article';
 import Review from './Review';
-import Account from './Account';
+import SignInSide from './SignInSide';
 
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
 
@@ -23,8 +23,8 @@ const router = createBrowserRouter([
     element: <Review/>
   },
   {
-    path: "account",
-    element: <Account/>
+    path: "signInSide",
+    element: <SignInSide/>
   },
 ]);
 

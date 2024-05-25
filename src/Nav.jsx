@@ -29,7 +29,7 @@ function Nav() {
             </button>
           </div>
           <div className="account-section">
-            <Link to="/Account">
+            <Link to="/SignInSide">
               <button className="account-btn">
                 <img className="account-icon" src="https://www.svgrepo.com/show/456992/account.svg" />
               </button>
