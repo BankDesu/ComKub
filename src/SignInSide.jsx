@@ -32,16 +32,22 @@ export default function SignInSide() {
       name: data.get("name"),
       email2: data.get("email2"),
       password2: data.get("password2"),
-
     });
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid className="SideSignIn"
+      <Grid
+        className="SideSignIn"
         container
         component="main"
-        sx={{ height: "100vh", position: "relative" }}
+        sx={{
+          height: "100vh",
+          position: "relative",
+          backgroundColor: checked
+            ? "#010101"
+            : "#0e0a21",
+        }}
       >
         <CssBaseline />
         <Grid
@@ -49,6 +55,7 @@ export default function SignInSide() {
           xs={false}
           sm={4}
           md={7}
+          className={checked ? "move-left" : "move-right"}
           sx={{
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
@@ -63,7 +70,7 @@ export default function SignInSide() {
               : "url(https://images6.alphacoders.com/133/1338694.png)",
             top: "0%",
             left: checked ? "0%" : "41.7%",
-            zIndex: checked ? "2" : "2",
+            zIndex: "5",
             width: "100%",
             height: "100%",
           }}
@@ -85,7 +92,8 @@ export default function SignInSide() {
             position: "absolute",
             top: 0,
             right: 0,
-            zIndex: checked ? "3" : "1",
+            zIndex: "2",
+            opacity: checked ? "100%" : "0%",
           }}
         >
           <Box
@@ -97,14 +105,14 @@ export default function SignInSide() {
               alignItems: "center",
             }}
           >
-            <Link to="/">  
+            <Link to="/">
               <Box
                 sx={{
                   position: "absolute",
                   top: 10,
                   left: -950,
                   m: 2,
-                  zIndex: "10",
+                  zIndex: "2",
                 }}
               >
                 <HomeIcon sx={{ color: "white", fontSize: 50 }} />
@@ -178,8 +186,6 @@ export default function SignInSide() {
           </Box>
         </Grid>
 
-
-
         <Grid
           item
           xs={12}
@@ -197,7 +203,8 @@ export default function SignInSide() {
             position: "absolute",
             top: 0,
             left: 0,
-            zIndex: checked ? "1" : "3",
+            zIndex: "2",
+            opacity: checked ? "0%" : "100%",
           }}
         >
           <Box
@@ -216,10 +223,10 @@ export default function SignInSide() {
                   top: 10,
                   left: 45,
                   m: 2,
-                  zIndex: "5",
+                  zIndex: "10",
                 }}
               >
-                <HomeIcon sx={{ color: "black", fontSize: 50 }} />
+                <HomeIcon sx={{ color: "#1f6bb1", fontSize: 50 }} />
               </Box>
             </Link>
             <Avatar

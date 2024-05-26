@@ -1,0 +1,35 @@
+@keyframes moveBackgroundLeft {
+  0% {
+    transform: translateX(100%);
+    z-index: 5;
+  }
+  85% {
+    z-index: 5;
+  }
+  100% {
+    transform: translateX(0%);
+    z-index: 1;
+  }
+}
+
+@keyframes moveBackgroundRight {
+  0% {
+    transform: translateX(-80%);
+    z-index: 5;
+  }
+  85% {
+    z-index: 5;
+  }
+  100% {
+    transform: translateX(0%);
+    z-index: 1;
+  }
+}
+
+.move-left {
+  animation: moveBackgroundLeft 0.5s ease-in-out forwards;
+}
+
+.move-right {
+  animation: moveBackgroundRight 0.5s ease-in-out forwards;
+}
