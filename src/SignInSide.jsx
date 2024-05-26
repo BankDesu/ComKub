@@ -46,7 +46,22 @@ export default function SignInSide() {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          sx={{
+            height: "100vh",
+            background: "linear-gradient(to right, #D9E7FE, #F7FAFE)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Box
             sx={{
               my: 8,
@@ -71,7 +86,11 @@ export default function SignInSide() {
             <Avatar
               sx={{ m: 1, bgcolor: "rgb(63, 175, 209)", width: 55, height: 55 }}
             ></Avatar>
-            <Typography component="h1" variant="h5" sx={{fontSize:35,marginTop:2}}>
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{ fontSize: 35, marginTop: 2 }}
+            >
               Sign in
             </Typography>
             <Box
@@ -112,7 +131,7 @@ export default function SignInSide() {
               >
                 Sign In
               </Button>
-              <Grid container sx={{marginTop:4}}>
+              <Grid container sx={{ marginTop: 4 }}>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?

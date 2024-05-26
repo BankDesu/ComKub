@@ -156,16 +156,17 @@ function Home() {
               className="contact"
               style={{
                 marginTop: "1rem",
-                height: "2.2rem",
+                height: "2.5rem",
                 width:'17rem',
                 border: "solid",
-                backgroundColor: "white",
-                borderRadius:'15px'
+                backgroundColor: 'white',
+                borderRadius:'15px',
+
               }}
             >
               <img
                 className="fb"
-                style={{ marginTop: "0rem",marginLeft:'1rem', width: "2rem" }}
+                style={{ marginTop: "0.1rem",marginLeft:'1rem', width: "2rem" }}
                 src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png"
               />
               <img
