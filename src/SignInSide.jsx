@@ -110,7 +110,7 @@ export default function SignInSide() {
                 sx={{
                   position: "absolute",
                   top: 10,
-                  left: -950,
+                  left: -850,
                   m: 2,
                   zIndex: "2",
                 }}

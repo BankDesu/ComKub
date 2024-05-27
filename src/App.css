@@ -48,12 +48,6 @@ nav a {
   transition: transform 0.15s;
 }
 
-/* .article-text,
-.article-text {
-  font-size: 0.75rem;
-  color: black;
-} */
-
 .review-img {
   margin: 0.3rem 0rem 0rem 0rem;
   height: 3.5rem;
@@ -99,6 +93,9 @@ nav a {
   background-color: white;
   text-align: center;
   transition: transform 0.15s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .account-icon {

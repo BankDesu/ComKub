@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from "./Nav";
+import Sidebar from "./Sidebar";
 import "./Home.css";
 
 function Home() {
@@ -29,36 +30,41 @@ function Home() {
           </button>
         </div>
       </div>
-      <div className="slideset1">
-        <div className="slide1">
-          <h1>This is slide 1</h1>
-          <p>Slide 1</p>
-        </div>
-        <div className="slide2">
-          <h1>This is the second slide</h1>
-          <p>Second slide</p>
-        </div>
-        <div className="slide3">
-          <h1>This is slide number 3</h1>
-          <p>Slide number 3</p>
-        </div>
-      </div>
+      <div className="container flex">
+        <Sidebar />
+        <div className="data-wrap">
+          <div className="slideset1">
+            <div className="slide1">
+              <h1>This is slide 1</h1>
+              <p>Slide 1</p>
+            </div>
+            <div className="slide2">
+              <h1>This is the second slide</h1>
+              <p>Second slide</p>
+            </div>
+            <div className="slide3">
+              <h1>This is slide number 3</h1>
+              <p>Slide number 3</p>
+            </div>
+          </div>
 
-      <div className="content-container-home">
-        {/* <NotebookData/> */}
-        <div className="data-home">1</div>
-        <div className="data-home">2</div>
-        <div className="data-home">3</div>
-        <div className="data-home">4</div>
-        <div className="data-home">5</div>
-        <div className="data-home">6</div>
-        <div className="data-home">7</div>
-        <div className="data-home">8</div>
-        <div className="data-home">9</div>
-        <div className="data-home">10</div>
-        <div className="data-home">11</div>
-        <div className="data-home">12</div>
-        <div className="data-home">13</div>
+          <div className="content-container-home">
+            {/* <NotebookData/> */}
+            <div className="data-home">1</div>
+            <div className="data-home">2</div>
+            <div className="data-home">3</div>
+            <div className="data-home">4</div>
+            <div className="data-home">5</div>
+            <div className="data-home">6</div>
+            <div className="data-home">7</div>
+            <div className="data-home">8</div>
+            <div className="data-home">9</div>
+            <div className="data-home">10</div>
+            <div className="data-home">11</div>
+            <div className="data-home">12</div>
+            <div className="data-home">13</div>
+          </div>
+        </div>
       </div>
 
       <div className="about-section">
@@ -153,38 +159,53 @@ function Home() {
             </a>
             <p style={{ marginTop: "2rem" }}>ติดตามเรา</p>
             <div
-              className="contact"
+              className="contact flex"
               style={{
                 marginTop: "1rem",
                 height: "2.5rem",
-                width:'17rem',
+                width: "17rem",
                 border: "solid",
-                backgroundColor: 'white',
-                borderRadius:'15px',
-
+                backgroundColor: "white",
+                borderRadius: "15px",
               }}
             >
               <img
                 className="fb"
-                style={{ marginTop: "0.1rem",marginLeft:'1rem', width: "2rem" }}
+                style={{
+                  marginTop: "0.1rem",
+                  marginLeft: "1rem",
+                  width: "2rem",
+                  height: "2rem",
+                }}
                 src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png"
               />
               <img
                 className="x"
-                style={{ marginTop: "0rem", marginLeft: "1rem", width: "2rem" }}
+                style={{
+                  marginTop: "0.1rem",
+                  marginLeft: "1rem",
+                  width: "2rem",
+                  height: "2rem",
+                }}
                 src="https://static.vecteezy.com/system/resources/previews/027/395/710/non_2x/twitter-brand-new-logo-3-d-with-new-x-shaped-graphic-of-the-world-s-most-popular-social-media-free-png.png"
               />
               <img
                 className="ig"
-                style={{ marginTop: "0rem", marginLeft: "1rem", width: "2rem" }}
+                style={{
+                  marginTop: "0.1rem",
+                  marginLeft: "1rem",
+                  width: "2rem",
+                  height: "2rem",
+                }}
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png"
               />
               <img
                 className="yt"
                 style={{
-                  marginTop: "0rem",
+                  marginTop: "0.1rem",
                   marginLeft: "1.2rem",
                   width: "2rem",
+                  height: "2rem",
                   scale: "1.5",
                 }}
                 src="https://static.vecteezy.com/system/resources/previews/023/986/704/non_2x/youtube-logo-youtube-logo-transparent-youtube-icon-transparent-free-free-png.png"
@@ -192,9 +213,10 @@ function Home() {
               <img
                 className="line"
                 style={{
-                  marginTop: "0rem",
+                  marginTop: "0.1rem",
                   marginLeft: "1.2rem",
                   width: "2rem",
+                  height: "2rem",
                 }}
                 src="https://upload.wikimedia.org/wikipedia/commons/2/2e/LINE_New_App_Icon_%282020-12%29.png"
               />

@@ -13,6 +13,10 @@ body {
   background: linear-gradient(to right, #A1C4FD , #C2E9FB);
 }
 
+.data-wrap {
+  width: 90%;
+}
+
 .content-container-home {
   justify-content: center;
   display: grid;
@@ -25,7 +29,7 @@ body {
   vertical-align: middle;
   border: 0.1rem solid black;
   height: 15rem;
-  width: 20rem;
+  width: 18rem;
   margin: 1.5rem;
   padding: 6rem;
   transition: transform 0.15s;
@@ -48,10 +52,10 @@ body {
     left: -100%;
   }
   4% {
-    left: 27.5%;
+    left: 22%;
   }
   33.33% {
-    left: 27.5%;
+    left: 22%;
   }
   37.33% {
     left: 100%;
@@ -101,7 +105,6 @@ body {
   height: 16rem;
   width: 100%;
   background-color: rgb(33, 62, 121);
-  margin: 1rem 0rem 0rem 0rem;
   position: relative;
 }
 
