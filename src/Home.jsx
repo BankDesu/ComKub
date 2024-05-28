@@ -31,7 +31,7 @@ function Home() {
         </div>
       </div>
       <div className="container flex">
-        <Sidebar />
+        <Sidebar/>
         <div className="data-wrap">
           <div className="slideset1">
             <div className="slide1">
@@ -48,7 +48,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="content-container-home">
+          <div className="content-container-home mb-4">
             {/* <NotebookData/> */}
             <div className="data-home">1</div>
             <div className="data-home">2</div>
