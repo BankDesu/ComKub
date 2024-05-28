@@ -1,18 +1,17 @@
 const express = require('express');
-const db = require('./db/dbConnection'); // Import the db connection
+import userRoutes from './routes/userRoutes';
+import userReviewRoutes from './routes/userReviewRoutes';
+import notebookRoutes from './routes/notebookRoutes';
 
 const app = express();
 const port = 4000;
 
-app.get('', (req, res) => {
-    db.query('SELECT * FROM users', (err, rows) => {
-        if (err) {
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-        res.send(rows);
-    });
-})
+app.use(express.json());
+app.use('/user', userRoutes);
+app.use('/review', userReviewRoutes);
+app.use('/notebook', notebookRoutes);
+
+
 app.listen(port, () => {
     console.log(`backend is running on port ${port}`);
 });

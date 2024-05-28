@@ -1,9 +1,25 @@
-import { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import "./App.css";
 import comkub from "./assets/comkub.png";
-import { Link } from "react-router-dom";
 
 function Nav() {
+  const navigate = useNavigate();
+
+  const handleAccountClick = async () => {
+    try {
+      const response = await axios.get('/api/check-login', { withCredentials: true });
+      if (response.data.loggedIn) {
+        navigate('/account');
+      } else {
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('Error checking login status:', error);
+      navigate('/login'); // Default to login on error
+    }
+  };
+
   return (
     <>
       <nav>
@@ -16,7 +32,7 @@ function Nav() {
               className="article-img"
               src="https://icons.veryicon.com/png/o/miscellaneous/shaanxi-left-column-icon/article-management-3.png"
             />
-          </Link>{" "}
+          </Link>
           <Link to="/review" className="review">
             <img className="review-img" src="https://cdn-icons-png.flaticon.com/512/2701/2701190.png" />
           </Link>
@@ -29,11 +45,9 @@ function Nav() {
             </button>
           </div>
           <div className="account-section">
-            <Link to="/Account">
-              <button className="account-btn">
-                <img className="account-icon" src="https://www.svgrepo.com/show/456992/account.svg" />
-              </button>
-            </Link>
+            <button className="account-btn" onClick={handleAccountClick}>
+              <img className="account-icon" src="https://www.svgrepo.com/show/456992/account.svg" />
+            </button>
           </div>
         </div>
       </nav>
