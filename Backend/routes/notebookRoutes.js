@@ -43,4 +43,34 @@ notebookRoutes.get('/displayNotebookByCategory', async (req, res) => {
     }
 });
 
+notebookRoutes.get('/displayNotebookByCPU', async (req, res) => {
+    const { cpu } = req.query;
+    try {
+        const notebook = await lookupNotebookByCPU(cpu);
+        res.send(notebook);
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+notebookRoutes.get('/displayNotebookByGPU', async (req, res) => {
+    const { gpu } = req.query;
+    try {
+        const notebook = await lookupNotebookByGPU(gpu);
+        res.send(notebook);
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+notebookRoutes.get('/displayNotebookByRam', async (req, res) => {
+    const { ram } = req.query;
+    try {
+        const notebook = await lookupNotebookByram(ram);
+        res.send(notebook);
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 export default notebookRoutes;

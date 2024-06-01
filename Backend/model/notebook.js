@@ -32,9 +32,31 @@ const lookupNotebookByCategory = async (category) => {
     return (notebook["rows"]);
 };
 
+const lookupNotebookByCPU = async (cpu) => {
+    const notebook = await db.query(
+        `SELECT * FROM notebook WHERE cpu like ?`,
+        [cpu]
+    );
+    return (notebook["rows"]);
+}
 
+const lookupNotebookByGPU = async (gpu) => {
+    const notebook = await db.query(
+        `SELECT * FROM notebook WHERE gpu like ?`,
+        [gpu]
+    );
+    return (notebook["rows"]);
+}
+
+const lookupNotebookByram = async (ram) => {
+    const notebook = await db.query(
+        `SELECT * FROM notebook WHERE ram like ?`,
+        [ram]
+    );
+    return (notebook["rows"]);
+}
 
 export {
-    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCategory, lookupNotebookByPriceRange
+    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange, lookupNotebookByram
 };
 
