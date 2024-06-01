@@ -1,17 +1,16 @@
-import * as React from "react";
-import { useState } from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import { styled } from "@mui/material/styles";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
 import MuiInput from "@mui/material/Input";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
+import * as React from "react";
 
 const CustomAccordion = styled(Accordion)(({ theme }) => ({
   "&.Mui-expanded": {

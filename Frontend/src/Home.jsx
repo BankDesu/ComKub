@@ -1,10 +1,10 @@
-import React from "react";
-import Nav from "./Nav";
-import Sidebar from "./Sidebar";
-import "./Home.css";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import React from "react";
+import "./Home.css";
+import Nav from "./Nav";
+import Sidebar from "./Sidebar";
 
 function Home() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -104,7 +104,6 @@ function Home() {
             <div className="data-home">10</div>
             <div className="data-home">11</div>
             <div className="data-home">12</div>
-            <div className="data-home">13</div>
           </div>
         </div>
       </div>
