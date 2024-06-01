@@ -39,19 +39,19 @@ export default function Sidebar() {
 
   const handleChangeRange = (event, newValue) => {
     setValue(newValue);
-    console.log('Min',[value[0],value[1]],'Max');
+    console.log("Min", [value[0], value[1]], "Max");
   };
 
   const handleInputChangeMin = (event) => {
     const newValue = event.target.value === "" ? 0 : Number(event.target.value);
     setValue([newValue, value[1]]);
-    console.log("Min:",[newValue]);
+    console.log("Min:", [newValue]);
   };
 
   const handleInputChangeMax = (event) => {
     const newValue = event.target.value === "" ? 0 : Number(event.target.value);
     setValue([value[0], newValue]);
-    console.log("Max:",[newValue]);
+    console.log("Max:", [newValue]);
   };
 
   const handleBlur = () => {
@@ -70,7 +70,7 @@ export default function Sidebar() {
         <AccordionSummary
           className="max-h-10"
           expandIcon={<ArrowDropDownIcon />}
-          sx={{backgroundColor: "#c2c2c2"}}
+          sx={{ backgroundColor: "" }}
         >
           <Typography className="pl-5">BRAND</Typography>
         </AccordionSummary>
@@ -157,7 +157,7 @@ export default function Sidebar() {
         <AccordionSummary
           className="max-h-10"
           expandIcon={<ArrowDropDownIcon />}
-          sx={{backgroundColor: "#c2c2c2"}}
+          sx={{ backgroundColor: "" }}
         >
           <Typography className="pl-5">CATEGORY</Typography>
         </AccordionSummary>
@@ -214,7 +214,7 @@ export default function Sidebar() {
         <AccordionSummary
           className="max-h-10"
           expandIcon={<ArrowDropDownIcon />}
-          sx={{backgroundColor: "#c2c2c2"}}
+          sx={{ backgroundColor: "" }}
         >
           <Typography className="pl-5">PRICE RANGE</Typography>
         </AccordionSummary>
@@ -270,12 +270,244 @@ export default function Sidebar() {
           </Box>
         </AccordionDetails>
       </CustomAccordion>
+
+      <CustomAccordion className="w-60 m-0!important">
+        <AccordionSummary
+          className="max-h-10"
+          expandIcon={<ArrowDropDownIcon />}
+          sx={{ backgroundColor: "" }}
+        >
+          <Typography className="pl-5">CPU</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="Intel Core i5"
+                />
+              }
+              label="Intel Core i5"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="Intel Core i7"
+                />
+              }
+              label="Intel Core i7"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="Intel Core i9"
+                />
+              }
+              label="Intel Core i9"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="AMD Ryzen 5"
+                />
+              }
+              label="AMD Ryzen 5"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="AMD Ryzen 7"
+                />
+              }
+              label="AMD Ryzen 7"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="AMD Ryzen 9"
+                />
+              }
+              label="AMD Ryzen 9"
+              labelPlacement="start"
+            />
+          </FormGroup>
+        </AccordionDetails>
+      </CustomAccordion>
+
+      <CustomAccordion className="w-60 m-0!important">
+        <AccordionSummary
+          className="max-h-10"
+          expandIcon={<ArrowDropDownIcon />}
+          sx={{ backgroundColor: "" }}
+        >
+          <Typography className="pl-5">GPU</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="Intel"
+                />
+              }
+              label="Intel"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="Nvidia"
+                />
+              }
+              label="Nvidia"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="AMD"
+                />
+              }
+              label="AMD"
+              labelPlacement="start"
+            />
+          </FormGroup>
+        </AccordionDetails>
+      </CustomAccordion>
+
+      <CustomAccordion className="w-60 m-0!important">
+        <AccordionSummary
+          className="max-h-10"
+          expandIcon={<ArrowDropDownIcon />}
+          sx={{ backgroundColor: "" }}
+        >
+          <Typography className="pl-5">MEMORY</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="8GB"
+                />
+              }
+              label="8GB"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="16GB"
+                />
+              }
+              label="16GB"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="32GB"
+                />
+              }
+              label="32GB"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup className="mr-7 h-10">
+            <FormControlLabel
+              className="border-b-2"
+              control={
+                <Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
+                  onChange={handleChangeChecked}
+                  inputProps={{ "aria-label": "controlled" }}
+                  name="64GB"
+                />
+              }
+              label="64GB"
+              labelPlacement="start"
+            />
+          </FormGroup>
+        </AccordionDetails>
+      </CustomAccordion>
     </div>
   );
 }
 
 // สำหรับ hover AccordionSummary
-{/* <AccordionSummary
+{
+  /* <AccordionSummary
   expandIcon={<ArrowDropDownIcon sx={{ color: "success.dark" }} />}
   aria-controls="panel1a-content"
   id="panel1a-header"
@@ -299,4 +531,5 @@ export default function Sidebar() {
     {" "}
     Accordion 1
   </Typography>
-</AccordionSummary>; */}
+</AccordionSummary>; */
+}

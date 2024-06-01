@@ -2,12 +2,25 @@ import React from "react";
 import Nav from "./Nav";
 import Sidebar from "./Sidebar";
 import "./Home.css";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 function Home() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClickOrder = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+    console.log(event.target.innerText);
+  };
+
   return (
     <>
       <Nav />
-      <div className="search-section">
+      <div className="search-section justify-center">
         <div className="category-section">
           <button className="category-btn">
             <img
@@ -29,9 +42,38 @@ function Home() {
             />
           </button>
         </div>
+        <div>
+          <Button
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClickOrder}
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2740/2740721.png"
+              alt="เรียงตาม"
+              className="w-8 h-7 absolute left-8 top-5"
+            />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleClose}>ราคาต่ำสุด</MenuItem>
+            <MenuItem onClick={handleClose}>ราคาสูงสุด</MenuItem>
+            <MenuItem onClick={handleClose}>ชื่อสินค้า A-Z</MenuItem>
+            <MenuItem onClick={handleClose}>ชื่อสินค้า Z-A</MenuItem>
+          </Menu>
+        </div>
       </div>
       <div className="container flex">
-        <Sidebar/>
+        <Sidebar />
         <div className="data-wrap">
           <div className="slideset1">
             <div className="slide1">
