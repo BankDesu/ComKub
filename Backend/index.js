@@ -1,7 +1,7 @@
-const express = require('express');
-import userRoutes from './routes/userRoutes';
-import userReviewRoutes from './routes/userReviewRoutes';
-import notebookRoutes from './routes/notebookRoutes';
+import express from 'express';
+import notebookRoutes from './routes/notebookRoutes.js';
+import userReviewRoutes from './routes/userReviewRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 const port = 4000;

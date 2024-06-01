@@ -1,4 +1,4 @@
-import db from "../config/dbConnection";
+import db from "../config/dbConnection.js";
 
 const lookupNotebook = async (notebook_id) => {
     const notebook = await db.query(
@@ -34,6 +34,7 @@ const lookupNotebookByCategory = async (category) => {
 
 
 
-export {  
-     lookupNotebook, lookupNotebookByBrand, lookupNotebookByPriceRange, lookupNotebookByCategory
-}; 
+export {
+    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCategory, lookupNotebookByPriceRange
+};
+

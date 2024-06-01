@@ -1,4 +1,4 @@
-import db from "../config/dbConnection";
+import db from "../config/dbConnection.js";
 
 const newUser = async (username,password,birthday,gender,email) => {
     const newUser = await db.query(
@@ -36,3 +36,4 @@ const lookupUser = async (uid) => {
 export {
     deleteUser, lookupUser, newUser, updateUser
 };
+

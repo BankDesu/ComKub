@@ -1,4 +1,4 @@
-import db from "../config/dbConnection";
+import db from "../config/dbConnection.js";
 
 const newReview = async (userid,notebook_id,review_title,perfromance_score,service_score) => {
     const newReview = await db.query(
@@ -41,5 +41,6 @@ const lookupReviewByNotebook = async (notebook_id) => {
 };
 
 export {
-    deleteReview, lookupReview, newReview, updateReview,lookupReviewByNotebook
+    deleteReview, lookupReview, lookupReviewByNotebook, newReview, updateReview
 };
+

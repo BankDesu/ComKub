@@ -1,8 +1,7 @@
 import express from 'express';
-import logger from '../config/logger';
-import { deleteUser, lookupUser, newUser, updateUser } from '../model/user';
+import { deleteUser, lookupUser, newUser, updateUser } from '../model/user.js';
 
-const router = express.Router();
+const userRoutes = express.Router();
 
 userRoutes.post('/create', async (req, res) => {
     const { username,password,birthday,gender,email } = req.body;
@@ -10,7 +9,6 @@ userRoutes.post('/create', async (req, res) => {
         const user = await newUser(username,password,birthday,gender,email );
         res.status(200).send(user);
     } catch (err) {
-        logger.error(err);
         res.status(500).send('Internal Server Error');
     } 
 });
@@ -21,7 +19,6 @@ userRoutes.post('/edit', async (req, res) => {
         const user = await updateUser(userid,username,password,email);
         res.status(200).send(user);
     } catch (err) {
-        logger.error(err);
         res.status(500).send('Internal Server Error');
     }
 });
@@ -32,7 +29,6 @@ userRoutes.delete('/delete', async (req, res) => {
         const user = await deleteUser(userid);
         res.status(200).send(user);
     } catch (err) {
-        logger.error(err);
         res.status(500).send('Internal Server Error');
     }
 });
@@ -44,9 +40,8 @@ userRoutes.get('/displayUser', async (req, res) => {
         const user = await lookupUser(userid);
         res.send(user);
     } catch (err) {
-        logger.error(err);
         res.status(500).send('Internal Server Error');
     }
 });
 
-export default router;
+export default userRoutes;
