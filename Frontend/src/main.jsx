@@ -1,35 +1,42 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import Home from './Home';
-import Article from './Article';
-import Review from './Review';
-import SignInSide from './SignInSide';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import Home from "./Home";
+import Article_container from "./Article_container.jsx";
+import Review from "./Review";
+import SignInSide from "./SignInSide";
+import Advt from "./Advt.jsx";
 
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
+
+import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>
+    element: <Home />,
   },
   {
-    path: "article",
-    element: <Article/>,
+    path: "article_container",
+    element: <Article_container />,
   },
   {
     path: "review",
-    element: <Review/>
+    element: <Review />,
   },
   {
     path: "signInSide",
-    element: <SignInSide/>
+    element: <SignInSide />,
   },
+  {
+    path: "advt",
+    element: <Advt />,
+  },
+
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

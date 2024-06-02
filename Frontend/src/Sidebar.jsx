@@ -34,7 +34,7 @@ export default function Sidebar() {
     console.log(event.target.name, event.target.checked);
   };
 
-  const [value, setValue] = React.useState([7000, 80000]);
+  const [value, setValue] = React.useState([15000, 85000]);
 
   const handleChangeRange = (event, newValue) => {
     setValue(newValue);
@@ -54,17 +54,17 @@ export default function Sidebar() {
   };
 
   const handleBlur = () => {
-    if (value[0] < 7000) {
-      setValue([7000, value[1]]);
-    } else if (value[1] > 80000) {
-      setValue([value[0], 80000]);
+    if (value[0] < 0) {
+      setValue([0, value[1]]);
+    } else if (value[1] > 200000) {
+      setValue([value[0], 200000]);
     } else if (value[0] > value[1]) {
       setValue([value[1], value[0]]);
     }
   };
 
   return (
-    <div className="w-60 bg-#A1C4FD z-10 mt-2">
+    <div className="w-svw bg-#A1C4FD z-10 mt-2">
       <CustomAccordion className="w-60 m-0 !important">
         <AccordionSummary
           className="max-h-10"
@@ -218,7 +218,7 @@ export default function Sidebar() {
           <Typography className="pl-5">PRICE RANGE</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Box sx={{ width: 230, ml: 1 }}>
+          <Box sx={{ width: 220, ml: 1 }}>
             <Slider
               getAriaLabel={() => "Price range"}
               value={value}
@@ -226,8 +226,8 @@ export default function Sidebar() {
               valueLabelDisplay="auto"
               getAriaValueText={valuetext}
               step={1000}
-              min={7000}
-              max={80000}
+              min={0}
+              max={200000}
             />
             <Box
               sx={{
@@ -245,23 +245,24 @@ export default function Sidebar() {
                 onBlur={handleBlur}
                 inputProps={{
                   step: 1000,
-                  min: 7000,
-                  max: 80000,
+                  min: 0,
+                  max: 200000,
                   type: "number",
                   "aria-labelledby": "input-slider",
                 }}
               />
               <Box>-</Box>
-              <Input
+              <Input sx={{width:80}}
                 value={value[1]}
                 size="small"
                 onChange={handleInputChangeMax}
                 onBlur={handleBlur}
                 inputProps={{
                   step: 1000,
-                  min: 7000,
-                  max: 80000,
+                  min: 0,
+                  max: 200000,
                   type: "number",
+        
                   "aria-labelledby": "input-slider",
                 }}
               />

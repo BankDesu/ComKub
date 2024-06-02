@@ -5,6 +5,10 @@ import React from "react";
 import "./Home.css";
 import Nav from "./Nav";
 import Sidebar from "./Sidebar";
+import advtPic1 from "./assets/advtPic1.jpg";
+import advtPic2 from "./assets/advtPic2.png";
+import advtPic3 from "./assets/advtPic3.png";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -12,7 +16,7 @@ function Home() {
   const handleClickOrder = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (event) => {
     setAnchorEl(null);
     console.log(event.target.innerText);
   };
@@ -77,16 +81,33 @@ function Home() {
         <div className="data-wrap">
           <div className="slideset1">
             <div className="slide1">
-              <h1>This is slide 1</h1>
-              <p>Slide 1</p>
+            <Link to="/advt" 
+            // only advtData[0]
+            >
+                <img
+                  className="h-full w-full"
+                  src={advtPic1}
+                  alt="แนะนำสินค้า1"
+                />
+              </Link>
             </div>
             <div className="slide2">
-              <h1>This is the second slide</h1>
-              <p>Second slide</p>
+            <Link to="/advt" >
+                <img
+                  className="h-full w-full"
+                  src={advtPic2}
+                  alt="แนะนำสินค้า2"
+                />
+              </Link>
             </div>
             <div className="slide3">
-              <h1>This is slide number 3</h1>
-              <p>Slide number 3</p>
+            <Link to="/advt">
+                <img
+                  className="h-full w-full"
+                  src={advtPic3}
+                  alt="แนะนำสินค้า3"
+                />
+              </Link>
             </div>
           </div>
 
@@ -103,7 +124,6 @@ function Home() {
             <div className="data-home">9</div>
             <div className="data-home">10</div>
             <div className="data-home">11</div>
-            <div className="data-home">12</div>
           </div>
         </div>
       </div>

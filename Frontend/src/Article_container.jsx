@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "./Nav";
-import './Article.css';
+import './Article_container.css';
 
 function Article() {
   return (

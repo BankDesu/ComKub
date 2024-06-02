@@ -11,7 +11,7 @@ function Nav() {
           <Link to="/">
             <img className="comkub" src={comkub} />
           </Link>
-          <Link to="/article" className="article">
+          <Link to="/article_container" className="article_container">
             <img
               className="article-img"
               src="https://icons.veryicon.com/png/o/miscellaneous/shaanxi-left-column-icon/article-management-3.png"

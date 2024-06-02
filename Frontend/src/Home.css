@@ -37,14 +37,16 @@ body {
 }
 
 .slideset1 {
-  height: 22rem;
+  height: 13rem;
+  width: 83vw;
   position: relative;
   overflow: hidden;
 }
 .slideset1 > * {
   position: absolute;
-  top: 10%;
+  top: 5%;
   right: 180%;
+  /* right: 10%; */
   animation: 15s autoplay1 infinite ease-in-out;
 }
 @keyframes autoplay1 {
@@ -78,10 +80,10 @@ body {
 .slide2,
 .slide3 {
   border: 2px solid black;
-  height: 17rem;
-  width: 40rem;
+  height: 10rem;
+  width: 42rem;
   text-align: center;
-  padding: 3rem 0rem 0rem 0rem;
+  margin: 1rem 0rem 0rem 0rem;
   background-color: white;
   transition: transform 0.15s;
 }
@@ -89,7 +91,7 @@ body {
 .slide1:hover,
 .slide2:hover,
 .slide3:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   filter: drop-shadow(15px 15px 4px grey);
   z-index: 2;
 }
