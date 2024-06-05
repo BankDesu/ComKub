@@ -1,16 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  box-sizing: border-box;
-}
-
-body {
-  justify-content: center;
-  width: 100%;
-}
-
 .content-container-article {
   justify-content: center;
   display: grid;

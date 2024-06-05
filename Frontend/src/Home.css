@@ -1,10 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  box-sizing: border-box;
-}
+
 
 body {
   justify-content: center;
@@ -23,18 +17,6 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.data-home {
-  justify-self: center;
-  text-align: center;
-  vertical-align: middle;
-  border: 0.1rem solid black;
-  height: 15rem;
-  width: 18rem;
-  margin: 1.5rem;
-  padding: 6rem;
-  transition: transform 0.15s;
-  background-color: white;
-}
 
 .slideset1 {
   height: 13rem;

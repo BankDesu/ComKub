@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
 import Nav from "./Nav";
 import Sidebar from "./Sidebar";
@@ -9,6 +9,7 @@ import advtPic1 from "./assets/advtPic1.jpg";
 import advtPic2 from "./assets/advtPic2.png";
 import advtPic3 from "./assets/advtPic3.png";
 import { Link } from "react-router-dom";
+import Notebook_data from "./Notebook_data";
 
 function Home() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -21,27 +22,44 @@ function Home() {
     console.log(event.target.innerText);
   };
 
+
+  //เปลี่ยนเป็น backend
+  const [dataN, setDataN] = useState([
+    { title: "1", content: "Notebook Data" },
+    { title: "2", content: "Notebook Data" },
+    { title: "3", content: "Notebook Data" },
+    { title: "4", content: "Notebook Data" },
+    { title: "5", content: "Notebook Data" },
+    { title: "6", content: "Notebook Data" },
+    { title: "7", content: "Notebook Data" },
+    { title: "8", content: "Notebook Data" },
+    { title: "9", content: "Notebook Data" },
+    { title: "10", content: "Notebook Data" },
+    { title: "11", content: "Notebook Data" },
+    { title: "12", content: "Notebook Data" },
+  ]);
+
   return (
     <>
       <Nav />
-      <div className="search-section justify-center">
-        <div className="category-section">
-          <button className="category-btn">
+      <div className="search-section flex w-full h-20 justify-center bg-sky-600">
+        <div className="category-section justify-self-end">
+          <button className="category-btn h-10 w-10 border-0 mt-6 mr-2 bg-sky-600 transition-transform duration-150 hover:transform hover:scale-110">
             <img
-              className="category-icon"
+              className="category-icon h-8 m-0"
               src="https://cdn-icons-png.flaticon.com/512/2603/2603910.png"
             ></img>
           </button>
         </div>
-        <div className="searchbar-section">
+        <div className="searchbar-section flex mt-6 h-10 w-1/3 bg-white border-0 ">
           <input
-            className="search-bar"
+            className="search-bar h-8.4 w-11/12 text-sm text-left m-0 pt-2.4 pl-3 border-0 focus:outline-none"
             type="search"
             placeholder="คุณมองหาอะไรอยู่?"
           />
-          <button className="search-btn" type="submit">
+          <button className="search-btn transition-transform duration-150 hover:transform hover:scale-110" type="submit">
             <img
-              className="search-icon"
+              className="search-icon h-4 mt-0.8"
               src="https://static-00.iconduck.com/assets.00/search-icon-2048x2048-cmujl7en.png"
             />
           </button>
@@ -81,9 +99,7 @@ function Home() {
         <div className="data-wrap">
           <div className="slideset1">
             <div className="slide1">
-            <Link to="/advt" 
-            // only advtData[0]
-            >
+              <Link to="/advt">
                 <img
                   className="h-full w-full"
                   src={advtPic1}
@@ -92,7 +108,7 @@ function Home() {
               </Link>
             </div>
             <div className="slide2">
-            <Link to="/advt" >
+              <Link to="/advt">
                 <img
                   className="h-full w-full"
                   src={advtPic2}
@@ -101,7 +117,7 @@ function Home() {
               </Link>
             </div>
             <div className="slide3">
-            <Link to="/advt">
+              <Link to="/advt">
                 <img
                   className="h-full w-full"
                   src={advtPic3}
@@ -112,18 +128,12 @@ function Home() {
           </div>
 
           <div className="content-container-home mb-4">
-            {/* <NotebookData/> */}
-            <div className="data-home">1</div>
-            <div className="data-home">2</div>
-            <div className="data-home">3</div>
-            <div className="data-home">4</div>
-            <div className="data-home">5</div>
-            <div className="data-home">6</div>
-            <div className="data-home">7</div>
-            <div className="data-home">8</div>
-            <div className="data-home">9</div>
-            <div className="data-home">10</div>
-            <div className="data-home">11</div>
+            {dataN.map((data) => {
+              console.log(data);
+              return (
+                <Notebook_data title={data.title} content={data.content} />
+              );
+            })}
           </div>
         </div>
       </div>
