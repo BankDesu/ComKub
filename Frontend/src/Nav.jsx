@@ -27,14 +27,14 @@ function Nav() {
         </div>
 
         <div className="flex-end flex items-center">
-          <div className="darkmode-section h-8 justify-self-end mr-10">
+          {/* <div className="darkmode-section h-8 justify-self-end mr-10">
             <button className="darkmode-btn h-8 w-8 rounded-full border-0 bg-white transition-transform duration-150 hover:transform hover:scale-110 ">
               <img
                 className="darkmode-icon h-8"
                 src="https://www.svgrepo.com/show/315691/dark-mode.svg"
               />
             </button>
-          </div>
+          </div> */}
           <div className="account-section pr-8 h-12 justify-self-end">
             <Link to="/SignInSide">
               <button className="account-btn h-10 w-10 mt-1 rounded-full border border-black bg-white text-center transition-transform duration-150 flex justify-center items-center hover:transform hover:bg-cyan-300/75">
