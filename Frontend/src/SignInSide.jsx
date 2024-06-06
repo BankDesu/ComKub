@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "./SignInSide.css";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -55,7 +54,9 @@ export default function SignInSide() {
           xs={false}
           sm={4}
           md={7}
-          className={checked ? "move-left" : "move-right"}
+          className={`absolute w-full h-full ${
+            checked ? "animate-moveBackgroundLeft" : "animate-moveBackgroundRight"
+          }`}
           sx={{
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
