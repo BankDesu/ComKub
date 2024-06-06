@@ -73,4 +73,41 @@ notebookRoutes.get('/displayNotebookByRam', async (req, res) => {
     }
 });
 
+
+notebookRoutes.get('/sortBylowPrice', async (req, res) => {
+    try {
+        const notebook = await sortBylowPrice();
+        res.send(notebook);
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+notebookRoutes.get('/sortByhighPrice', async (req, res) => {
+    try {
+        const notebook = await sortByhighPrice();
+        res.send(notebook);
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+notebookRoutes.get('/sortByAtoZ', async (req, res) => {
+    try {
+        const notebook = await sortByAtoZ();
+        res.send(notebook);
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+notebookRoutes.get('/sortByZtoA', async (req, res) => {
+    try {
+        const notebook = await sortByZtoA();
+        res.send(notebook);
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 export default notebookRoutes;

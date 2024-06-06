@@ -56,7 +56,36 @@ const lookupNotebookByram = async (ram) => {
     return (notebook["rows"]);
 }
 
+const sortBylowPrice = async () => {
+    const notebook = await db.query(
+        `SELECT * FROM notebook ORDER BY price ASC`
+    );
+    return (notebook["rows"]);
+}
+
+const sortByhighPrice = async () => {
+    const notebook = await db.query(
+        `SELECT * FROM notebook ORDER BY price DESC`
+    );
+    return (notebook["rows"]);
+}
+
+const sortByAtoZ = async () => {
+    const notebook = await db.query(
+        `SELECT * FROM notebook ORDER BY brand ASC`
+    );
+    return (notebook["rows"]);
+}
+
+const sortByZtoA = async () => {
+    const notebook = await db.query(
+        `SELECT * FROM notebook ORDER BY brand DESC`
+    );
+    return (notebook["rows"]);
+}
+
 export {
-    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange, lookupNotebookByram
+    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU,
+    lookupNotebookByPriceRange, lookupNotebookByram, sortByAtoZ, sortByZtoA, sortByhighPrice, sortBylowPrice
 };
 
