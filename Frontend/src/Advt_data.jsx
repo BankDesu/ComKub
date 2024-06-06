@@ -4,7 +4,7 @@ function Advt_data({ title, content, image }) {
   return (
     <>
       <div className="">
-      <h1 className="">{title}</h1>
+      <h1 className="text-lg font-semibold">{title}</h1>
       {image && <img src={image} alt={title} className="article-image" />}
       <div className="article-content">
         {content}

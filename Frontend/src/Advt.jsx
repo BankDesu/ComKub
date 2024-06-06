@@ -1,39 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "./Nav";
-import { useState } from "react";
 import Advt_data from "./Advt_data";
+import { useLocation } from "react-router-dom";
 
 function Advt() {
-  const [advtData, setAdvtData] = useState([
-    {
-      title: "1",
-      content: "A",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg",
-    },
-    {
-      title: "2",
-      content: "B",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg",
-    },
-    {
-      title: "3",
-      content: "C",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg",
-    },
-  ]);
+  const location = useLocation();
+  const { data } = location.state || {};
+
+  if (!data) {
+    return <div>Advt not found</div>;
+  }
 
   return (
     <>
       <Nav />
-      {advtData.map((i) => {
-        console.log(i);
-        return (
-          <Advt_data title={i.title} content={i.content} image={i.image} />
-        );
-      })}
+      <Advt_data title={data.title} content={data.content} image={data.image} />
     </>
   );
 }

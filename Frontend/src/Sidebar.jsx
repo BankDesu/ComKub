@@ -19,7 +19,7 @@ const CustomAccordion = styled(Accordion)(({ theme }) => ({
 }));
 
 const Input = styled(MuiInput)`
-  width: 70px;
+  width: 60px;
 `;
 
 function valuetext(value) {
@@ -64,7 +64,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-svw bg-#A1C4FD z-10 mt-2">
+    <div className="sidebar-content bg-#A1C4FD z-10 mt-2 ml-2 relative">
       <CustomAccordion className="w-60 m-0 !important">
         <AccordionSummary
           className="max-h-10"

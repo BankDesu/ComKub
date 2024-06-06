@@ -1,13 +1,12 @@
 import React from "react";
 import Nav from "./Nav";
-import Advt1 from "./Advt";
 
 function App() {
 
   return (
-    <>
+    <div className="h-full w-full">
       <Nav />
-    </>
+    </div>
   );
 }
 
