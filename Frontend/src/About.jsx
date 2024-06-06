@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <div className="about-section mt-5 h-64 w-full relative">
+    <div className="about-section mt-6 h-64 w-full relative">
       <svg
         className="wave w-full absolute top-0 z-10"
         version="1.1"

@@ -26,9 +26,41 @@ function Home() {
   };
 
   const slides = [
-    { id: 1, src: advtPic1, alt: "แนะนำสินค้า1", data: { title: "1", content: "A", image: advtPic1 } },
-    { id: 2, src: advtPic2, alt: "แนะนำสินค้า2", data: { title: "2", content: "B", image: advtPic2 } },
-    { id: 3, src: advtPic3, alt: "แนะนำสินค้า3", data: { title: "3", content: "C", image: advtPic3 } },
+    {
+      id: 1,
+      src: advtPic1,
+      alt: "แนะนำสินค้า1",
+      data: {
+        id:1,
+        maintitle:
+          "ชี้เป้า 10 โน้ตบุ๊กรุ่นไหนดี สเปกแรง ใช้ได้ทั้งทำงานและเล่นเกม คุ้มค่าราคา",
+        image0:
+          "https://shopee.co.th/blog/wp-content/uploads/2021/11/Shopee-blog-%E0%B9%82%E0%B8%99%E0%B9%89%E0%B8%95%E0%B8%9A%E0%B8%B8%E0%B9%8A%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B9%88%E0%B8%99%E0%B9%84%E0%B8%AB%E0%B8%99%E0%B8%94%E0%B8%B5.jpg",
+      },
+    },
+    {
+      id: 2,
+      src: advtPic2,
+      alt: "แนะนำสินค้า2",
+      data: {
+        id:2,
+        maintitle:
+          "7 โน๊ตบุ๊คสำหรับนักเรียนและนักศึกษา ใช้เรียนดี ใช้เล่นได้ อัปเดตใหม่ล่าสุด ปี 2022",
+        image0:
+          "https://blog.bnn.in.th/wp-content/uploads/2022/04/BlogCover-recommend-7-notebook-for-student.jpg",
+      },
+    },
+    {
+      id: 3,
+      src: advtPic3,
+      alt: "แนะนำสินค้า3",
+      data: {
+        id:3,
+        maintitle: "โน๊ตบุ๊คเล่นเกม 2024 รุ่นไหนต้องมีมาดูกัน",
+        image0:
+          "https://www.neoshop.co.th/wp-content/uploads/2023/12/podium-for-product-presentation-technology-in-galaxy-wallpaper-with-a-fantastic-bubble-reflection-blue-background-backdrop-pink-colors-smoke-floating-on-water-surface-18.png",
+      },
+    },
   ];
 
   const [dataN, setDataN] = useState([

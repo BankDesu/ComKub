@@ -5,18 +5,18 @@ import { useState } from "react";
 
 function Review() {
   const [dataR, setdataA] = useState([
-    { title: "1", content: "Article Data" },
-    { title: "2", content: "Article Data" },
-    { title: "3", content: "Article Data" },
-    { title: "4", content: "Article Data" },
-    { title: "5", content: "Article Data" },
-    { title: "6", content: "Article Data" },
-    { title: "7", content: "Article Data" },
-    { title: "8", content: "Article Data" },
-    { title: "9", content: "Article Data" },
-    { title: "10", content: "Article Data" },
-    { title: "11", content: "Article Data" },
-    { title: "12", content: "Article Data" },
+    { title: "1", content: "Review Data" },
+    { title: "2", content: "Review Data" },
+    { title: "3", content: "Review Data" },
+    { title: "4", content: "Review Data" },
+    { title: "5", content: "Review Data" },
+    { title: "6", content: "Review Data" },
+    { title: "7", content: "Review Data" },
+    { title: "8", content: "Review Data" },
+    { title: "9", content: "Review Data" },
+    { title: "10", content: "Review Data" },
+    { title: "11", content: "Review Data" },
+    { title: "12", content: "Review Data" },
   ]);
   return (
     <>
