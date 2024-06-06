@@ -1,18 +1,18 @@
+import HomeIcon from "@mui/icons-material/Home";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
 import { Link } from "react-router-dom";
 import "./SignInSide.css";
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import HomeIcon from "@mui/icons-material/Home";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const defaultTheme = createTheme();
 
@@ -167,13 +167,6 @@ export default function SignInSide() {
                 Sign In
               </Button>
               <Grid container sx={{ marginTop: 4 }}>
-                <Grid item xs>
-                  <Button disabled>
-                    <Typography variant="body2">
-                      {"Forgot password?"}
-                    </Typography>
-                  </Button>
-                </Grid>
                 <Grid item>
                   <Button variant="text" onClick={handleChange}>
                     <Typography variant="body2">
