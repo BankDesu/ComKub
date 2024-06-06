@@ -43,9 +43,7 @@ export default function SignInSide() {
         sx={{
           height: "100vh",
           position: "relative",
-          backgroundColor: checked
-            ? "#010101"
-            : "#0e0a21",
+          backgroundColor: checked ? "#010101" : "#0e0a21",
         }}
       >
         <CssBaseline />
@@ -54,7 +52,9 @@ export default function SignInSide() {
           xs={false}
           sm={4}
           md={7}
-          className={checked ? "move-left" : "move-right"}
+          className={`absolute w-full h-full ${
+            checked ? "animate-moveBackgroundLeft" : "animate-moveBackgroundRight"
+          }`}
           sx={{
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
@@ -291,4 +291,3 @@ export default function SignInSide() {
     </ThemeProvider>
   );
 }
-
