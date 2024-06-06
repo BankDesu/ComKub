@@ -26,9 +26,9 @@ function Home() {
   };
 
   const slides = [
-    { id: 1, src: advtPic1, alt: "แนะนำสินค้า1", delay: "delay-[0s]" },
-    { id: 2, src: advtPic2, alt: "แนะนำสินค้า2", delay: "delay-[5s]" },
-    { id: 3, src: advtPic3, alt: "แนะนำสินค้า3", delay: "delay-[10s]" },
+    { id: 1, src: advtPic1, alt: "แนะนำสินค้า1", data: { title: "1", content: "A", image: advtPic1 } },
+    { id: 2, src: advtPic2, alt: "แนะนำสินค้า2", data: { title: "2", content: "B", image: advtPic2 } },
+    { id: 3, src: advtPic3, alt: "แนะนำสินค้า3", data: { title: "3", content: "C", image: advtPic3 } },
   ];
 
   const [dataN, setDataN] = useState([
@@ -116,7 +116,7 @@ function Home() {
                   key={slide.id}
                   className={`absolute top-[5%] right-[-180%] h-40 w-[42rem] border-2 border-black text-center m-4 transition-transform duration-150 hover:transform hover:scale-105 filter hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] z-2 animate-autoplay1 `}
                 >
-                  <Link to={`/advt/${slide.id}`}>
+                  <Link to="/advt" state={{ data: slide.data }}>
                     <img
                       className="h-full w-full"
                       src={slide.src}
