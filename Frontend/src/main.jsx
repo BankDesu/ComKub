@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     element: <SignInSide />,
   },
   {
-    path: "advt",
+    path: "advt/:id",
     element: <Advt />,
   },
 

@@ -17,7 +17,7 @@ function Nav() {
               className="article-img ml-8 mr-10 h-8 transition-transform duration-150 hover:transform hover:scale-110 filter invert"
               src="https://icons.veryicon.com/png/o/miscellaneous/shaanxi-left-column-icon/article-management-3.png"
             />
-          </Link>{" "}
+          </Link>
           <Link to="/review" className="review">
             <img
               className="review-img mt-1.2 h-14 transition-transform duration-150 hover:transform hover:scale-110 filter invert"
@@ -37,7 +37,7 @@ function Nav() {
           </div>
           <div className="account-section pr-8 h-12 justify-self-end">
             <Link to="/SignInSide">
-              <button className="account-btn h-10 w-10 mt-1 rounded-full border border-black bg-white text-center transition-transform duration-150 flex justify-center items-center hover:transform hover:scale-110">
+              <button className="account-btn h-10 w-10 mt-1 rounded-full border border-black bg-white text-center transition-transform duration-150 flex justify-center items-center hover:transform hover:bg-cyan-300/75">
                 <img
                   className="account-icon h-6"
                   src="https://www.svgrepo.com/show/456992/account.svg"

@@ -50,9 +50,9 @@ function Home() {
     <>
       <Nav />
       <div className="body flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-zinc-800 to-zinc-700">
-        <div className="search-section flex w-full h-20 justify-center bg-zinc-700">
+        <div className="search-section flex w-full h-16 justify-center bg-zinc-700">
           <div className="category-section justify-self-end">
-            <button className="category-btn h-10 w-10 border-0 mt-6 mr-2 bg-zinc-700 transition-transform duration-150 hover:transform hover:scale-110">
+            <button className="category-btn h-10 w-10 border-0 mt-4 mr-2 bg-zinc-700 transition-transform duration-150 hover:transform hover:scale-110">
               <img
                 className="category-icon h-8 m-0 filter invert"
                 src="https://cdn-icons-png.flaticon.com/512/2603/2603910.png"
@@ -60,7 +60,7 @@ function Home() {
               />
             </button>
           </div>
-          <div className="searchbar-section flex mt-6 h-10 w-1/3 bg-white border-0">
+          <div className="searchbar-section flex mt-4 h-10 w-1/3 bg-white border-0">
             <input
               className="search-bar h-8.4 w-11/12 text-sm text-left m-0 pt-2.4 pl-3 border-0 focus:outline-none"
               type="search"
@@ -86,7 +86,7 @@ function Home() {
               onClick={handleClickOrder}
             >
               <img
-                className="order w-8 h-7 absolute left-8 top-5 transition-transform duration-150 hover:transform hover:scale-110 filter invert"
+                className="order w-8 h-7 absolute left-3 top-3 transition-transform duration-150 hover:transform hover:scale-110 filter invert"
                 src="https://cdn-icons-png.flaticon.com/512/2740/2740721.png"
                 alt="เรียงตาม"
               />
@@ -116,7 +116,7 @@ function Home() {
                   key={slide.id}
                   className={`absolute top-[5%] right-[-180%] h-40 w-[42rem] border-2 border-black text-center m-4 transition-transform duration-150 hover:transform hover:scale-105 filter hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] z-2 animate-autoplay1 `}
                 >
-                  <Link to="/advt">
+                  <Link to={`/advt/${slide.id}`}>
                     <img
                       className="h-full w-full"
                       src={slide.src}
