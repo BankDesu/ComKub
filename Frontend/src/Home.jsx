@@ -1,7 +1,8 @@
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import About from "./About";
 import Nav from "./Nav";
@@ -11,8 +12,8 @@ import advtPic1 from "./assets/advtPic1.jpg";
 import advtPic2 from "./assets/advtPic2.png";
 import advtPic3 from "./assets/advtPic3.png";
 import "./index.css";
-import axios from "axios";
 
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 
 function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -71,9 +72,8 @@ function Home() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
+          `${VITE_API_PATH}/notebook/displayNotebook`
         );
-        // '${VITE_API_PATH}/notebook/displayNotebook'
         setDataN(response.data);
         console.log(response.data, "11111111111111111111111111111111111");
       } catch (error) {

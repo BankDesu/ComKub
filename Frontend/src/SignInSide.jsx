@@ -10,10 +10,13 @@ import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const defaultTheme = createTheme();
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 
 export default function SignInSide() {
   const [checked, setChecked] = React.useState(true);
@@ -22,16 +25,36 @@ export default function SignInSide() {
     setChecked((prev) => !prev);
   };
 
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
+    const data = new FormData(event.traget);
+    axios.post(`${VITE_API_PATH}/auth/login`, {
+      username: data.get("username"),
       password: data.get("password"),
-      name: data.get("name"),
-      email2: data.get("email2"),
-      password2: data.get("password2"),
-    });
+    })
+      .then((res) => {
+        console.log(res.data);
+        navigate("/");
+      })
+      .catch((err) => {
+        window.alert("Invalid username or password. Please try again.");
+      });
+    
+    axios.post(`${VITE_API_PATH}/auth/register`, {
+      username: data.get("username"),
+      password: data.get("password"),
+      email: data.get("email"),
+    })
+      .then((res) => {
+        console.log(res.data);
+        navigate("signInSide");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+      event.target.reset();
   };
 
   return (
@@ -137,10 +160,10 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
               />
               <TextField
@@ -241,18 +264,18 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="name"
-                label="Name"
-                name="name"
+                id="username2"
+                label="Username"
+                name="username"
                 autoFocus
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email2"
+                id="email"
                 label="Email Address"
-                name="email2"
+                name="email"
                 autoComplete="email"
                 autoFocus
               />
@@ -260,7 +283,7 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                name="password2"
+                name="password"
                 label="Password"
                 type="password"
                 id="password2"
