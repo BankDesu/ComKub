@@ -1,46 +1,45 @@
 import db from "../config/dbConnection.js";
 
-const newReview = async (userid,notebook_id,review_title,perfromance_score,service_score) => {
-    const newReview = await db.query(
-        'INSERT INTO review (userid,notebook_id,review_title,perfromance_score,service_score) VALUES (?,?,?,?,?) RETURNING *', 
-        [userid,notebook_id,review_title,perfromance_score,service_score]
+const newReview = async (userid, notebook_id, review_title, performance_score, service_score) => {
+    const [result, fields] = await db.query(
+        'INSERT INTO review (userid, notebook_id, review_title, performance_score, service_score) VALUES (?, ?, ?, ?, ?) RETURNING *',
+        [userid, notebook_id, review_title, performance_score, service_score]
     );
-    return (newReview["row"][0]);
-}
-
-const deleteReview = async (reviewid) => {
-    const review = await db.query(
-        'DELETE FROM review WHERE reviewid = ?', 
-        [reviewid]
-    );
-    return (deletedReview["row"][0]);
+    return result[0];
 };
 
-const updateReview = async (reviewid,notebook_id,review_title,perfromance_score,service_score) => {
-    const review = await db.query(
-        'UPDATE review SET notebook_id = ?, review_title = ?, perfromance_score = ?, service_score = ? WHERE reviewid = ? RETURNING *', 
-        [notebook_id,review_title,perfromance_score,service_score,reviewid]
-    );
-    return (updatedReview["row"][0]);
-}
-
-const lookupReview = async (reviewid) => {
-    const review = await db.query(
-        `SELECT * FROM review WHERE reviewid = ?`,
+const deleteReview = async (reviewid) => {
+    const [result, fields] = await db.query(
+        'DELETE FROM review WHERE reviewid = ?',
         [reviewid]
     );
-    return (review["rows"]);
+    return result.affectedRows > 0;
+};
+
+const updateReview = async (reviewid, notebook_id, review_title, performance_score, service_score) => {
+    const [result, fields] = await db.query(
+        'UPDATE review SET notebook_id = ?, review_title = ?, performance_score = ?, service_score = ? WHERE reviewid = ? RETURNING *',
+        [notebook_id, review_title, performance_score, service_score, reviewid]
+    );
+    return result[0];
+};
+
+const lookupReview = async (reviewid) => {
+    const [result, fields] = await db.query(
+        'SELECT * FROM review WHERE reviewid = ?',
+        [reviewid]
+    );
+    return result;
 };
 
 const lookupReviewByNotebook = async (notebook_id) => {
-    const review = await db.query(
-        `SELECT * FROM review WHERE notebook_id = ?`,
+    const [result, fields] = await db.query(
+        'SELECT * FROM review WHERE notebook_id = ?',
         [notebook_id]
     );
-    return (review["rows"]);
+    return result;
 };
 
 export {
     deleteReview, lookupReview, lookupReviewByNotebook, newReview, updateReview
 };
-

@@ -1,100 +1,102 @@
 import db from "../config/dbConnection.js";
 
 const lookupNotebook = async (notebook_id) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE notebook_id = ?`,
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook WHERE notebook_id = ?',
         [notebook_id]
     );
-    return (notebook["rows"]);
+    return results;
 };
 
 const lookupNotebookByBrand = async (brand) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE brand = ?`,
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook WHERE brand = ?',
         [brand]
     );
-    return (notebook["rows"]);
+    return results;
 };
 
-const lookupNotebookByPriceRange = async (minPrice,maxPrice) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE price >= ? AND price <= ?`,
-        [minPrice,maxPrice]
+const lookupNotebookByPriceRange = async (minPrice, maxPrice) => {
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook WHERE price >= ? AND price <= ?',
+        [minPrice, maxPrice]
     );
-    return (notebook["rows"]);
+    return results;
 };
 
 const lookupNotebookByCategory = async (category) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE category = ?`,
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook WHERE category = ?',
         [category]
     );
-    return (notebook["rows"]);
+    return results;
 };
 
 const lookupNotebookByCPU = async (cpu) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE cpu like ?`,
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook WHERE cpu LIKE ?',
         [cpu]
     );
-    return (notebook["rows"]);
-}
+    return results;
+};
 
 const lookupNotebookByGPU = async (gpu) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE gpu like ?`,
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook WHERE gpu LIKE ?',
         [gpu]
     );
-    return (notebook["rows"]);
-}
+    return results;
+};
 
 const lookupNotebookByram = async (ram) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE ram like ?`,
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook WHERE ram LIKE ?',
         [ram]
     );
-    return (notebook["rows"]);
-}
+    return results;
+};
 
 const sortBylowPrice = async () => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook ORDER BY price ASC`
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook ORDER BY price ASC'
     );
-    return (notebook["rows"]);
-}
+    return results;
+};
 
 const sortByhighPrice = async () => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook ORDER BY price DESC`
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook ORDER BY price DESC'
     );
-    return (notebook["rows"]);
-}
+    return results;
+};
 
 const sortByAtoZ = async () => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook ORDER BY brand ASC`
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook ORDER BY brand ASC'
     );
-    return (notebook["rows"]);
-}
+    return results;
+};
 
 const sortByZtoA = async () => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook ORDER BY brand DESC`
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook ORDER BY brand DESC'
     );
-    return (notebook["rows"]);
-}
+    return results;
+};
 
 const lookupTop5 = async (minPrice, maxPrice, limit = 5) => {
-    const notebook = await db.query(
-        `   SELECT *,
-                (0.5 * performance_score + 0.5 * service_score) AS total_score
-            FROM notebook 
-            WHERE price BETWEEN ? AND ?
-            ORDER BY total_score DESC
-            LIMIT ?;
-        `, [minPrice, maxPrice, limit]);
-    return notebook["rows"];
-}
+    const [results, fields] = await db.promise().query(
+        `
+        SELECT *,
+        (0.5 * performance_score + 0.5 * service_score) AS total_score
+        FROM notebook 
+        WHERE price BETWEEN ? AND ?
+        ORDER BY total_score DESC
+        LIMIT ?;
+    `
+    , [minPrice, maxPrice, limit]);
+    return results;
+};
 
 export {
     lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU,
