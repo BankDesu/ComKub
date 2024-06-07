@@ -1,16 +1,19 @@
-import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import About from "./About";
 import Nav from "./Nav";
+import Notebook_data from "./Notebook_data";
 import Sidebar from "./Sidebar";
 import advtPic1 from "./assets/advtPic1.jpg";
 import advtPic2 from "./assets/advtPic2.png";
 import advtPic3 from "./assets/advtPic3.png";
-import { Link } from "react-router-dom";
-import Notebook_data from "./Notebook_data";
-import About from "./About";
 import "./index.css";
+
+const VITE_API_PATH = import.meta.env.VITE_API_PATH
+
 
 function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
