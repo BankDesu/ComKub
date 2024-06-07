@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import About from "./About";
 import Nav from "./Nav";
 import Notebook_data from "./Notebook_data";
+import Info from "./Info";
 import Sidebar from "./Sidebar";
 import advtPic1 from "./assets/advtPic1.jpg";
 import advtPic2 from "./assets/advtPic2.png";
 import advtPic3 from "./assets/advtPic3.png";
 import "./index.css";
 import axios from "axios";
-
 
 function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -71,11 +71,10 @@ function Home() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
+          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook` // '${VITE_API_PATH}/notebook/displayNotebook'
         );
-        // '${VITE_API_PATH}/notebook/displayNotebook'
         setDataN(response.data);
-        console.log(response.data, "11111111111111111111111111111111111");
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -84,11 +83,145 @@ function Home() {
     fetchData();
   }, []);
 
+  // const [dataN, setDataN] = useState([
+  //   {
+  //     id: "1",
+  //     brand: "ASUS",
+  //     notebook_name: "1",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "2",
+  //     brand: "ASUS",
+  //     notebook_name: "2",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "3",
+  //     brand: "ASUS",
+  //     notebook_name: "3",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "4",
+  //     brand: "ACER",
+  //     notebook_name: "4",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "5",
+  //     brand: "ACER",
+  //     notebook_name: "5",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "6",
+  //     brand: "ACER",
+  //     notebook_name: "6",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "7",
+  //     brand: "MSI",
+  //     notebook_name: "7",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "8",
+  //     brand: "MSI",
+  //     notebook_name: "8",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "9",
+  //     brand: "MSI",
+  //     notebook_name: "9",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "10",
+  //     brand: "Lenovo",
+  //     notebook_name: "10",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "11",
+  //     brand: "Lenovo",
+  //     notebook_name: "11",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  //   {
+  //     id: "12",
+  //     brand: "Lenovo",
+  //     notebook_name: "12",
+  //     cpu: "Intel core I5",
+  //     gpu: "Intel",
+  //     ram: "16GB",
+  //     price: "29,990",
+  //     pic_path:
+  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
+  //   },
+  // ]);
+
   return (
     <>
       <Nav />
-      {dataN}
-      <div className="body flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-zinc-800 to-zinc-700">
+      <div className="body flex flex-col justify-center items-center bg-gradient-to-br from-zinc-800 to-zinc-700">
         <div className="search-section flex w-full h-16 justify-center bg-zinc-700">
           {/* <div className="category-section justify-self-end">
             <button className="category-btn h-10 w-10 border-0 mt-4 mr-2 bg-zinc-700 transition-transform duration-150 hover:transform hover:scale-110">
@@ -166,9 +299,20 @@ function Home() {
               ))}
             </div>
             <div className="content-container-home justify-center grid grid-cols-3">
-              {dataN.map((data, index) => (
-                <Notebook_data key={index} data={data} />
-              ))}
+              {dataN.map(
+                (data, index) => (
+                  (
+                    <Link to="/Info">
+                      <Notebook_data key={index} data={data} />
+                    </Link>
+                  )
+                )
+              )}
+              {/* {dataN.map((data, index) => (
+                <Link to="/Info" state={{ data }}>
+                  <Notebook_data key={index} data={data} />
+                </Link>
+              ))} */}
             </div>
           </div>
         </div>
