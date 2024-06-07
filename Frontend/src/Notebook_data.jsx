@@ -1,7 +1,7 @@
 import React from "react";
 
 function Notebook_data({ data }) {
-  const { brand,notebook_name, cpu, gpu, ram, price, pic_path } = data;
+  const { brand, notebook_name, cpu, gpu, ram, price, pic_path } = data;
   return (
     <>
       <div className="border ml-10 m-6 p-2 border-black h-60 w-72 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">

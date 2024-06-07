@@ -7,6 +7,7 @@ import About from "./About";
 function Advt() {
   const location = useLocation();
   const { data } = location.state || {};
+  console.log(location.state)
 
   if (!data) {
     return <div>Advt not found</div>;
