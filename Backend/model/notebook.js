@@ -84,8 +84,20 @@ const sortByZtoA = async () => {
     return (notebook["rows"]);
 }
 
+const lookupTop5 = async (minPrice, maxPrice, limit = 5) => {
+    const notebook = await db.query(
+        `   SELECT *,
+                (0.5 * performance_score + 0.5 * service_score) AS total_score
+            FROM notebook 
+            WHERE price BETWEEN ? AND ?
+            ORDER BY total_score DESC
+            LIMIT ?;
+        `, [minPrice, maxPrice, limit]);
+    return notebook["rows"];
+}
+
 export {
     lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU,
-    lookupNotebookByPriceRange, lookupNotebookByram, sortByAtoZ, sortByZtoA, sortByhighPrice, sortBylowPrice
+    lookupNotebookByPriceRange, lookupNotebookByram, lookupTop5, sortByAtoZ, sortByZtoA, sortByhighPrice, sortBylowPrice
 };
 

@@ -17,6 +17,8 @@ create table notebook (
     storage varchar(255) not null,
     os varchar(255) not null,
     pic_path VARCHAR(255) not null,
+    perfromance_score int,
+    service_score int,
     link varchar(255)
 );
 -- drop table notebook;
@@ -31,15 +33,6 @@ create table user (
 );
 -- drop table user;
 
-create table bookmark (
-	bookmarkid int auto_increment not null primary key,
-	userid int not null ,
-    notebook_id int not null,
-    FOREIGN KEY (userid) REFERENCES user(userid),
-	FOREIGN KEY (notebook_id) REFERENCES notebook(notebook_id)
-);
-drop table bookmark;
-
 create table review (
 	reviewid int auto_increment not null primary key,
 	userid int not null ,
@@ -53,6 +46,6 @@ create table review (
 );
 -- drop table review;
  
- INSERT INTO user (username,password,birthday,gender,email) VALUES ('BankDesu','bank2739','2003-07-01','Male',''); 
+ -- INSERT INTO user (username,password,birthday,gender,email) VALUES ('BankDesu','bank2739','2003-07-01','Male',''); 
 
  select * from user ;

@@ -1,5 +1,7 @@
 import express from 'express';
-import { lookupNotebook, lookupNotebookByBrand, lookupNotebookByCategory, lookupNotebookByPriceRange } from '../model/notebook.js';
+import { lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU,
+    lookupNotebookByPriceRange, lookupNotebookByram, lookupTop5, sortByAtoZ, sortByZtoA, sortByhighPrice, sortBylowPrice } 
+from '../model/notebook.js';
 
 const notebookRoutes = express.Router();
 
@@ -109,5 +111,16 @@ notebookRoutes.get('/sortByZtoA', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+notebookRoutes.get('/displayTop5', async (req, res) => {
+    try {
+        const notebook = await lookupTop5();
+        res.send(notebook);
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
 
 export default notebookRoutes;
