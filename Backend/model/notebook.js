@@ -8,6 +8,13 @@ const lookupNotebook = async (notebook_id) => {
     return results;
 };
 
+const lookupNotebookall = async () => {
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook order by notebook_id desc'
+    );
+    return results;
+}
+
 const lookupNotebookByBrand = async (brand) => {
     const [results, fields] = await db.promise().query(
         'SELECT * FROM notebook WHERE brand = ?',
@@ -99,7 +106,9 @@ const lookupTop5 = async (minPrice, maxPrice, limit = 5) => {
 };
 
 export {
-    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU,
-    lookupNotebookByPriceRange, lookupNotebookByram, lookupTop5, sortByAtoZ, sortByZtoA, sortByhighPrice, sortBylowPrice
+    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, 
+    lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange, 
+    lookupNotebookByram, lookupTop5, sortByAtoZ, 
+    sortByZtoA, sortByhighPrice, sortBylowPrice, lookupNotebookall
 };
 

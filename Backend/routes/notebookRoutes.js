@@ -1,11 +1,24 @@
 import express from 'express';
-import { lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU,
-    lookupNotebookByPriceRange, lookupNotebookByram, lookupTop5, sortByAtoZ, sortByZtoA, sortByhighPrice, sortBylowPrice } 
-from '../model/notebook.js';
+import {
+    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU,
+    lookupNotebookByPriceRange, lookupNotebookByram,
+    lookupNotebookall,
+    lookupTop5, sortByAtoZ, sortByZtoA, sortByhighPrice, sortBylowPrice
+} from '../model/notebook.js';
 
 const notebookRoutes = express.Router();
 
 notebookRoutes.get('/displayNotebook', async (req, res) => {
+    const { notebook_id } = req.query;
+    try {
+        const notebook = await lookupNotebookall(notebook_id);
+        res.send(notebook);
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+notebookRoutes.get('/lookupNotebook', async (req, res) => {
     const { notebook_id } = req.query;
     try {
         const notebook = await lookupNotebook(notebook_id);
@@ -14,6 +27,7 @@ notebookRoutes.get('/displayNotebook', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 notebookRoutes.get('/displayNotebookByBrand', async (req, res) => {
     const { brand } = req.query;
