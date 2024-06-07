@@ -85,14 +85,14 @@ function About() {
           <h3 style={{ marginBottom: "3rem", fontWeight: "600" }}>
             เกี่ยวกับ Comkub
           </h3>
-          <a
+          {/* <a
             href="https://youtu.be/xvFZjo5PgG0"
             target="_blank"
             style={{ color: "white" }}
           >
             เกี่ยวกับเรา
-          </a>
-          <p style={{ marginTop: "2rem" }}>ติดตามเรา</p>
+          </a> */}
+          {/* <p style={{ marginTop: "2rem" }}>ติดตามเรา</p>
           <div
             className="contact flex"
             style={{
@@ -155,7 +155,7 @@ function About() {
               }}
               src="https://upload.wikimedia.org/wikipedia/commons/2/2e/LINE_New_App_Icon_%282020-12%29.png"
             />
-          </div>
+          </div> */}
         </div>
         <div className="about2" style={{ marginLeft: "12rem" }}>
           <h4>ผู้จัดทำ</h4>

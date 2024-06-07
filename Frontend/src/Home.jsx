@@ -31,7 +31,7 @@ function Home() {
       src: advtPic1,
       alt: "แนะนำสินค้า1",
       data: {
-        id:1,
+        id: 1,
         maintitle:
           "ชี้เป้า 10 โน้ตบุ๊กรุ่นไหนดี สเปกแรง ใช้ได้ทั้งทำงานและเล่นเกม คุ้มค่าราคา",
         image0:
@@ -43,7 +43,7 @@ function Home() {
       src: advtPic2,
       alt: "แนะนำสินค้า2",
       data: {
-        id:2,
+        id: 2,
         maintitle:
           "7 โน๊ตบุ๊คสำหรับนักเรียนและนักศึกษา ใช้เรียนดี ใช้เล่นได้ อัปเดตใหม่ล่าสุด ปี 2022",
         image0:
@@ -55,7 +55,7 @@ function Home() {
       src: advtPic3,
       alt: "แนะนำสินค้า3",
       data: {
-        id:3,
+        id: 3,
         maintitle: "โน๊ตบุ๊คเล่นเกม 2024 รุ่นไหนต้องมีมาดูกัน",
         image0:
           "https://www.neoshop.co.th/wp-content/uploads/2023/12/podium-for-product-presentation-technology-in-galaxy-wallpaper-with-a-fantastic-bubble-reflection-blue-background-backdrop-pink-colors-smoke-floating-on-water-surface-18.png",
@@ -64,18 +64,67 @@ function Home() {
   ];
 
   const [dataN, setDataN] = useState([
-    { title: "1", content: "Notebook Data" },
-    { title: "2", content: "Notebook Data" },
-    { title: "3", content: "Notebook Data" },
-    { title: "4", content: "Notebook Data" },
-    { title: "5", content: "Notebook Data" },
-    { title: "6", content: "Notebook Data" },
-    { title: "7", content: "Notebook Data" },
-    { title: "8", content: "Notebook Data" },
-    { title: "9", content: "Notebook Data" },
-    { title: "10", content: "Notebook Data" },
-    { title: "11", content: "Notebook Data" },
-    { title: "12", content: "Notebook Data" },
+    {
+      title: "1",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    ,
+    {
+      title: "2",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "3",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "4",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "5",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "6",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "7",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "8",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "9",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "10",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "11",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
+    {
+      title: "12",
+      content: "Notebook Data",
+      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
+    },
   ]);
 
   return (
@@ -160,13 +209,7 @@ function Home() {
             </div>
             <div className="content-container-home justify-center grid grid-cols-3">
               {dataN.map((data) => {
-                return (
-                  <Notebook_data
-                    key={data.title}
-                    title={data.title}
-                    content={data.content}
-                  />
-                );
+                return <Notebook_data data={data} />;
               })}
             </div>
           </div>
