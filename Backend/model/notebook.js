@@ -106,9 +106,9 @@ const lookupTop5 = async (minPrice, maxPrice, limit = 5) => {
 };
 
 export {
-    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, 
-    lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange, 
-    lookupNotebookByram, lookupTop5, sortByAtoZ, 
-    sortByZtoA, sortByhighPrice, sortBylowPrice, lookupNotebookall
+    lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU,
+    lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange,
+    lookupNotebookByram, lookupNotebookall, lookupTop5, sortByAtoZ,
+    sortByZtoA, sortByhighPrice, sortBylowPrice
 };
 

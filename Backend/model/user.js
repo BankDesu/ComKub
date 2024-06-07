@@ -1,7 +1,7 @@
 import db from "../config/dbConnection.js";
 
 const newUser = async (username,password,birthday,gender,email) => {
-    const newUser = await db.query(
+    const newUser = await db.promise().query(
         'INSERT INTO user (username,password,birthday,gender,email) VALUES (?,?,?,?,?) RETURNING *', 
         [username,password,birthday,gender,email]
     );
@@ -9,7 +9,7 @@ const newUser = async (username,password,birthday,gender,email) => {
 }; 
 
 const deleteUser = async (userid) => {
-    const user = await db.query(
+    const user = await db.promise().query(
         'DELETE FROM user WHERE userid = ?', 
         [userid]
     );
@@ -17,7 +17,7 @@ const deleteUser = async (userid) => {
 };
 
 const updateUser = async (userid,username,password,email) => {
-    const user = await db.query(
+    const user = await db.promise().query(
         'UPDATE user SET username = ?, password = ?, email = ? WHERE userid = ? RETURNING *', 
         [username,password,email,userid]
     );
@@ -25,7 +25,7 @@ const updateUser = async (userid,username,password,email) => {
 };
 
 const lookupUser = async (uid) => {
-    const user = await db.query(
+    const user = await db.promise().query(
         `SELECT * FROM users WHERE userid = ?`,
         [userid]
     );

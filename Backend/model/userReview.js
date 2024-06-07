@@ -1,7 +1,7 @@
 import db from "../config/dbConnection.js";
 
 const newReview = async (userid, notebook_id, review_title, performance_score, service_score) => {
-    const [result, fields] = await db.query(
+    const [result, fields] = await db.promise().query(
         'INSERT INTO review (userid, notebook_id, review_title, performance_score, service_score) VALUES (?, ?, ?, ?, ?) RETURNING *',
         [userid, notebook_id, review_title, performance_score, service_score]
     );
@@ -9,7 +9,7 @@ const newReview = async (userid, notebook_id, review_title, performance_score, s
 };
 
 const deleteReview = async (reviewid) => {
-    const [result, fields] = await db.query(
+    const [result, fields] = await db.promise().query(
         'DELETE FROM review WHERE reviewid = ?',
         [reviewid]
     );
@@ -17,7 +17,7 @@ const deleteReview = async (reviewid) => {
 };
 
 const updateReview = async (reviewid, notebook_id, review_title, performance_score, service_score) => {
-    const [result, fields] = await db.query(
+    const [result, fields] = await db.promise().query(
         'UPDATE review SET notebook_id = ?, review_title = ?, performance_score = ?, service_score = ? WHERE reviewid = ? RETURNING *',
         [notebook_id, review_title, performance_score, service_score, reviewid]
     );
@@ -25,7 +25,7 @@ const updateReview = async (reviewid, notebook_id, review_title, performance_sco
 };
 
 const lookupReview = async (reviewid) => {
-    const [result, fields] = await db.query(
+    const [result, fields] = await db.promise().query(
         'SELECT * FROM review WHERE reviewid = ?',
         [reviewid]
     );
@@ -33,7 +33,7 @@ const lookupReview = async (reviewid) => {
 };
 
 const lookupReviewByNotebook = async (notebook_id) => {
-    const [result, fields] = await db.query(
+    const [result, fields] = await db.promise().query(
         'SELECT * FROM review WHERE notebook_id = ?',
         [notebook_id]
     );
@@ -43,3 +43,4 @@ const lookupReviewByNotebook = async (notebook_id) => {
 export {
     deleteReview, lookupReview, lookupReviewByNotebook, newReview, updateReview
 };
+
