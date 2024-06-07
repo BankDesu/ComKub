@@ -93,7 +93,7 @@ const lookupTop5 = async (minPrice, maxPrice, limit = 5) => {
             ORDER BY total_score DESC
             LIMIT ?;
         `, [minPrice, maxPrice, limit]);
-return notebooks["rows"];
+    return notebook["rows"];
 }
 
 export {
