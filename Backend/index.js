@@ -35,7 +35,7 @@ app.all("/", (req, res) => {
 app.use('/auth', authRoutes);
 app.use('/user', authMiddleware, userRoutes);
 app.use('/review', authMiddleware, userReviewRoutes);
-app.use('/notebook', authMiddleware, notebookRoutes);
+app.use('/notebook', notebookRoutes);
 
 
 app.listen(port, () => {

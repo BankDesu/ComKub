@@ -30,7 +30,7 @@ authRoutes.post('/login', async (req, res) => {
     }
 });
 
-authRoutes.post('/register', authMiddleware, async (req, res) => {
+authRoutes.post('/register', async (req, res) => {
     const { username, password, email } = req.body;
     try {
         const user = await registerUser(username, password, email);
@@ -39,13 +39,12 @@ authRoutes.post('/register', authMiddleware, async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
 authRoutes.get('/logout', authMiddleware, (req, res) => {
     res.clearCookie('token');
     res.send('Logout successful');
 });
 
-authRoutes.get('/check', authMiddleware, async (req, res) => {
+authRoutes.get('/check', async (req, res) => {
     try {
         res.sendStatus(200);
     } catch (err) {

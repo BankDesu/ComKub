@@ -1,100 +1,115 @@
 import db from "../config/dbConnection.js";
 
 const lookupNotebook = async (notebook_id) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE notebook_id = ?`,
-        [notebook_id]
-    );
-    return (notebook["rows"]);
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook WHERE notebook_id = ?',
+        values: [notebook_id],
+        rowsAsArray: true,
+    });
+    return results;
 };
 
 const lookupNotebookByBrand = async (brand) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE brand = ?`,
-        [brand]
-    );
-    return (notebook["rows"]);
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook WHERE brand = ?',
+        values: [brand],
+        rowsAsArray: true,
+    });
+    return results;
 };
 
-const lookupNotebookByPriceRange = async (minPrice,maxPrice) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE price >= ? AND price <= ?`,
-        [minPrice,maxPrice]
-    );
-    return (notebook["rows"]);
+const lookupNotebookByPriceRange = async (minPrice, maxPrice) => {
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook WHERE price >= ? AND price <= ?',
+        values: [minPrice, maxPrice],
+        rowsAsArray: true,
+    });
+    return results;
 };
 
 const lookupNotebookByCategory = async (category) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE category = ?`,
-        [category]
-    );
-    return (notebook["rows"]);
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook WHERE category = ?',
+        values: [category],
+        rowsAsArray: true,
+    });
+    return results;
 };
 
 const lookupNotebookByCPU = async (cpu) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE cpu like ?`,
-        [cpu]
-    );
-    return (notebook["rows"]);
-}
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook WHERE cpu LIKE ?',
+        values: [cpu],
+        rowsAsArray: true,
+    });
+    return results;
+};
 
 const lookupNotebookByGPU = async (gpu) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE gpu like ?`,
-        [gpu]
-    );
-    return (notebook["rows"]);
-}
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook WHERE gpu LIKE ?',
+        values: [gpu],
+        rowsAsArray: true,
+    });
+    return results;
+};
 
 const lookupNotebookByram = async (ram) => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook WHERE ram like ?`,
-        [ram]
-    );
-    return (notebook["rows"]);
-}
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook WHERE ram LIKE ?',
+        values: [ram],
+        rowsAsArray: true,
+    });
+    return results;
+};
 
 const sortBylowPrice = async () => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook ORDER BY price ASC`
-    );
-    return (notebook["rows"]);
-}
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook ORDER BY price ASC',
+        rowsAsArray: true,
+    });
+    return results;
+};
 
 const sortByhighPrice = async () => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook ORDER BY price DESC`
-    );
-    return (notebook["rows"]);
-}
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook ORDER BY price DESC',
+        rowsAsArray: true,
+    });
+    return results;
+};
 
 const sortByAtoZ = async () => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook ORDER BY brand ASC`
-    );
-    return (notebook["rows"]);
-}
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook ORDER BY brand ASC',
+        rowsAsArray: true,
+    });
+    return results;
+};
 
 const sortByZtoA = async () => {
-    const notebook = await db.query(
-        `SELECT * FROM notebook ORDER BY brand DESC`
-    );
-    return (notebook["rows"]);
-}
+    const [results, fields] = await db.query({
+        sql: 'SELECT * FROM notebook ORDER BY brand DESC',
+        rowsAsArray: true,
+    });
+    return results;
+};
 
 const lookupTop5 = async (minPrice, maxPrice, limit = 5) => {
-    const notebook = await db.query(
-        `   SELECT *,
-                (0.5 * performance_score + 0.5 * service_score) AS total_score
+    const [results, fields] = await db.query({
+        sql: `
+            SELECT *,
+            (0.5 * performance_score + 0.5 * service_score) AS total_score
             FROM notebook 
             WHERE price BETWEEN ? AND ?
             ORDER BY total_score DESC
             LIMIT ?;
-        `, [minPrice, maxPrice, limit]);
-    return notebook["rows"];
-}
+        `,
+        values: [minPrice, maxPrice, limit],
+        rowsAsArray: true,
+    });
+    return results;
+};
 
 export {
     lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU, lookupNotebookByCategory, lookupNotebookByGPU,
