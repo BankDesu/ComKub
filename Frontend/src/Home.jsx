@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import About from "./About";
 import Nav from "./Nav";
@@ -11,8 +11,7 @@ import advtPic1 from "./assets/advtPic1.jpg";
 import advtPic2 from "./assets/advtPic2.png";
 import advtPic3 from "./assets/advtPic3.png";
 import "./index.css";
-
-const VITE_API_PATH = import.meta.env.VITE_API_PATH
+import axios from "axios";
 
 
 function Home() {
@@ -66,73 +65,29 @@ function Home() {
     },
   ];
 
-  const [dataN, setDataN] = useState([
-    {
-      title: "1",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    ,
-    {
-      title: "2",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "3",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "4",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "5",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "6",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "7",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "8",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "9",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "10",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "11",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-    {
-      title: "12",
-      content: "Notebook Data",
-      img: "https://i5.walmartimages.com/seo/HP-Stream-14-Laptop-Intel-Celeron-N4000-4GB-SDRAM-32GB-eMMC-Office-365-1-yr-Brilliant-Black_d579aa66-7e24-4eb2-9686-521be769a755_2.09283250bd5d2a12834c2d4aaca652dd.jpeg",
-    },
-  ]);
+  const [dataN, setDataN] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
+        );
+        // '${VITE_API_PATH}/notebook/displayNotebook'
+        setDataN(response.data);
+        console.log(response.data, "11111111111111111111111111111111111");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
       <Nav />
+      {dataN}
       <div className="body flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-zinc-800 to-zinc-700">
         <div className="search-section flex w-full h-16 justify-center bg-zinc-700">
           {/* <div className="category-section justify-self-end">
@@ -211,9 +166,9 @@ function Home() {
               ))}
             </div>
             <div className="content-container-home justify-center grid grid-cols-3">
-              {dataN.map((data) => {
-                return <Notebook_data data={data} />;
-              })}
+              {dataN.map((data, index) => (
+                <Notebook_data key={index} data={data} />
+              ))}
             </div>
           </div>
         </div>
