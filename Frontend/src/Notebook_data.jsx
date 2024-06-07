@@ -1,20 +1,20 @@
 import React from "react";
 
 function Notebook_data({ data }) {
-  const { title, content, img } = data;
+  const { brand,notebook_name, cpu, gpu, ram, price, pic_path } = data;
   return (
     <>
-      <div class=" border ml-10 m-6 p-3 border-black h-60 w-72 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">
-        <div className="border-2 border-zinc-400 ">
-          <img className="w-7/12 h-28 p-0 mx-auto" src={img} alt="" />
+      <div className="border ml-10 m-6 p-2 border-black h-60 w-72 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">
+        <p className="text-sm font-thin font-mono">{brand}</p>
+        <div className="border-2 mx-auto border-zinc-400 p-2 ml-6 mr-6">
+          <img className="w-6/12 h-24 p-0 mx-auto" src={pic_path} alt="" />
         </div>
         <div className="p-1">
-          {/* name cpu gpu ram price */}
-          <h2 className="text-sm font-medium">Name: {title}</h2>
-          <h2 className="text-sm">CPU: {title}</h2>
-          <h2 className="text-sm">GPU: {title}</h2>
-          <h2 className="text-sm">RAM: {title}</h2>
-          <h2 className="text-sm">Price: {title}</h2>
+          <h2 className="text-sm font-medium">Name: {notebook_name}</h2>
+          <h2 className="text-xs">CPU: {cpu}</h2>
+          <h2 className="text-xs">GPU: {gpu}</h2>
+          <h2 className="text-xs">RAM: {ram}</h2>
+          <h2 className="text-xs">Price: {price}</h2>
         </div>
       </div>
     </>
