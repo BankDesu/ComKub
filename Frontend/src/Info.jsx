@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Nav from "./Nav";
-import About from "./About";
-import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
+import Rating from "@mui/material/Rating";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import About from "./About";
+import Nav from "./Nav";
 
+const apiPATH = import.meta.env.VITE_API_PATH;
 function Info() {
   const { notebook_id } = useParams(); // Extract notebook_id from the URL
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
   const [avgP, setAvgP] = useState([]);
+  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/lookupNotebook/${notebook_id}`,
+          `${apiPATH}/notebook/lookupNotebook/${notebook_id}`,
         );
         setData(response.data);
       } catch (error) {
