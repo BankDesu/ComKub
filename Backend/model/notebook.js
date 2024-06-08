@@ -2,12 +2,11 @@ import db from "../config/dbConnection.js";
 
 const lookupNotebook = async (notebook_id) => {
     const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook WHERE notebook_id = ?',
-        [notebook_id]
+      'SELECT * FROM notebook WHERE notebook_id = ?',
+      [notebook_id]
     );
-    
     return results;
-};
+  };
 
 const lookupNotebookall = async () => {
     const [results, fields] = await db.promise().query(
