@@ -105,10 +105,18 @@ const lookupTop5 = async (minPrice, maxPrice, limit = 5) => {
     return results;
 };
 
+const updatenotebookscore = async (notebook_id, avgPerformanceScore, avgServiceScore) => {
+    const [results, fields] = await db.promise().query(
+        'UPDATE notebook SET performance_score = ?, service_score = ? WHERE notebook_id = ?',
+        [avgPerformanceScore, avgServiceScore, notebook_id]
+    );
+    return results;
+}
+
 export {
     lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU,
     lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange,
     lookupNotebookByram, lookupNotebookall, lookupTop5, sortByAtoZ,
-    sortByZtoA, sortByhighPrice, sortBylowPrice
+    sortByZtoA, sortByhighPrice, sortBylowPrice, updatenotebookscore
 };
 

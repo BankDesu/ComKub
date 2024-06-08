@@ -1,18 +1,19 @@
 import express from "express";
 import {
-    lookupNotebook,
-    lookupNotebookByBrand,
-    lookupNotebookByCPU,
-    lookupNotebookByCategory,
-    lookupNotebookByGPU,
-    lookupNotebookByPriceRange,
-    lookupNotebookByram,
-    lookupNotebookall,
-    lookupTop5,
-    sortByAtoZ,
-    sortByZtoA,
-    sortByhighPrice,
-    sortBylowPrice,
+  lookupNotebook,
+  lookupNotebookByBrand,
+  lookupNotebookByCPU,
+  lookupNotebookByCategory,
+  lookupNotebookByGPU,
+  lookupNotebookByPriceRange,
+  lookupNotebookByram,
+  lookupNotebookall,
+  lookupTop5,
+  sortByAtoZ,
+  sortByZtoA,
+  sortByhighPrice,
+  sortBylowPrice,
+  updatenotebookscore
 } from "../model/notebook.js";
 
 const notebookRoutes = express.Router();
@@ -139,6 +140,24 @@ notebookRoutes.get("/displayTop5", async (req, res) => {
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get('/updateScores/:notebookId', async (req, res) => {
+  const notebookId = req.params.notebookId;
+  try {
+      // ดึงค่าเฉลี่ยของ service score และ performance score จากฐานข้อมูล
+      const [result] = await db.promise().query('SELECT AVG(service_score) AS avg_service_score, AVG(performance_score) AS avg_performance_score FROM userReview');
+      const avgServiceScore = result.avg_service_score;
+      const avgPerformanceScore = result.avg_performance_score;
+
+      // อัปเดตค่าในฐานข้อมูล notebook
+      const updateResult = await updatenotebookscore(notebookId, avgServiceScore, avgPerformanceScore);
+
+      res.json(updateResult);
+  } catch (error) {
+      console.error('Error updating scores:', error);
+      res.status(500).json({ success: false, message: 'Failed to update scores' });
   }
 });
 
