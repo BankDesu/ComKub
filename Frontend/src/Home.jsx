@@ -13,8 +13,6 @@ import advtPic1 from "./assets/advtPic1.jpg";
 import advtPic2 from "./assets/advtPic2.png";
 import advtPic3 from "./assets/advtPic3.png";
 import "./index.css";
-import axios from "axios";
-
 
 function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -75,7 +73,7 @@ function Home() {
         const response = await axios.get(
           `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
         );
-        setDataN(response.data);
+        setDataN(response.data,"Fetched data");
         console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -84,6 +82,10 @@ function Home() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    console.log(dataN, "Updated dataN"); 
+  }, [dataN]);
 
   // const [dataN, setDataN] = useState([
   //   {
@@ -301,17 +303,13 @@ function Home() {
               ))}
             </div>
             <div className="content-container-home justify-center grid grid-cols-3">
-              {dataN.map(
-                (data, index) => (
-                  (
-                    <Link to="/Info">
-                      <Notebook_data key={index} data={data} />
-                    </Link>
-                  )
-                )
-              )}
+              {dataN.map((data) => (
+                <Link to="/info" state={{ data }}>
+                  <Notebook_data data={data} />
+                </Link>
+              ))}
               {/* {dataN.map((data, index) => (
-                <Link to="/Info" state={{ data }}>
+                <Link to="/Info">
                   <Notebook_data key={index} data={data} />
                 </Link>
               ))} */}
