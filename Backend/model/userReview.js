@@ -2,10 +2,10 @@ import db from "../config/dbConnection.js";
 
 const newReview = async (userid, notebook_id, review_title, performance_score, service_score) => {
     const [result, fields] = await db.promise().query(
-        'INSERT INTO review (userid, notebook_id, review_title, performance_score, service_score) VALUES (?, ?, ?, ?, ?) RETURNING *',
+        'INSERT INTO review (userid, notebook_id, review_title, performance_score, service_score) VALUES (?, ?, ?, ?, ?) ',
         [userid, notebook_id, review_title, performance_score, service_score]
     );
-    return result[0];
+    return result ;
 };
 
 const deleteReview = async (reviewid) => {
@@ -18,10 +18,10 @@ const deleteReview = async (reviewid) => {
 
 const updateReview = async (reviewid, notebook_id, review_title, performance_score, service_score) => {
     const [result, fields] = await db.promise().query(
-        'UPDATE review SET notebook_id = ?, review_title = ?, performance_score = ?, service_score = ? WHERE reviewid = ? RETURNING *',
+        'UPDATE review SET notebook_id = ?, review_title = ?, performance_score = ?, service_score = ? WHERE reviewid = ? ',
         [notebook_id, review_title, performance_score, service_score, reviewid]
     );
-    return result[0];
+    return result;
 };
 
 const lookupReview = async (reviewid) => {
@@ -40,7 +40,23 @@ const lookupReviewByNotebook = async (notebook_id) => {
     return result;
 };
 
+const displayPrefromanceAvgScore = async (notebook_id) => {
+    const [result, fields] = await db.promise().query(
+        'SELECT AVG(performance_score) FROM review WHERE notebook_id = ?',
+        [notebook_id]
+    );
+    return result;
+};
+
+const displayServiceAvgScore = async (notebook_id) => {
+    const [result, fields] = await db.promise().query(
+        'SELECT AVG(service_score) FROM review WHERE notebook_id = ?',
+        [notebook_id]
+    );
+    return result;
+};
+
 export {
-    deleteReview, lookupReview, lookupReviewByNotebook, newReview, updateReview
+    deleteReview, displayPrefromanceAvgScore, displayServiceAvgScore, lookupReview, lookupReviewByNotebook, newReview, updateReview
 };
 
