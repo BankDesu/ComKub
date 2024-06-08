@@ -5,6 +5,7 @@ const lookupNotebook = async (notebook_id) => {
         'SELECT * FROM notebook WHERE notebook_id = ?',
         [notebook_id]
     );
+    
     return results;
 };
 

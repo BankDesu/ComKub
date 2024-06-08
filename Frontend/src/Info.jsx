@@ -27,25 +27,6 @@ function Info() {
     fetchData();
   }, [notebook_id]);
 
-  // useEffect(() => {
-  //   const fetchAvgRatings = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${import.meta.env.VITE_API_PATH}/notebook/lookupNotebook`
-  //       );
-  //       setAvgP(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  
-  //   fetchAvgRatings();
-  // }, []);
-
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-
   const {
     notebook_name,
     brand,
@@ -85,6 +66,10 @@ function Info() {
     4: "Good",
     5: "Excellent",
   };
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   function getLabelText(newReviewValue) {
     return `${newReviewValue} Star${newReviewValue !== 1 ? "s" : ""}, ${
