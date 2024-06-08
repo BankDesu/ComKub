@@ -9,7 +9,7 @@ import Nav from "./Nav";
 const apiPATH = import.meta.env.VITE_API_PATH;
 function Info() {
   const { notebook_id } = useParams(); // Extract notebook_id from the URL
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [avgP, setAvgP] = useState([]);
   console.log(data);
 
@@ -31,9 +31,7 @@ function Info() {
   useEffect(() => {
     const fetchAvgRatings = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/lookupNotebook`
-        );
+        const response = await axios.get(`${apiPATH}/notebook/lookupNotebook`);
         setAvgP(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -66,7 +64,7 @@ function Info() {
     price,
     link,
     pic_path,
-  } = data || {};
+  } = data[0] || {}; // Change this line to handle array data
 
   function getLabelText(newReviewValue) {
     return `${newReviewValue} Star${newReviewValue !== 1 ? "s" : ""}, ${
@@ -78,6 +76,10 @@ function Info() {
   const [hoverP, setHoverP] = useState(-1);
   const [newReviewValueS, setNewReviewValueS] = useState(3);
   const [hoverS, setHoverS] = useState(-1);
+
+  if (data.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
