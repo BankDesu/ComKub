@@ -9,6 +9,7 @@ import {
   lookupNotebookByram,
   lookupNotebookall,
   lookupTop5,
+  searchNotebookByname,
   sortByAtoZ,
   sortByZtoA,
   sortByhighPrice,
@@ -158,6 +159,16 @@ notebookRoutes.get('/updateScores/:notebookId', async (req, res) => {
   } catch (error) {
       console.error('Error updating scores:', error);
       res.status(500).json({ success: false, message: 'Failed to update scores' });
+  }
+});
+
+notebookRoutes.get("/serch", async (req, res) => {
+  const { name } = req.query;
+  try {
+    const notebook = await searchNotebookByname(name);
+    res.send(notebook);
+  } catch (err) {
+    res.status(500).send("Internal Server Error");
   }
 });
 

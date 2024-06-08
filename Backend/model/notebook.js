@@ -113,10 +113,18 @@ const updatenotebookscore = async (notebook_id, avgPerformanceScore, avgServiceS
     return results;
 }
 
+const searchNotebookByname = async (name) => {
+    const [results, fields] = await db.promise().query(
+        'SELECT * FROM notebook WHERE notebook_name LIKE ?',
+        [name]
+    );
+    return results;
+};
+
 export {
     lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU,
     lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange,
     lookupNotebookByram, lookupNotebookall, lookupTop5, sortByAtoZ,
-    sortByZtoA, sortByhighPrice, sortBylowPrice, updatenotebookscore
+    sortByZtoA, sortByhighPrice, sortBylowPrice, updatenotebookscore,searchNotebookByname
 };
 
