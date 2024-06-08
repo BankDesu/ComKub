@@ -29,7 +29,7 @@ notebookRoutes.get('/displayNotebook', async (req, res) => {
     }
 });
 
-notebookRoutes.get("/lookupNotebook", async (req, res) => {
+notebookRoutes.get("/lookupNotebook/:notebook_id", async (req, res) => {
   const { notebook_id } = req.query;
   try {
     const notebook = await lookupNotebook(notebook_id);

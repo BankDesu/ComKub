@@ -1,7 +1,18 @@
 import comkub from "./assets/comkub.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function Nav() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const account = {
+    name: "John Doe",
+    logout: () => {
+      console.log("Logged out");
+      // Add your logout logic here
+    },
+  };
+
   return (
     <>
       <nav className="bg-zinc-900 w-full h-12 flex flex-row justify-between sticky top-0 drop-shadow-custom z-50">
@@ -35,15 +46,30 @@ function Nav() {
               />
             </button>
           </div> */}
-          <div className="account-section pr-8 h-12 justify-self-end">
+          <div
+            className="account-section pr-8 h-12 justify-self-end"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <Link to="/SignInSide">
-              <button className="account-btn h-10 w-10 mt-1 rounded-full border border-black bg-white text-center transition-transform duration-150 flex justify-center items-center hover:transform hover:bg-cyan-400">
+              <button className="account-btn h-10 w-10 mt-1 rounded-full border border-black bg-white text-center transition-transform duration-150 flex justify-center items-center hover:transform hover:bg-slate-200 hover:invert hover:scale-105">
                 <img
                   className="account-icon h-6"
                   src="https://www.svgrepo.com/show/456992/account.svg"
                 />
               </button>
             </Link>
+            {isHovered && (
+              <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-4 w-48">
+                <p className="mb-2">{account.name}</p>
+                <button
+                  onClick={account.logout}
+                  className="bg-zinc-500 text-white px-4 py-2 rounded w-full"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </nav>

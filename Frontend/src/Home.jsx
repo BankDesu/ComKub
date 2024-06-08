@@ -283,7 +283,7 @@ function Home() {
             </Menu>
           </div>
         </div>
-        <div className="container flex w-full">
+        <div className="container flex w-full mb-32">
           <Sidebar />
           <div className="data-wrap w-full h-full">
             <div className="slideset1 h-56 w-full relative overflow-hidden">
@@ -304,7 +304,7 @@ function Home() {
             </div>
             <div className="content-container-home justify-center grid grid-cols-3">
               {dataN.map((data,index) => (
-                <Link key={index} to="/info" state={{ data }}>
+                <Link key={index} to={`/info/${data.notebook_id}`}>
                   <Notebook_data data={data} />
                 </Link>
               ))}
