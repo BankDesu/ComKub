@@ -4,7 +4,7 @@ import { deleteUser, lookupUser, newUser, updateUser } from '../model/user.js';
 const userRoutes = express.Router();
 
 userRoutes.post('/create', async (req, res) => {
-    const { username,password,birthday,gender,email } = req.body;
+    const { username,password,email } = req.body;
     try {
         const user = await newUser(username,password,birthday,gender,email );
         res.status(200).send(user);

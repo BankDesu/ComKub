@@ -5,19 +5,20 @@ import db from "../config/dbConnection.js";
 env.config();
 
 const findUser = async (username) => {
-    const result = await db.promise().query(`SELECT username,password FROM users WHERE username = ?`,
+    const result = await db.promise().query(`SELECT username,password FROM user WHERE username = ?`,
         [username]
     );
-    return result.rows[0];
+    console.log(result);
+    return result;
 }
 
 const registerUser = async (username, password, email) => {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 12);
     const result = await db.promise().query(
-        'INSERT INTO users (username,password,email) VALUES (?,?,?) RETURNING *',
+        'INSERT INTO user (username,password,email) VALUES (?,?,?) ',
         [username, hashedPassword, email]
     );
-    return result.rows[0];
+    return result;
 }
 
 const comparePassword = async (password, hashedPassword) => {
@@ -25,6 +26,8 @@ const comparePassword = async (password, hashedPassword) => {
 };
 
 export {
-    comparePassword, findUser,
+    comparePassword,
+    findUser,
     registerUser
 };
+

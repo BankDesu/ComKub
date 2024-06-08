@@ -2,9 +2,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -14,47 +12,57 @@ import axios from "axios";
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const defaultTheme = createTheme();
 const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 
 export default function SignInSide() {
   const [checked, setChecked] = React.useState(true);
+  const navigate = useNavigate();
 
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
 
-  const navigate = useNavigate();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.traget);
+  const handleLogin = async (data) => {
     axios.post(`${VITE_API_PATH}/auth/login`, {
       username: data.get("username"),
       password: data.get("password"),
     })
-      .then((res) => {
-        console.log(res.data);
-        navigate("/");
-      })
-      .catch((err) => {
-        window.alert("Invalid username or password. Please try again.");
-      });
-    
+    .then((res) => {
+      console.log(res.data);
+      navigate("/");
+    })
+    .catch((err) => {
+      window.alert("Invalid username or password. Please try again.");
+    });
+  };
+
+  const handleRegister = async (data) => {
     axios.post(`${VITE_API_PATH}/auth/register`, {
       username: data.get("username"),
       password: data.get("password"),
       email: data.get("email"),
     })
-      .then((res) => {
-        console.log(res.data);
-        navigate("signInSide");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then((res) => {
+      console.log(res.data);
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
 
-      event.target.reset();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+
+    if (checked) {
+      handleLogin(data);
+    } else {
+      handleRegister(data);
+    }
+
+    event.target.reset();
   };
 
   return (
@@ -176,10 +184,6 @@ export default function SignInSide() {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
               <Button
                 type="submit"
                 fullWidth
@@ -264,7 +268,7 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="username2"
+                id="username"
                 label="Username"
                 name="username"
                 autoFocus
@@ -277,7 +281,6 @@ export default function SignInSide() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
               />
               <TextField
                 margin="normal"
@@ -286,7 +289,7 @@ export default function SignInSide() {
                 name="password"
                 label="Password"
                 type="password"
-                id="password2"
+                id="password"
                 autoComplete="current-password"
               />
 

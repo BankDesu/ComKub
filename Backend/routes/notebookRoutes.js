@@ -9,9 +9,9 @@ import {
 const notebookRoutes = express.Router();
 
 notebookRoutes.get('/displayNotebook', async (req, res) => {
-    const { notebook_id } = req.query;
+    const {} = req.query;
     try {
-        const notebook = await lookupNotebookall(notebook_id);
+        const notebook = await lookupNotebookall();
         res.send(notebook);
     } catch (err) {
         res.status(500).send('Internal Server Error');
