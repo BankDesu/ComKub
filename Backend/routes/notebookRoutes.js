@@ -30,7 +30,7 @@ notebookRoutes.get('/displayNotebook', async (req, res) => {
 });
 
 notebookRoutes.get("/lookupNotebook/:notebook_id", async (req, res) => {
-  const { notebook_id } = req.query;
+  const { notebook_id } = req.params;
   try {
     const notebook = await lookupNotebook(notebook_id);
     res.send(notebook);
