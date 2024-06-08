@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <div className="bg-zinc-600/60 border-y-2 text-white about-section mt-20 h-full w-full relative grid grid-row-3">
+    <div className="bg-zinc-600/60 border-y-2 text-white about-section h-full w-full relative grid grid-row-3">
       {/* <div>
         <svg
           className="wave w-full absolute top-0 z-10"

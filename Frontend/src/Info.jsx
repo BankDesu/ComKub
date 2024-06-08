@@ -1,21 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Nav from "./Nav";
-import { useLocation } from "react-router-dom";
 import About from "./About";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
+import axios from "axios";
 
 function Info() {
-  const location = useLocation();
-  const { data } = location.state || {};
-  console.log(location.state);
+  const { notebook_id } = useParams(); // Extract notebook_id from the URL
+  const [data, setData] = useState(null);
+  const [avgP, setAvgP] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_PATH}/notebook/lookupNotebook/${notebook_id}`
+        );
+        setData(response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [notebook_id]);
+
+  // useEffect(() => {
+  //   const fetchAvgRatings = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${import.meta.env.VITE_API_PATH}/notebook/lookupNotebook`
+  //       );
+  //       setAvgP(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+  
+  //   fetchAvgRatings();
+  // }, []);
 
   if (!data) {
-    return <div>Info not found</div>;
+    return <div>Loading...</div>;
   }
 
   const {
-    notebook_id,
     notebook_name,
     brand,
     model,
@@ -32,42 +63,45 @@ function Info() {
     pic_path,
   } = data;
 
+  useEffect(() => {
+    const fetchAvgRatings = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_PATH}/notebook/lookupNotebook`
+        );
+        setAvgP(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchAvgRatings();
+  }, []);
+
   const labels = {
-    0.5: "Useless",
-    1: "Useless+",
-    1.5: "Poor",
-    2: "Poor+",
-    2.5: "Ok",
-    3: "Ok+",
-    3.5: "Good",
-    4: "Good+",
-    4.5: "Excellent",
-    5: "Excellent+",
+    1: "Useless",
+    2: "Poor",
+    3: "Ok",
+    4: "Good",
+    5: "Excellent",
   };
 
-  function getLabelTextP(newReviewValueP) {
-    return `${newReviewValueP} Star${newReviewValueP !== 1 ? "s" : ""}, ${
-      labels[newReviewValueP]
+  function getLabelText(newReviewValue) {
+    return `${newReviewValue} Star${newReviewValue !== 1 ? "s" : ""}, ${
+      labels[newReviewValue]
     }`;
   }
 
-  const [newReviewValueP, setNewReviewValueP] = React.useState(2.5);
-  const [hoverP, setHoverP] = React.useState(-1);
-
-  function getLabelTextS(newReviewValueP) {
-    return `${newReviewValueS} Star${newReviewValueS !== 1 ? "s" : ""}, ${
-      labels[newReviewValueS]
-    }`;
-  }
-
-  const [newReviewValueS, setNewReviewValueS] = React.useState(2.5);
-  const [hoverS, setHoverS] = React.useState(-1);
+  const [newReviewValueP, setNewReviewValueP] = useState(3);
+  const [hoverP, setHoverP] = useState(-1);
+  const [newReviewValueS, setNewReviewValueS] = useState(3);
+  const [hoverS, setHoverS] = useState(-1);
 
   return (
     <>
       <div className="box-border bg-gradient-to-br from-zinc-800 to-zinc-700 import text-white">
         <Nav />
-        <div className="mt-5 mr-12 ml-12 mb-28 flex flex-col">
+        <div className="mt-5 mr-12 ml-12 mb-32 flex flex-col">
           <div className="w-full h-full grid grid-cols-2 grid-rows-1">
             <img
               className="drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] w-[30rem] h-[22rem] ml-32 border-4 border-gray-300/80 rounded-xl"
@@ -80,19 +114,14 @@ function Info() {
                 <p className="relative w-44 bottom-[9.8rem] left-8 pl-2 text-lg text-black bg-white">
                   Performance Rating
                 </p>
-                {/* ข้อมูล review */}
-                <h2 className="relative bottom-[9rem] left-[6.3rem] text-yellow-500 text-5xl font-semibold">
+                <h2 className="w-20 relative bottom-[9rem] left-[6.3rem] text-yellow-500 text-5xl font-semibold">
                   2.5
                 </h2>
                 <Rating
                   className="relative bottom-[8.2rem] left-[3.75rem]"
-                  name="performence-rating-read"
+                  name="performance-rating-read"
                   size="large"
                   defaultValue={2.5}
-                  // value={}
-                  // onChange={(event, newValue) => {
-                  //   setNewReviewValueP(newValue);
-                  // }}
                   precision={0.5}
                   readOnly
                   emptyIcon={
@@ -105,19 +134,14 @@ function Info() {
                 <p className="relative w-32 bottom-[9.8rem] left-8 pl-2 text-lg text-black bg-white">
                   Service Rating
                 </p>
-                {/* ข้อมูล review */}
-                <h2 className="relative bottom-[9rem] left-[6.3rem] text-yellow-500 text-5xl font-semibold">
+                <h2 className="w-20 relative bottom-[9rem] left-[6.3rem] text-yellow-500 text-5xl font-semibold">
                   2.5
                 </h2>
                 <Rating
                   className="relative bottom-[8.2rem] left-[3.75rem]"
-                  name="performence-rating-read"
+                  name="service-rating-read"
                   size="large"
                   defaultValue={2.5}
-                  // value={}
-                  // onChange={(event, newValue) => {
-                  //   setNewReviewValueP(newValue);
-                  // }}
                   precision={0.5}
                   readOnly
                   emptyIcon={
@@ -146,17 +170,12 @@ function Info() {
               <p className="text-lg pt-8 pl-16">Storage: {storage}</p>
               <p className="text-lg pt-2 pl-16">OS: {os}</p>
               <p className="text-lg pt-2 pl-16">Price: {price}.-</p>
-              <button className="px-2 py-2 rounded-lg bg-white text-black hover:text-white text-lg mt-6 ml-48 absolute transition-transform duration-150 hover:transform hover:scale-105 hover:bg-zinc-500/90">
-                <a className="" href={link} target="_blank">
-                  Click here to Order
-                </a>
-              </button>
             </div>
           </div>
           <div className="w-[70rem] h-[9rem] mx-auto mt-5 grid grid-cols-2">
             <div className="w-11/12 h-[7rem] pt-3 pl-8 bg-zinc-600/80 border-2 border-gray-300/80 text-white rounded-xl mx-auto">
               <div className="flex">
-                <p className="text-2xl">Rate Performence score</p>
+                <p className="text-2xl">Rate Performance score</p>
                 <div className="pt-0.5 w-10 h-10 relative left-5 bottom-1 flex justify-center bg-white rounded-full opacity-90">
                   <img
                     className="w-8 h-8"
@@ -171,8 +190,7 @@ function Info() {
                   name="hover-feedback"
                   value={newReviewValueP}
                   size="large"
-                  precision={0.5}
-                  getLabelText={getLabelTextP}
+                  getLabelText={getLabelText}
                   onChange={(event, newValue) => {
                     setNewReviewValueP(newValue);
                   }}
@@ -207,8 +225,7 @@ function Info() {
                   name="hover-feedback"
                   value={newReviewValueS}
                   size="large"
-                  precision={0.5}
-                  getLabelTextP={getLabelTextS}
+                  getLabelText={getLabelText}
                   onChange={(event, newValue) => {
                     setNewReviewValueS(newValue);
                   }}
@@ -219,16 +236,15 @@ function Info() {
                     <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
                   }
                 />
-                {newReviewValueP !== null && (
+                {newReviewValueS !== null && (
                   <div className="pt-1 ml-5 w-32 text-center text-xl text-white bg-zinc-700 rounded-lg">
-                    {labels[hoverS !== -1 ? hoverS : newReviewValueP]}
+                    {labels[hoverS !== -1 ? hoverS : newReviewValueS]}
                   </div>
                 )}
               </div>
             </div>
           </div>
         </div>
-
         <About />
       </div>
     </>

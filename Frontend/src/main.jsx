@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     element: <Advt />,
   },
   {
-    path: "info",
+    path: "info/:notebook_id",
     element: <Info />,
   },
 

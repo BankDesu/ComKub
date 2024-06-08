@@ -2,6 +2,7 @@ import React from "react";
 import Nav from "./Nav";
 import Article_data from "./Article_data";
 import { useState } from "react";
+import About from "./About";
 
 function Article() {
   const [dataA, setdataA] = useState([
@@ -21,13 +22,16 @@ function Article() {
 
   return (
     <>
-      <Nav />
-      <div className="content-container-article w-full pt-8 grid grid-cols-1 grid-rows-1 gap-8 bg-zinc-800">
-        {dataA.map((data) => {
-          console.log(data);
-          return <Article_data title={data.title} content={data.content} />;
-        })}
+      <div className="w-full h-full bg-zinc-800 ">
+        <Nav />
+        <div className="justify-center grid grid-cols-2 grid-rows-1 pt-8 pb-32 px-10 ">
+          {dataA.map((data) => {
+            console.log(data);
+            return <Article_data title={data.title} content={data.content} />;
+          })}
+        </div>
       </div>
+      <About />
     </>
   );
 }
