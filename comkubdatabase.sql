@@ -18,8 +18,7 @@ create table notebook (
     os varchar(255) not null,
     pic_path VARCHAR(255) not null,
     performance_score FLOAT DEFAULT 0,
-    service_score FLOAT DEFAULT 0,
-    link varchar(255)
+    service_score FLOAT DEFAULT 0
 );
 -- drop table notebook;
 
