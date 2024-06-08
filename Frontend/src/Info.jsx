@@ -15,10 +15,9 @@ function Info() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/lookupNotebook/${notebook_id}`
+          `${import.meta.env.VITE_API_PATH}/notebook/lookupNotebook/${notebook_id}`,
         );
         setData(response.data);
-        console.log(response.data)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -26,23 +25,6 @@ function Info() {
 
     fetchData();
   }, [notebook_id]);
-
-  const {
-    notebook_name,
-    brand,
-    model,
-    model_year,
-    category,
-    cpu,
-    gpu,
-    display,
-    ram,
-    storage,
-    os,
-    price,
-    link,
-    pic_path,
-  } = data;
 
   useEffect(() => {
     const fetchAvgRatings = async () => {
@@ -67,9 +49,22 @@ function Info() {
     5: "Excellent",
   };
 
-  if (!data) {
-    return <div>Loading...</div>;
-  }
+  const {
+    notebook_name,
+    brand,
+    model,
+    model_year,
+    category,
+    cpu,
+    gpu,
+    display,
+    ram,
+    storage,
+    os,
+    price,
+    link,
+    pic_path,
+  } = data || {};
 
   function getLabelText(newReviewValue) {
     return `${newReviewValue} Star${newReviewValue !== 1 ? "s" : ""}, ${

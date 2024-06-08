@@ -34,6 +34,7 @@ notebookRoutes.get("/lookupNotebook/:notebook_id", async (req, res) => {
   try {
     const notebook = await lookupNotebook(notebook_id);
     res.send(notebook);
+    console.log(notebook_id);
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }
