@@ -5,11 +5,14 @@ import db from "../config/dbConnection.js";
 env.config();
 
 const findUser = async (username) => {
-    const result = await db.promise().query(`SELECT username,password FROM user WHERE username = ?`,
+    const [rows] = await db.promise().query(
+        `SELECT username, password FROM user WHERE username = ?`,
         [username]
     );
-    console.log(result);
-    return result;
+    if (rows.length === 0) {
+        return null;
+    }
+    return rows[0];
 }
 
 const registerUser = async (username, password, email) => {

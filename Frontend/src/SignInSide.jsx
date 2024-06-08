@@ -24,18 +24,18 @@ export default function SignInSide() {
   };
 
   const handleLogin = async (data) => {
-    axios.post(`${VITE_API_PATH}/auth/login`, {
-      username: data.get("username"),
-      password: data.get("password"),
-    })
-    .then((res) => {
-      console.log(res.data);
-      navigate("/");
-    })
-    .catch((err) => {
-      window.alert("Invalid username or password. Please try again.");
-    });
-  };
+    try {
+        const res = await axios.post(`${VITE_API_PATH}/auth/login`, {
+            username: data.get("username"),
+            password: data.get("password"),
+        }, { withCredentials: true });
+        console.log(res.data);
+        navigate("/");
+    } catch (err) {
+        console.error('Login error:', err.response.data);
+        window.alert(err.response.data || "Invalid username or password. Please try again.");
+    }
+};
 
   const handleRegister = async (data) => {
     axios.post(`${VITE_API_PATH}/auth/register`, {

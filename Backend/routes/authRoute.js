@@ -21,16 +21,13 @@ authRoutes.post('/login', async (req, res) => {
         if (!user) {
             return res.status(401).send('User not found');
         }
-        if (user && !user.password) {
-            return res.status(401).send('Password not found');
+        const isPasswordValid = await comparePassword(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).send('Invalid password');
         }
-        if(await comparePassword(password, user.password)) {
-            const token = jwt.sign({ username }, process.env.JWT_SECRET);
-            res.cookie('token', token);
-            res.status(200).send('Login successful');
-        } else {
-            res.status(401).send('Invalid password');
-        }
+        const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.cookie('token', token, { httpOnly: true });
+        res.status(200).send('Login successful');
     } catch (err) {
         console.error('Login failed:', err);
         res.status(500).send('Internal Server Error');
