@@ -143,7 +143,7 @@ notebookRoutes.get("/displayTop5", async (req, res) => {
   }
 });
 
-router.get('/updateScores/:notebookId', async (req, res) => {
+notebookRoutes.get('/updateScores/:notebookId', async (req, res) => {
   const notebookId = req.params.notebookId;
   try {
       // ดึงค่าเฉลี่ยของ service score และ performance score จากฐานข้อมูล
