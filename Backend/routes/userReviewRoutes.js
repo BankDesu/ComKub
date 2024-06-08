@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteReview, displayPrefromanceAvgScore, displayServiceAvgScore, lookupReview, lookupReviewByNotebook, newReview, updateReview } from '../model/userReview.js';
+import { deleteReview, lookupReview, lookupReviewByNotebook, newReview, updateReview } from '../model/userReview.js';
 
 const userReviewRoutes = express.Router();
 
@@ -48,26 +48,6 @@ userReviewRoutes.get('/displayReviewByNotebook', async (req, res) => {
     const { notebook_id } = req.query;
     try {
         const review = await lookupReviewByNotebook(notebook_id);
-        res.send(review);
-    } catch (err) {
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-userReviewRoutes.get('/displayPerformanceAvgScore', async (req, res) => {
-    const { notebook_id } = req.query;
-    try {
-        const review = await displayPrefromanceAvgScore(notebook_id);
-        res.send(review);
-    } catch (err) {
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-userReviewRoutes.get('/displayServiceAvgScore', async (req, res) => {
-    const { notebook_id } = req.query;
-    try {
-        const review = await displayServiceAvgScore(notebook_id);
         res.send(review);
     } catch (err) {
         res.status(500).send('Internal Server Error');
