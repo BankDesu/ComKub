@@ -226,7 +226,7 @@ function Home() {
     <>
       <Nav />
       <div className="body flex flex-col justify-center items-center bg-gradient-to-br from-zinc-800 to-zinc-700">
-        <div className="search-section flex w-full h-16 justify-center bg-zinc-700">
+        <div className="search-section flex w-full h-16 justify-center bg-zinc-700/80 border-b-2 border-gray-300/75">
           {/* <div className="category-section justify-self-end">
             <button className="category-btn h-10 w-10 border-0 mt-4 mr-2 bg-zinc-700 transition-transform duration-150 hover:transform hover:scale-110">
               <img
@@ -236,11 +236,11 @@ function Home() {
               />
             </button>
           </div> */}
-          <div className="searchbar-section flex mt-4 h-10 w-1/3 bg-white border-0">
+          <div className="searchbar-section flex mt-3 h-10 w-1/3 bg-white border-0">
             <input
               className="search-bar h-8.4 w-11/12 text-sm text-left m-0 pt-2.4 pl-3 border-0 focus:outline-none"
               type="search"
-              placeholder="คุณมองหาอะไรอยู่?"
+              placeholder="What are you looking for?"
             />
             <button
               className="search-btn transition-transform duration-150 hover:transform hover:scale-110"
@@ -262,7 +262,7 @@ function Home() {
               onClick={handleClickOrder}
             >
               <img
-                className="order w-8 h-7 absolute left-3 top-3 transition-transform duration-150 hover:transform hover:scale-110 filter invert"
+                className="order w-8 h-7 absolute left-3 top-2 transition-transform duration-150 hover:transform hover:scale-110 filter invert"
                 src="https://cdn-icons-png.flaticon.com/512/2740/2740721.png"
                 alt="เรียงตาม"
               />
@@ -276,10 +276,10 @@ function Home() {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={handleClose}>ราคาต่ำสุด</MenuItem>
-              <MenuItem onClick={handleClose}>ราคาสูงสุด</MenuItem>
-              <MenuItem onClick={handleClose}>ชื่อสินค้า A-Z</MenuItem>
-              <MenuItem onClick={handleClose}>ชื่อสินค้า Z-A</MenuItem>
+              <MenuItem onClick={handleClose}>Lowest price</MenuItem>
+              <MenuItem onClick={handleClose}>Highest price</MenuItem>
+              <MenuItem onClick={handleClose}>Name: A-Z</MenuItem>
+              <MenuItem onClick={handleClose}>Name: Z-A</MenuItem>
             </Menu>
           </div>
         </div>

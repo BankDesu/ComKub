@@ -4,7 +4,7 @@ function Notebook_data({ data }) {
   const { brand, notebook_name, cpu, gpu, ram, price, pic_path } = data;
   return (
     <>
-      <div className="border ml-10 m-6 p-2 border-black h-60 w-72 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">
+      <div className="border-4 ml-10 m-6 p-2 border-gray-300/75 rounded-lg h-60 w-72 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">
         <p className="text-sm font-thin font-mono">{brand}</p>
         <div className="border-2 mx-auto border-zinc-400 p-2 ml-6 mr-6">
           <img className="w-6/12 h-24 p-0 mx-auto" src={pic_path} alt="" />

@@ -305,7 +305,7 @@ function Advt_data({ data }) {
                 <li>- Weight: 1.26 กิโลกรัม</li>
                 <li>- ราคาประมาณ 84,990 บาท</li>
               </ul>
-              <div className="mt-24 text-zinc-600">
+              <div className="mt-12 text-zinc-600">
                 <a href="https://shopee.co.th/blog/recommended-best-laptop/">
                   source=https://shopee.co.th/blog/recommended-best-laptop/
                 </a>

@@ -64,7 +64,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="sidebar-content bg-#A1C4FD z-10 mt-2 ml-2 relative">
+    <div className="sidebar-content bg-#A1C4FD z-10 mt-4 ml-4 relative ">
       <CustomAccordion className="w-60 m-0 !important">
         <AccordionSummary
           className="max-h-10"
