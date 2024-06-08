@@ -135,9 +135,9 @@ function Info() {
               </div>
             </div>
           </div>
-          <div className="w-[70rem] h-[15rem] flex mx-auto p-6 bg-zinc-600/80 border-2 border-gray-300/80 text-white mt-5 rounded-xl">
+          <div className="w-[80rem] h-[15rem] flex mx-auto bg-zinc-600/80 border-2 border-gray-300/80 text-white mt-5 rounded-xl">
             <div className="w-full">
-              <p className="text-3xl font-semibold pl-8 pt-4">
+              <p className="text-3xl font-semibold pl-8 pt-4 ">
                 {notebook_name}
               </p>
               <p className="text-lg pt-4 pl-16">Brand: {brand}</p>
