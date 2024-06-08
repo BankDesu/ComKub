@@ -144,8 +144,8 @@ notebookRoutes.get("/displayTop5", async (req, res) => {
   }
 });
 
-notebookRoutes.get('/updateScores/:notebookId', async (req, res) => {
-  const notebookId = req.params.notebookId;
+notebookRoutes.get('/updateScores/:notebook_id', async (req, res) => {
+  const notebookId = req.params.notebook_id;
   try {
       // ดึงค่าเฉลี่ยของ service score และ performance score จากฐานข้อมูล
       const [result] = await db.promise().query('SELECT AVG(service_score) AS avg_service_score, AVG(performance_score) AS avg_performance_score FROM userReview');

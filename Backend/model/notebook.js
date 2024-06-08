@@ -124,7 +124,7 @@ const searchNotebookByname = async (name) => {
 export {
     lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU,
     lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange,
-    lookupNotebookByram, lookupNotebookall, lookupTop5, sortByAtoZ,
-    sortByZtoA, sortByhighPrice, sortBylowPrice, updatenotebookscore,searchNotebookByname
+    lookupNotebookByram, lookupNotebookall, lookupTop5, searchNotebookByname, sortByAtoZ,
+    sortByZtoA, sortByhighPrice, sortBylowPrice, updatenotebookscore
 };
 
