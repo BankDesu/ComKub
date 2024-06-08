@@ -8,7 +8,7 @@ import axios from "axios";
 
 function Info() {
   const { notebook_id } = useParams(); // Extract notebook_id from the URL
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [avgP, setAvgP] = useState([]);
 
   useEffect(() => {
