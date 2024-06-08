@@ -303,8 +303,8 @@ function Home() {
               ))}
             </div>
             <div className="content-container-home justify-center grid grid-cols-3">
-              {dataN.map((data) => (
-                <Link to="/info" state={{ data }}>
+              {dataN.map((data,index) => (
+                <Link key={index} to="/info" state={{ data }}>
                   <Notebook_data data={data} />
                 </Link>
               ))}

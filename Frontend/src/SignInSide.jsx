@@ -138,9 +138,9 @@ export default function SignInSide() {
             <Link to="/">
               <Box
                 sx={{
-                  position: "absolute",
+                  position: "fixed",
                   top: 10,
-                  left: -850,
+                  left: 45,
                   m: 2,
                   zIndex: "2",
                 }}
@@ -238,7 +238,7 @@ export default function SignInSide() {
             <Link to="/">
               <Box
                 sx={{
-                  position: "absolute",
+                  position: "fixed",
                   top: 10,
                   left: 45,
                   m: 2,
