@@ -40,23 +40,7 @@ const lookupReviewByNotebook = async (notebook_id) => {
     return result;
 };
 
-const displayPrefromanceAvgScore = async (notebook_id) => {
-    const [result, fields] = await db.promise().query(
-        'SELECT AVG(performance_score) FROM review WHERE notebook_id = ?',
-        [notebook_id]
-    );
-    return result;
-};
-
-const displayServiceAvgScore = async (notebook_id) => {
-    const [result, fields] = await db.promise().query(
-        'SELECT AVG(service_score) FROM review WHERE notebook_id = ?',
-        [notebook_id]
-    );
-    return result;
-};
-
 export {
-    deleteReview, displayPrefromanceAvgScore, displayServiceAvgScore, lookupReview, lookupReviewByNotebook, newReview, updateReview
+    deleteReview, lookupReview, lookupReviewByNotebook, newReview, updateReview
 };
 
