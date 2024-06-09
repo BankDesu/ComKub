@@ -19,9 +19,53 @@ function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const handleBrandSelection = (selectedBrand) => {
-    setBrand0(selectedBrand);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const handleSelectedBrands = (e) => {
+    setSelectedBrands(e);
   };
+  React.useEffect(() => {
+    console.log(selectedBrands, "Brand");
+  }, [selectedBrands]);
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const handleSelectedCategories = (e) => {
+    setSelectedCategories(e);
+  };
+  React.useEffect(() => {
+    console.log(selectedCategories, "Categories");
+  }, [selectedCategories]);
+
+  const [selectedCPUs, setSelectedCPUs] = useState([]);
+  const handleSelectedCPUs = (e) => {
+    setSelectedCPUs(e);
+  };
+  React.useEffect(() => {
+    console.log(selectedCPUs, "CPU");
+  }, [selectedCPUs]);
+
+  const [selectedGPUs, setSelectedGPUs] = useState([]);
+  const handleSelectedGPUs = (e) => {
+    setSelectedGPUs(e);
+  };
+  React.useEffect(() => {
+    console.log(selectedGPUs, "GPU");
+  }, [selectedGPUs]);
+
+  const [selectedMemory, setSelectedMemory] = useState([]);
+  const handleSelectedMemory = (e) => {
+    setSelectedMemory(e);
+  };
+  React.useEffect(() => {
+    console.log(selectedMemory, "Memory");
+  }, [selectedMemory]);
+
+  const [priceRange, setPriceRange] = useState([]);
+  const handleSelectedPrice = (e) => {
+    setPriceRange(e);
+  };
+  React.useEffect(() => {
+    console.log(priceRange, "Price");
+  }, [priceRange]);
 
   const handleClickOrder = (event) => {
     setAnchorEl(event.currentTarget);
@@ -88,7 +132,6 @@ function Home() {
     fetchData();
   }, []);
 
-
   return (
     <>
       <Nav />
@@ -152,7 +195,14 @@ function Home() {
           </div>
         </div>
         <div className="container flex w-full mb-32">
-          <Sidebar setSelectedBrand={handleBrandSelection}/>
+          <Sidebar
+            onSelectBrand={handleSelectedBrands}
+            onSelectCategory={handleSelectedCategories}
+            onSelectCPU={handleSelectedCPUs}
+            onSelectGPU={handleSelectedGPUs}
+            onSelectMemory={handleSelectedMemory}
+            onSelectPrice={handleSelectedPrice}
+          />
           <div className="data-wrap w-full h-full">
             <div className="slideset1 h-56 w-full relative overflow-hidden">
               {slides.map((slide) => (
@@ -173,12 +223,25 @@ function Home() {
             <div className="content-container-home justify-center grid grid-cols-3">
               {dataN
                 .filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.notebook_name.toLowerCase().includes(search) ||
-                        item.cpu.toLowerCase().includes(search) ||
-                        item.gpu.toLowerCase().includes(search) ||
-                        item.ram.toLowerCase().includes(search);
+                  return (
+                    (selectedBrands.length === 0 ||
+                      selectedBrands.includes(item.brand)) &&
+                    (selectedCategories.length === 0 ||
+                      selectedCategories.includes(item.category)) &&
+                    (selectedCPUs.length === 0 ||
+                      selectedCPUs.includes(item.cpu)) &&
+                    (selectedGPUs.length === 0 ||
+                      selectedGPUs.includes(item.gpu)) &&
+                    (selectedMemory.length === 0 ||
+                      selectedMemory.includes(item.memory)) &&
+                      (priceRange.length === 0 ||
+                        (item.price >= priceRange[0] && item.price <= priceRange[1])) &&
+                    (search.toLowerCase() === "" ||
+                      item.notebook_name.toLowerCase().includes(search) ||
+                      item.cpu.toLowerCase().includes(search) ||
+                      item.gpu.toLowerCase().includes(search) ||
+                      item.ram.toLowerCase().includes(search))
+                  );
                 })
                 .map((data, index) => (
                   <Link key={index} to={`/info/${data.notebook_id}`}>

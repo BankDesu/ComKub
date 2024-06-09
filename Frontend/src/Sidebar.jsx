@@ -28,7 +28,7 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function Sidebar({ setSelectedBrand }) {
+export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onSelectGPU,onSelectMemory,onSelectPrice}) {
   const [data, setData] = React.useState([]);
   const [filteredData, setFilteredData] = React.useState([]);
   const [selectedBrands, setSelectedBrands] = React.useState([]);
@@ -76,7 +76,7 @@ export default function Sidebar({ setSelectedBrand }) {
   };
 
   React.useEffect(() => {
-    console.log(selectedBrands,"Brands");
+    onSelectBrand(selectedBrands);
   }, [selectedBrands]);
   
   const handleCategorieChange = (category) => (event) => {
@@ -87,7 +87,7 @@ export default function Sidebar({ setSelectedBrand }) {
   };
 
   React.useEffect(() => {
-    console.log(selectedCategories,"Categories");
+    onSelectCategory(selectedCategories);
   }, [selectedCategories]);
   
   const handleCPUChange = (CPU) => (event) => {
@@ -98,7 +98,7 @@ export default function Sidebar({ setSelectedBrand }) {
   };
 
   React.useEffect(() => {
-    console.log(selectedCPUs,"CPUs");
+    onSelectCPU(selectedCPUs);
   }, [selectedCPUs]);
   
   const handleGPUChange = (GPU) => (event) => {
@@ -109,7 +109,7 @@ export default function Sidebar({ setSelectedBrand }) {
   };
 
   React.useEffect(() => {
-    console.log(selectedGPUs,"GPUs");
+    onSelectGPU(selectedGPUs)
   }, [selectedGPUs]);
   
   const handleMemoryChange = (memory) => (event) => {
@@ -120,7 +120,7 @@ export default function Sidebar({ setSelectedBrand }) {
   };
 
   React.useEffect(() => {
-    console.log(selectedMemory,"Memories");
+    onSelectMemory(selectedMemory)
   }, [selectedMemory]);
 
   const handleChangeRange = (event, newValue) => {
@@ -129,7 +129,7 @@ export default function Sidebar({ setSelectedBrand }) {
   };
 
   React.useEffect(() => {
-    console.log(priceRange,"Price");
+    onSelectPrice(priceRange)
   }, [priceRange[0],priceRange[1]]);
 
   const handleInputChangeMin = (event) => {

@@ -108,11 +108,6 @@ function Info() {
     }`;
   }
 
-  const [newReviewValueP, setNewReviewValueP] = useState(3);
-  const [hoverP, setHoverP] = useState(-1);
-  const [newReviewValueS, setNewReviewValueS] = useState(3);
-  const [hoverS, setHoverS] = useState(-1);
-
   if (data.length === 0) {
     return <div>Loading...</div>;
   }
