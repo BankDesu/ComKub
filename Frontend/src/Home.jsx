@@ -19,6 +19,54 @@ function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const handleSelectedBrands = (e) => {
+    setSelectedBrands(e);
+  };
+  React.useEffect(() => {
+    console.log(selectedBrands, "Brand");
+  }, [selectedBrands]);
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const handleSelectedCategories = (e) => {
+    setSelectedCategories(e);
+  };
+  React.useEffect(() => {
+    console.log(selectedCategories, "Categories");
+  }, [selectedCategories]);
+
+  const [selectedCPUs, setSelectedCPUs] = useState([]);
+  const handleSelectedCPUs = (e) => {
+    setSelectedCPUs(e);
+  };
+  React.useEffect(() => {
+    console.log(selectedCPUs, "CPU");
+  }, [selectedCPUs]);
+
+  const [selectedGPUs, setSelectedGPUs] = useState([]);
+  const handleSelectedGPUs = (e) => {
+    setSelectedGPUs(e);
+  };
+  React.useEffect(() => {
+    console.log(selectedGPUs, "GPU");
+  }, [selectedGPUs]);
+
+  const [selectedMemory, setSelectedMemory] = useState([]);
+  const handleSelectedMemory = (e) => {
+    setSelectedMemory(e);
+  };
+  React.useEffect(() => {
+    console.log(selectedMemory, "Memory");
+  }, [selectedMemory]);
+
+  const [priceRange, setPriceRange] = useState([]);
+  const handleSelectedPrice = (e) => {
+    setPriceRange(e);
+  };
+  React.useEffect(() => {
+    console.log(priceRange, "Price");
+  }, [priceRange]);
+
   const handleClickOrder = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -84,160 +132,6 @@ function Home() {
     fetchData();
   }, []);
 
-  const fetchNotebooksByBrands = async (brands) => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_PATH}/notebook/displayNotebookByBrand`,
-        {
-          params: {
-            brands: brands.join(","), // Convert array to comma-separated string
-          },
-        }
-      );
-      // console.log(response.data,'111111111111111111'); // Handle the response data as needed
-    } catch (error) {
-      console.error("Error fetching notebooks by brands:", error);
-    }
-  };
-
-  // Example usage: Call fetchNotebooksByBrands with an array of brand names as a parameter
-  fetchNotebooksByBrands(["Acer", "Asus", "HP", "Lenovo", "MSI"]);
-
-  // const [dataN, setDataN] = useState([
-  //   {
-  //     id: "1",
-  //     brand: "ASUS",
-  //     notebook_name: "1",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "2",
-  //     brand: "ASUS",
-  //     notebook_name: "2",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "3",
-  //     brand: "ASUS",
-  //     notebook_name: "3",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "4",
-  //     brand: "ACER",
-  //     notebook_name: "4",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "5",
-  //     brand: "ACER",
-  //     notebook_name: "5",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "6",
-  //     brand: "ACER",
-  //     notebook_name: "6",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "7",
-  //     brand: "MSI",
-  //     notebook_name: "7",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "8",
-  //     brand: "MSI",
-  //     notebook_name: "8",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "9",
-  //     brand: "MSI",
-  //     notebook_name: "9",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "10",
-  //     brand: "Lenovo",
-  //     notebook_name: "10",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "11",
-  //     brand: "Lenovo",
-  //     notebook_name: "11",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  //   {
-  //     id: "12",
-  //     brand: "Lenovo",
-  //     notebook_name: "12",
-  //     cpu: "Intel core I5",
-  //     gpu: "Intel",
-  //     ram: "16GB",
-  //     price: "29,990",
-  //     pic_path:
-  //       "https://www.electrocity.ie/wp-content/uploads/2023/06/hp-15.6-inch-full-hd-laptop-intel-core-i5-8gb-ram-256gb-ssd-silver-2_electrocity.ie_.jpg",
-  //   },
-  // ]);
-
   return (
     <>
       <Nav />
@@ -301,7 +195,14 @@ function Home() {
           </div>
         </div>
         <div className="container flex w-full mb-32">
-          <Sidebar />
+          <Sidebar
+            onSelectBrand={handleSelectedBrands}
+            onSelectCategory={handleSelectedCategories}
+            onSelectCPU={handleSelectedCPUs}
+            onSelectGPU={handleSelectedGPUs}
+            onSelectMemory={handleSelectedMemory}
+            onSelectPrice={handleSelectedPrice}
+          />
           <div className="data-wrap w-full h-full">
             <div className="slideset1 h-56 w-full relative overflow-hidden">
               {slides.map((slide) => (
@@ -322,12 +223,25 @@ function Home() {
             <div className="content-container-home justify-center grid grid-cols-3">
               {dataN
                 .filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.notebook_name.toLowerCase().includes(search) ||
-                        item.cpu.toLowerCase().includes(search) ||
-                        item.gpu.toLowerCase().includes(search) ||
-                        item.ram.toLowerCase().includes(search);
+                  return (
+                    (selectedBrands.length === 0 ||
+                      selectedBrands.includes(item.brand)) &&
+                    (selectedCategories.length === 0 ||
+                      selectedCategories.includes(item.category)) &&
+                    (selectedCPUs.length === 0 ||
+                      selectedCPUs.includes(item.cpu)) &&
+                    (selectedGPUs.length === 0 ||
+                      selectedGPUs.includes(item.gpu)) &&
+                    (selectedMemory.length === 0 ||
+                      selectedMemory.includes(item.memory)) &&
+                      (priceRange.length === 0 ||
+                        (item.price >= priceRange[0] && item.price <= priceRange[1])) &&
+                    (search.toLowerCase() === "" ||
+                      item.notebook_name.toLowerCase().includes(search) ||
+                      item.cpu.toLowerCase().includes(search) ||
+                      item.gpu.toLowerCase().includes(search) ||
+                      item.ram.toLowerCase().includes(search))
+                  );
                 })
                 .map((data, index) => (
                   <Link key={index} to={`/info/${data.notebook_id}`}>
