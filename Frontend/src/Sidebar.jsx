@@ -7,12 +7,11 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import MuiInput from "@mui/material/Input";
-import Slider from "@mui/material/Slider";
+import Slider, { SliderThumb } from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
 import axios from "axios";
-
 
 const CustomAccordion = styled(Accordion)(({ theme }) => ({
   "&.Mui-expanded": {
@@ -28,7 +27,14 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onSelectGPU,onSelectMemory,onSelectPrice}) {
+export default function Sidebar({
+  onSelectBrand,
+  onSelectCategory,
+  onSelectCPU,
+  onSelectGPU,
+  onSelectMemory,
+  onSelectPrice,
+}) {
   const [data, setData] = React.useState([]);
   const [filteredData, setFilteredData] = React.useState([]);
   const [selectedBrands, setSelectedBrands] = React.useState([]);
@@ -42,7 +48,9 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
+        );
         setData(response.data);
         setFilteredData(response.data);
       } catch (error) {
@@ -66,7 +74,15 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
       );
     });
     setFilteredData(filteredData);
-  }, [data, selectedBrands, selectedCategories, selectedCPUs, selectedGPUs, selectedMemory, priceRange]);
+  }, [
+    data,
+    selectedBrands,
+    selectedCategories,
+    selectedCPUs,
+    selectedGPUs,
+    selectedMemory,
+    priceRange,
+  ]);
 
   const handleBrandChange = (brand) => (event) => {
     const isChecked = event.target.checked;
@@ -78,7 +94,7 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
   React.useEffect(() => {
     onSelectBrand(selectedBrands);
   }, [selectedBrands]);
-  
+
   const handleCategorieChange = (category) => (event) => {
     const isChecked = event.target.checked;
     setSelectedCategories((prev) =>
@@ -89,7 +105,7 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
   React.useEffect(() => {
     onSelectCategory(selectedCategories);
   }, [selectedCategories]);
-  
+
   const handleCPUChange = (CPU) => (event) => {
     const isChecked = event.target.checked;
     setSelectedCPUs((prev) =>
@@ -100,7 +116,7 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
   React.useEffect(() => {
     onSelectCPU(selectedCPUs);
   }, [selectedCPUs]);
-  
+
   const handleGPUChange = (GPU) => (event) => {
     const isChecked = event.target.checked;
     setSelectedGPUs((prev) =>
@@ -109,9 +125,9 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
   };
 
   React.useEffect(() => {
-    onSelectGPU(selectedGPUs)
+    onSelectGPU(selectedGPUs);
   }, [selectedGPUs]);
-  
+
   const handleMemoryChange = (memory) => (event) => {
     const isChecked = event.target.checked;
     setSelectedMemory((prev) =>
@@ -120,7 +136,7 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
   };
 
   React.useEffect(() => {
-    onSelectMemory(selectedMemory)
+    onSelectMemory(selectedMemory);
   }, [selectedMemory]);
 
   const handleChangeRange = (event, newValue) => {
@@ -129,8 +145,8 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
   };
 
   React.useEffect(() => {
-    onSelectPrice(priceRange)
-  }, [priceRange[0],priceRange[1]]);
+    onSelectPrice(priceRange);
+  }, [priceRange[0], priceRange[1]]);
 
   const handleInputChangeMin = (event) => {
     const newValue = event.target.value === "" ? 0 : Number(event.target.value);
@@ -330,6 +346,38 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
               step={1000}
               min={0}
               max={200000}
+              sx={{
+                color: "#545454",
+                height: 5,
+                "& .MuiSlider-thumb": {
+                  height: 20,
+                  width: 20,
+                  backgroundColor: "#fff",
+                  border: '2px solid currentColor',
+                  "&:focus, &:hover, &.Mui-active": {
+                    boxShadow: "0px 1px 5px 1px rgba(0, 0, 0, 0.5)",
+                  },
+                },
+                "& .MuiSlider-valueLabel": {
+                  lineHeight: 1.2,
+                  fontSize: 8,
+                  background: "unset",
+                  padding: 0,
+                  width: 42,
+                  height: 42,
+                  borderRadius: "50% 50% 50% 0",
+                  backgroundColor: "#545454",
+                  transformOrigin: "bottom left",
+                  transform: "translate(50%, -100%) rotate(-45deg) scale(0)",
+                  "&::before": { display: "none" },
+                  "&.MuiSlider-valueLabelOpen": {
+                    transform: "translate(50%, -100%) rotate(-45deg) scale(1)",
+                  },
+                  "& > *": {
+                    transform: "rotate(45deg)",
+                  },
+                },
+              }}
             />
             <Box
               sx={{
@@ -341,6 +389,7 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
               }}
             >
               <Input
+                sx={{ width: 80 }}
                 value={value[0]}
                 size="small"
                 onChange={handleInputChangeMin}
@@ -354,7 +403,8 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
                 }}
               />
               <Box>-</Box>
-              <Input sx={{width:80}}
+              <Input
+                sx={{ width: 80 }}
                 value={value[1]}
                 size="small"
                 onChange={handleInputChangeMax}
@@ -364,7 +414,7 @@ export default function Sidebar({ onSelectBrand,onSelectCategory,onSelectCPU,onS
                   min: 0,
                   max: 200000,
                   type: "number",
-        
+
                   "aria-labelledby": "input-slider",
                 }}
               />
