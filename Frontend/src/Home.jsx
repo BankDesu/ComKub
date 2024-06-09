@@ -16,15 +16,9 @@ import "./index.css";
 function Home() {
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-
   const [sortOption, setSortOption] = useState("");
-  useEffect(() => {
-    const sortedData = sortData(filteredData);
-    setFilteredData(sortedData);
-  }, [sortOption, filteredData]);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
 
   const [selectedBrands, setSelectedBrands] = useState([]);
   const handleSelectedBrands = (e) => {
@@ -83,7 +77,8 @@ function Home() {
 
   const handleClose = (event) => {
     setAnchorEl(null);
-    setSortOption(event.target.innerText);;
+    const selectedSortOption = event.target.innerText;
+    setSortOption(event.target.innerText);
   };
 
   const slides = [
@@ -133,7 +128,7 @@ function Home() {
           `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
         );
         setDataN(response.data, "Fetched data");
-        console.log(response.data,"datadata");
+        console.log(response.data, "datadata");
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -145,13 +140,13 @@ function Home() {
   const sortData = (data) => {
     switch (sortOption) {
       case "Lowest price":
-        return data.sort((a, b) => a.price - b.price);
+        return [...data].sort((a, b) => a.price - b.price);
       case "Highest price":
-        return data.sort((a, b) => b.price - a.price);
+        return [...data].sort((a, b) => b.price - a.price);
       case "Name: A-Z":
-        return data.sort((a, b) => a.brand.localeCompare(b.brand));
+        return [...data].sort((a, b) => a.brand.localeCompare(b.brand));
       case "Name: Z-A":
-        return data.sort((a, b) => b.brand.localeCompare(a.brand));
+        return [...data].sort((a, b) => b.brand.localeCompare(a.brand));
       default:
         return data;
     }
@@ -174,6 +169,7 @@ function Home() {
         item.ram.toLowerCase().includes(search))
     );
   });
+  const sortedFilteredData = sortData(filteredData0);
 
   const totalPages = Math.ceil(filteredData0.length / itemsPerPage);
 
@@ -184,7 +180,7 @@ function Home() {
   const getPageData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return filteredData0.slice(startIndex, endIndex);
+    return sortedFilteredData.slice(startIndex, endIndex);
   };
 
   return (
