@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import About from "./About";
 import Nav from "./Nav";
 import Notebook_data from "./Notebook_data";
-import Info from "./Info";
 import Sidebar from "./Sidebar";
 import advtPic1 from "./assets/advtPic1.jpg";
 import advtPic2 from "./assets/advtPic2.png";
@@ -66,6 +65,9 @@ function Home() {
   React.useEffect(() => {
     console.log(priceRange, "Price");
   }, [priceRange]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
   const handleClickOrder = (event) => {
     setAnchorEl(event.currentTarget);
@@ -132,20 +134,41 @@ function Home() {
     fetchData();
   }, []);
 
+  const filteredData = dataN.filter((item) => {
+    return (
+      (selectedBrands.length === 0 || selectedBrands.includes(item.brand)) &&
+      (selectedCategories.length === 0 ||
+        selectedCategories.includes(item.category)) &&
+      (selectedCPUs.length === 0 || selectedCPUs.includes(item.cpu)) &&
+      (selectedGPUs.length === 0 || selectedGPUs.includes(item.gpu)) &&
+      (selectedMemory.length === 0 || selectedMemory.includes(item.memory)) &&
+      (priceRange.length === 0 ||
+        (item.price >= priceRange[0] && item.price <= priceRange[1])) &&
+      (search.toLowerCase() === "" ||
+        item.notebook_name.toLowerCase().includes(search) ||
+        item.cpu.toLowerCase().includes(search) ||
+        item.gpu.toLowerCase().includes(search) ||
+        item.ram.toLowerCase().includes(search))
+    );
+  });
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const getPageData = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredData.slice(startIndex, endIndex);
+  };
+
   return (
     <>
       <Nav />
       <div className="body flex flex-col justify-center items-center bg-gradient-to-br from-zinc-800 to-zinc-700">
         <div className="search-section flex w-full h-16 justify-center bg-zinc-700/80 border-b-2 border-gray-300/75">
-          {/* <div className="category-section justify-self-end">
-            <button className="category-btn h-10 w-10 border-0 mt-4 mr-2 bg-zinc-700 transition-transform duration-150 hover:transform hover:scale-110">
-              <img
-                className="category-icon h-8 m-0 filter invert"
-                src="https://cdn-icons-png.flaticon.com/512/2603/2603910.png"
-                alt="category"
-              />
-            </button>
-          </div> */}
           <div className="searchbar-section flex mt-3 h-10 w-1/3 bg-white border-0">
             <input
               className="search-bar h-8.4 w-11/12 text-sm text-left m-0 pt-2.4 pl-3 border-0 focus:outline-none"
@@ -221,33 +244,43 @@ function Home() {
               ))}
             </div>
             <div className="content-container-home justify-center grid grid-cols-3">
-              {dataN
-                .filter((item) => {
-                  return (
-                    (selectedBrands.length === 0 ||
-                      selectedBrands.includes(item.brand)) &&
-                    (selectedCategories.length === 0 ||
-                      selectedCategories.includes(item.category)) &&
-                    (selectedCPUs.length === 0 ||
-                      selectedCPUs.includes(item.cpu)) &&
-                    (selectedGPUs.length === 0 ||
-                      selectedGPUs.includes(item.gpu)) &&
-                    (selectedMemory.length === 0 ||
-                      selectedMemory.includes(item.memory)) &&
-                      (priceRange.length === 0 ||
-                        (item.price >= priceRange[0] && item.price <= priceRange[1])) &&
-                    (search.toLowerCase() === "" ||
-                      item.notebook_name.toLowerCase().includes(search) ||
-                      item.cpu.toLowerCase().includes(search) ||
-                      item.gpu.toLowerCase().includes(search) ||
-                      item.ram.toLowerCase().includes(search))
-                  );
-                })
-                .map((data, index) => (
-                  <Link key={index} to={`/info/${data.notebook_id}`}>
-                    <Notebook_data data={data} />
-                  </Link>
-                ))}
+              {getPageData().map((data, index) => (
+                <Link key={index} to={`/info/${data.notebook_id}`}>
+                  <Notebook_data data={data} />
+                </Link>
+              ))}
+            </div>
+            <div className="pagination-controls flex justify-center mt-4">
+            <Button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={`prev-next-btn text-white hover:bg-gray-300 hover:text-white ${
+                currentPage === 1 ? "bg-white" : "bg-transparent"
+              }`}
+            >
+              &lt;
+            </Button>
+            {[...Array(totalPages).keys()].map((num) => (
+              <Button
+                key={num + 1}
+                onClick={() => setCurrentPage(num + 1)}
+                variant={currentPage === num + 1 ? "contained" : "outlined"}
+                className={`pagination-btn ${
+                  currentPage === num + 1 ? "current-page" : ""
+                }`}
+              >
+                {num + 1}
+              </Button>
+            ))}
+            <Button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className={`prev-next-btn text-white hover:bg-gray-300 hover:text-white ${
+                currentPage === totalPages ? "bg-white" : "bg-transparent"
+              }`}
+            >
+              &gt;
+            </Button>
             </div>
           </div>
         </div>
