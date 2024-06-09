@@ -21,7 +21,9 @@ function Info() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiPATH}/notebook/lookupNotebook/${notebook_id}`);
+        const response = await axios.get(
+          `${apiPATH}/notebook/lookupNotebook/${notebook_id}`
+        );
         setData(response.data[0]);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -33,7 +35,9 @@ function Info() {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get(`${apiPATH}/auth/check/`, { withCredentials: true });
+        const response = await axios.get(`${apiPATH}/auth/check/`, {
+          withCredentials: true,
+        });
         console.log("Login status response:", response.data);
         setIsLoggedIn(true);
         setUserid(response.data.userid);
@@ -62,7 +66,7 @@ function Info() {
       alert("You need to be logged in to submit a review");
       return;
     }
-  
+
     try {
       const response = await axios.post(
         `${apiPATH}/review/create`,
@@ -75,12 +79,16 @@ function Info() {
         { withCredentials: true }
       );
       console.log("Review submitted:", response.data);
-      
+
       // Call the update scores endpoint
-      await axios.get(`${apiPATH}/notebook/updateScores/${notebook_id}`, { withCredentials: true });
-  
+      await axios.get(`${apiPATH}/notebook/updateScores/${notebook_id}`, {
+        withCredentials: true,
+      });
+
       // Optionally, you can fetch the updated data
-      const updatedData = await axios.get(`${apiPATH}/notebook/lookupNotebook/${notebook_id}`);
+      const updatedData = await axios.get(
+        `${apiPATH}/notebook/lookupNotebook/${notebook_id}`
+      );
       setData(updatedData.data[0]);
     } catch (error) {
       console.error("Error submitting review:", error);
@@ -125,8 +133,8 @@ function Info() {
                 <p className="relative w-44 bottom-[9.8rem] left-8 pl-2 text-lg text-black bg-white">
                   Performance Rating
                 </p>
-                <h2 className="w-20 relative bottom-[9rem] left-[6.3rem] text-yellow-500 text-5xl font-semibold">
-                  {performance_score?.toFixed(1) || 'N/A'}
+                <h2 className="w-20 relative bottom-[9rem] left-[6rem] text-yellow-500 text-5xl font-semibold">
+                  {performance_score?.toFixed(1) || "N/A"}
                 </h2>
                 <Rating
                   className="relative bottom-[8.2rem] left-[3.75rem]"
@@ -135,7 +143,9 @@ function Info() {
                   value={performance_score || 0}
                   precision={0.5}
                   readOnly
-                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                  }
                 />
               </div>
               <div className="mt-8 w-[17rem] h-[10rem] bg-white border-2 border-gray-300/80 rounded-xl">
@@ -143,8 +153,8 @@ function Info() {
                 <p className="relative w-32 bottom-[9.8rem] left-8 pl-2 text-lg text-black bg-white">
                   Service Rating
                 </p>
-                <h2 className="w-20 relative bottom-[9rem] left-[6.3rem] text-yellow-500 text-5xl font-semibold">
-                  {service_score?.toFixed(1) || 'N/A'}
+                <h2 className="w-20 relative bottom-[9rem] left-[6.5rem] text-yellow-500 text-5xl font-semibold">
+                  {service_score?.toFixed(1) || "N/A"}
                 </h2>
                 <Rating
                   className="relative bottom-[8.2rem] left-[3.75rem]"
@@ -153,14 +163,18 @@ function Info() {
                   value={service_score || 0}
                   precision={0.5}
                   readOnly
-                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                  }
                 />
               </div>
             </div>
           </div>
           <div className="w-[80rem] h-[15rem] flex mx-auto bg-zinc-600/80 border-2 border-gray-300/80 text-white mt-5 rounded-xl">
             <div className="w-full">
-              <p className="text-3xl font-semibold pl-8 pt-4">{notebook_name}</p>
+              <p className="text-3xl font-semibold pl-8 pt-4">
+                {notebook_name}
+              </p>
               <p className="text-lg pt-4 pl-16">Brand: {brand}</p>
               <p className="text-lg pt-2 pl-16">Model: {model}</p>
               <p className="text-lg pt-2 pl-16">Category: {category}</p>
@@ -177,51 +191,69 @@ function Info() {
               <p className="text-lg pt-2 pl-16">Price: {price}.-</p>
             </div>
           </div>
-          <div className="w-[80rem] h-[20rem] flex flex-col mx-auto bg-white border-2 border-gray-300/80 mt-5 rounded-xl p-5">
-            <p className="text-lg text-black mb-4">Your Rating</p>
-            <div className="flex justify-around mb-8">
-              <div className="w-1/2">
-                <p className="text-black">Performance</p>
-                <Rating
-                  name="hover-feedback-performance"
-                  value={newReviewValueP}
-                  precision={1}
-                  onChange={(event, newValue) => {
-                    setNewReviewValueP(newValue);
-                  }}
-                  onChangeActive={(event, newHover) => {
-                    setHoverP(newHover);
-                  }}
-                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                  size="large"
-                />
-                {newReviewValueP !== null && (
-                  <p>{labels[hoverP !== -1 ? hoverP : newReviewValueP]}</p>
-                )}
+          <div className="w-[80rem] h-[15rem] flex flex-col mx-auto bg-zinc-600/80 border-2 border-gray-300/80 mt-8 rounded-xl p-5 text-white">
+            <p className="text-white h-[12rem] mb-4 pt-20 pr-16 ml-12 text-3xl font-semibold absolute border-r-2 border-white">
+              Your Rating
+            </p>
+            <div className="flex w-[60rem] mb-8 justify-center relative top-5 left-60">
+              <div className="h-[8rem] w-[20rem] grid grid-rows-2 mr-36 pb-16">
+                <p className="text-white text-2xl pt-0 pl-16">
+                  Performance Score
+                </p>
+                <div className="flex">
+                  <Rating
+                    name="hover-feedback-performance"
+                    value={newReviewValueP}
+                    precision={1}
+                    onChange={(event, newValue) => {
+                      setNewReviewValueP(newValue);
+                    }}
+                    onChangeActive={(event, newHover) => {
+                      setHoverP(newHover);
+                    }}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                    size="large"
+                    className="bg-zinc-400 h-12 border-2 border-white p-2 rounded-3xl ml-24 mt-4"
+                  />
+                  {newReviewValueP !== null && (
+                    <p className="bg-white w-[8rem] h-8 text-center text-black text-lg ml-4 mt-6 mb-2 rounded-xl">
+                      {labels[hoverP !== -1 ? hoverP : newReviewValueP]}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="w-1/2">
-                <p className="text-black">Service</p>
-                <Rating
-                  name="hover-feedback-service"
-                  value={newReviewValueS}
-                  precision={1}
-                  onChange={(event, newValue) => {
-                    setNewReviewValueS(newValue);
-                  }}
-                  onChangeActive={(event, newHover) => {
-                    setHoverS(newHover);
-                  }}
-                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                  size="large"
-                />
-                {newReviewValueS !== null && (
-                  <p>{labels[hoverS !== -1 ? hoverS : newReviewValueS]}</p>
-                )}
+              <div className=" h-[8rem] w-[20rem] grid grid-rows-2 mr-36 pb-16 border-l-2 boede-white">
+                <p className="text-white text-2xl pt-0 pl-12 ">Service</p>
+                <div className="flex">
+                  <Rating
+                    name="hover-feedback-service"
+                    value={newReviewValueS}
+                    precision={1}
+                    onChange={(event, newValue) => {
+                      setNewReviewValueS(newValue);
+                    }}
+                    onChangeActive={(event, newHover) => {
+                      setHoverS(newHover);
+                    }}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                    size="large"
+                    className="bg-zinc-400 h-12 border-2 border-white p-2 rounded-3xl ml-16 mt-4"
+                  />
+                  {newReviewValueS !== null && (
+                    <p className="bg-white w-[8rem] h-8 text-center text-black text-lg ml-4 mt-6 mb-2 rounded-xl">
+                      {labels[hoverS !== -1 ? hoverS : newReviewValueS]}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="flex justify-center mt-auto">
+            <div className="flex justify-center ">
               <button
-                className="px-10 py-2 mt-6 bg-gray-300 text-black rounded-lg hover:bg-gray-400"
+                className="px-10 py-2 mt-0 ml-52 bg-gray-300 text-black rounded-lg hover:bg-gray-500 hover:text-white"
                 onClick={handleSubmit}
               >
                 Submit Review
@@ -229,7 +261,7 @@ function Info() {
             </div>
           </div>
         </div>
-        <About/>
+        <About />
       </div>
     </>
   );
