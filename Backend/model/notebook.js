@@ -41,7 +41,7 @@ const lookupNotebookByCategory = async (category) => {
 
 const lookupNotebookByCPU = async (cpu) => {
     const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook WHERE cpu LIKE ?',
+        'SELECT * FROM notebook WHERE cpu LIKE ?%',
         [cpu]
     );
     return results;
@@ -49,7 +49,7 @@ const lookupNotebookByCPU = async (cpu) => {
 
 const lookupNotebookByGPU = async (gpu) => {
     const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook WHERE gpu LIKE ?',
+        'SELECT * FROM notebook WHERE gpu LIKE ?%',
         [gpu]
     );
     return results;
@@ -57,7 +57,7 @@ const lookupNotebookByGPU = async (gpu) => {
 
 const lookupNotebookByram = async (ram) => {
     const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook WHERE ram LIKE ?',
+        'SELECT * FROM notebook WHERE ram LIKE ?%',
         [ram]
     );
     return results;
