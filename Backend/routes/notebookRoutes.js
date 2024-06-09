@@ -1,21 +1,15 @@
 import express from "express";
 import db from "../config/dbConnection.js";
 import {
-  lookupNotebook,
-  lookupNotebookByBrand,
-  lookupNotebookByCPU,
-  lookupNotebookByCategory,
-  lookupNotebookByGPU,
-  lookupNotebookByPriceRange,
-  lookupNotebookByram,
-  lookupNotebookall,
-  lookupTop5,
+  lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU,
+  lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange,
+  lookupNotebookByram, lookupNotebookall,
+  lookupTop4PriceBetweenmor20kto50k,
+  lookupTop4PriceBetweenmor50kto100k,
+  lookupTop4PriceEqualto20k,
+  lookupTop4PriceMorethan100k,
   searchNotebookByname,
-  sortByAtoZ,
-  sortByZtoA,
-  sortByhighPrice,
-  sortBylowPrice,
-  updatenotebookscore,
+  updatenotebookscore
 } from "../model/notebook.js";
 
 
@@ -101,45 +95,37 @@ notebookRoutes.get("/displayNotebookByRam", async (req, res) => {
   }
 });
 
-notebookRoutes.get("/sortBylowPrice", async (req, res) => {
+
+notebookRoutes.get("/displayTop4PriceEqualto20k", async (req, res) => {
   try {
-    const notebook = await sortBylowPrice();
+    const notebook = await lookupTop4PriceEqualto20k();
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }
 });
 
-notebookRoutes.get("/sortByhighPrice", async (req, res) => {
+notebookRoutes.get("/displayTop4PriceBetweenmor20kto50k", async (req, res) => {
   try {
-    const notebook = await sortByhighPrice();
+    const notebook = await lookupTop4PriceBetweenmor20kto50k();
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }
 });
 
-notebookRoutes.get("/sortByAtoZ", async (req, res) => {
+notebookRoutes.get("/displayTop4PriceBetweenmor50kto100k", async (req, res) => {
   try {
-    const notebook = await sortByAtoZ();
+    const notebook = await lookupTop4PriceBetweenmor50kto100k();
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }
 });
 
-notebookRoutes.get("/sortByZtoA", async (req, res) => {
+notebookRoutes.get("/displayTop4PriceMorethan100k", async (req, res) => {
   try {
-    const notebook = await sortByZtoA();
-    res.send(notebook);
-  } catch (err) {
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-notebookRoutes.get("/displayTop5", async (req, res) => {
-  try {
-    const notebook = await lookupTop5();
+    const notebook = await lookupTop4PriceMorethan100k();
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
