@@ -18,10 +18,6 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "article_container",
-    element: <Article_container />,
-  },
-  {
     path: "review",
     element: <Review />,
   },

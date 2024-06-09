@@ -55,12 +55,6 @@ function Nav() {
               src={comkub}
             />
           </Link>
-          <Link to="/article_container" className="article_container">
-            <img
-              className="article-img ml-8 mr-10 h-8 transition-transform duration-150 hover:transform hover:scale-110 filter invert"
-              src="https://icons.veryicon.com/png/o/miscellaneous/shaanxi-left-column-icon/article-management-3.png"
-            />
-          </Link>
           <Link to="/review" className="review">
             <img
               className="review-img mt-1.2 h-14 transition-transform duration-150 hover:transform hover:scale-110 filter invert"

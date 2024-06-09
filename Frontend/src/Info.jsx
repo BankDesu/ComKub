@@ -98,9 +98,24 @@ function Info() {
     os,
     price,
     pic_path,
-    performance_score,
+    perfromance_score,
     service_score,
-  } = data;
+  } = data[0] || {}; // Change this line to handle array data
+
+  function getLabelText(newReviewValue) {
+    return `${newReviewValue} Star${newReviewValue !== 1 ? "s" : ""}, ${
+      labels[newReviewValue]
+    }`;
+  }
+
+  const [newReviewValueP, setNewReviewValueP] = useState(3);
+  const [hoverP, setHoverP] = useState(-1);
+  const [newReviewValueS, setNewReviewValueS] = useState(3);
+  const [hoverS, setHoverS] = useState(-1);
+
+  if (data.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
