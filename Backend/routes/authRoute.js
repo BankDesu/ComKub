@@ -56,7 +56,6 @@ authRoutes.get('/check', authMiddleware, (req, res) => {
             return res.status(401).send('Unauthorized');
         }
         res.status(200).json({ username: req.user.username, userid: req.user.userid });
-        console.log(req.user);
     } catch (err) {
         console.error('Error in /check endpoint:', err);
         res.status(500).send('Internal Server Error');

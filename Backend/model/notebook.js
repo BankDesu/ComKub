@@ -10,7 +10,7 @@ const lookupNotebook = async (notebook_id) => {
 
 const lookupNotebookall = async () => {
     const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook order by notebook_id desc'
+        'SELECT * FROM notebook order by notebook_id asc'
     );
     return results;
 }
