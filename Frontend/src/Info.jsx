@@ -62,12 +62,12 @@ function Info() {
       alert("You need to be logged in to submit a review");
       return;
     }
-
+  
     try {
       const response = await axios.post(
         `${apiPATH}/review/create`,
         {
-          userid, // Using correct key
+          userid,
           notebook_id,
           performance_score: newReviewValueP,
           service_score: newReviewValueS,
@@ -75,6 +75,13 @@ function Info() {
         { withCredentials: true }
       );
       console.log("Review submitted:", response.data);
+      
+      // Call the update scores endpoint
+      await axios.get(`${apiPATH}/notebook/updateScores/${notebook_id}`, { withCredentials: true });
+  
+      // Optionally, you can fetch the updated data
+      const updatedData = await axios.get(`${apiPATH}/notebook/lookupNotebook/${notebook_id}`);
+      setData(updatedData.data[0]);
     } catch (error) {
       console.error("Error submitting review:", error);
     }
