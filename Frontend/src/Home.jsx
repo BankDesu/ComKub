@@ -128,7 +128,7 @@ function Home() {
           `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
         );
         setDataN(response.data, "Fetched data");
-        console.log(response.data, "datadata");
+        console.log(response.data, "data");
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -144,9 +144,9 @@ function Home() {
       case "Highest price":
         return [...data].sort((a, b) => b.price - a.price);
       case "Name: A-Z":
-        return [...data].sort((a, b) => a.brand.localeCompare(b.brand));
+        return [...data].sort((a, b) => a.notebook_name.localeCompare(b.notebook_name));
       case "Name: Z-A":
-        return [...data].sort((a, b) => b.brand.localeCompare(a.brand));
+        return [...data].sort((a, b) => b.notebook_name.localeCompare(a.notebook_name));
       default:
         return data;
     }

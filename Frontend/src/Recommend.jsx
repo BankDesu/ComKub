@@ -1,10 +1,27 @@
 import React from "react";
 import Nav from "./Nav";
 import About from "./About";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 function Recommend() {
-  
+  const [dataTop20000, setDataTop20000] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
+        );
+        setDataTop20000(response.data, "Fetched data");
+        console.log(response.data, "datadata");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="h-full w-full bg-zinc-800">

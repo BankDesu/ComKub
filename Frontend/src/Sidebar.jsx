@@ -36,7 +36,7 @@ export default function Sidebar({
   onSelectPrice,
 }) {
   const [data, setData] = React.useState([]);
-  const [filteredData, setFilteredData] = React.useState([]);
+  // const [filteredData, setFilteredData] = React.useState([]);
   const [selectedBrands, setSelectedBrands] = React.useState([]);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [selectedCPUs, setSelectedCPUs] = React.useState([]);
@@ -60,29 +60,29 @@ export default function Sidebar({
     fetchData();
   }, []);
 
-  React.useEffect(() => {
-    const filteredData = data.filter((item) => {
-      // Apply filtering logic here based on selected criteria
-      return (
-        selectedBrands.includes(item.brand) &&
-        selectedCategories.includes(item.category) &&
-        selectedCPUs.includes(item.cpu) &&
-        selectedGPUs.includes(item.gpu) &&
-        selectedRams.includes(item.Ram) &&
-        item.price >= priceRange[0] &&
-        item.price <= priceRange[1]
-      );
-    });
-    setFilteredData(filteredData);
-  }, [
-    data,
-    selectedBrands,
-    selectedCategories,
-    selectedCPUs,
-    selectedGPUs,
-    selectedRams,
-    priceRange,
-  ]);
+  // React.useEffect(() => {
+  //   const filteredData = data.filter((item) => {
+  //     // Apply filtering logic here based on selected criteria
+  //     return (
+  //       selectedBrands.includes(item.brand) &&
+  //       selectedCategories.includes(item.category) &&
+  //       selectedCPUs.includes(item.cpu) &&
+  //       selectedGPUs.includes(item.gpu) &&
+  //       selectedRams.includes(item.Ram) &&
+  //       item.price >= priceRange[0] &&
+  //       item.price <= priceRange[1]
+  //     );
+  //   });
+  //   setFilteredData(filteredData);
+  // }, [
+  //   data,
+  //   selectedBrands,
+  //   selectedCategories,
+  //   selectedCPUs,
+  //   selectedGPUs,
+  //   selectedRams,
+  //   priceRange,
+  // ]);
 
   const handleBrandChange = (brand) => (event) => {
     const isChecked = event.target.checked;
@@ -562,13 +562,13 @@ export default function Sidebar({
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleGPUChange("Nvidia")}
-                  checked={selectedGPUs.includes("Nvidia")}
+                  onChange={handleGPUChange("NVIDIA")}
+                  checked={selectedGPUs.includes("NVIDIA")}
                   inputProps={{ "aria-label": "controlled" }}
-                  name="Nvidia"
+                  name="NVIDIA"
                 />
               }
-              label="Nvidia"
+              label="NVIDIA"
               labelPlacement="start"
             />
           </FormGroup>
