@@ -15,6 +15,8 @@ import advtPic3 from "./assets/advtPic3.png";
 import "./index.css";
 
 function Home() {
+  const [search, setSearch] = useState('');
+  console.log(search," is search value")
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -73,8 +75,8 @@ function Home() {
         const response = await axios.get(
           `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
         );
-        setDataN(response.data,"Fetched data");
-        console.log(response.data);
+        setDataN(response.data, "Fetched data");
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -83,9 +85,24 @@ function Home() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log(dataN, "Updated dataN"); 
-  }, [dataN]);
+  const fetchNotebooksByBrands = async (brands) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_PATH}/notebook/displayNotebookByBrand`,
+        {
+          params: {
+            brands: brands.join(","), // Convert array to comma-separated string
+          },
+        }
+      );
+      // console.log(response.data,'111111111111111111'); // Handle the response data as needed
+    } catch (error) {
+      console.error("Error fetching notebooks by brands:", error);
+    }
+  };
+
+  // Example usage: Call fetchNotebooksByBrands with an array of brand names as a parameter
+  fetchNotebooksByBrands(["Acer", "Asus", "HP", "Lenovo", "MSI"]);
 
   // const [dataN, setDataN] = useState([
   //   {
@@ -241,6 +258,7 @@ function Home() {
               className="search-bar h-8.4 w-11/12 text-sm text-left m-0 pt-2.4 pl-3 border-0 focus:outline-none"
               type="search"
               placeholder="What are you looking for?"
+              onChange={(e) => setSearch(e.target.value)}
             />
             <button
               className="search-btn transition-transform duration-150 hover:transform hover:scale-110"
@@ -303,16 +321,13 @@ function Home() {
               ))}
             </div>
             <div className="content-container-home justify-center grid grid-cols-3">
-              {dataN.map((data,index) => (
+              {dataN.filter((item) => {
+                return search.toLowerCase() === '' ? item : item.notebook_name.toLowerCase().includes(search)
+              }).map((data, index) => (
                 <Link key={index} to={`/info/${data.notebook_id}`}>
                   <Notebook_data data={data} />
                 </Link>
               ))}
-              {/* {dataN.map((data, index) => (
-                <Link to="/Info">
-                  <Notebook_data key={index} data={data} />
-                </Link>
-              ))} */}
             </div>
           </div>
         </div>

@@ -64,6 +64,8 @@ function Info() {
     price,
     link,
     pic_path,
+    perfromance_score,
+    service_score,
   } = data[0] || {}; // Change this line to handle array data
 
   function getLabelText(newReviewValue) {

@@ -11,6 +11,7 @@ import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
+import axios from "axios";
 
 const CustomAccordion = styled(Accordion)(({ theme }) => ({
   "&.Mui-expanded": {
@@ -27,39 +28,131 @@ function valuetext(value) {
 }
 
 export default function Sidebar() {
-  const [checked, setChecked] = React.useState(true);
+  const [data, setData] = React.useState([]);
+  const [filteredData, setFilteredData] = React.useState([]);
+  const [selectedBrands, setSelectedBrands] = React.useState([]);
+  const [selectedCategories, setSelectedCategories] = React.useState([]);
+  const [selectedCPUs, setSelectedCPUs] = React.useState([]);
+  const [selectedGPUs, setSelectedGPUs] = React.useState([]);
+  const [selectedMemory, setSelectedMemory] = React.useState([]);
+  const [priceRange, setPriceRange] = React.useState([0, 200000]);
+  const [value, setValue] = React.useState([15000, 85000]);
 
-  const handleChangeChecked = (event) => {
-    setChecked(event.target.checked);
-    console.log(event.target.name, event.target.checked);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`);
+        setData(response.data);
+        setFilteredData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  React.useEffect(() => {
+    const filteredData = data.filter((item) => {
+      // Apply filtering logic here based on selected criteria
+      return (
+        selectedBrands.includes(item.brand) &&
+        selectedCategories.includes(item.category) &&
+        selectedCPUs.includes(item.cpu) &&
+        selectedGPUs.includes(item.gpu) &&
+        selectedMemory.includes(item.memory) &&
+        item.price >= priceRange[0] &&
+        item.price <= priceRange[1]
+      );
+    });
+    setFilteredData(filteredData);
+  }, [data, selectedBrands, selectedCategories, selectedCPUs, selectedGPUs, selectedMemory, priceRange]);
+
+  const handleBrandChange = (brand) => (event) => {
+    const isChecked = event.target.checked;
+    setSelectedBrands((prev) =>
+      isChecked ? [...prev, brand] : prev.filter((b) => b !== brand)
+    );
   };
 
-  const [value, setValue] = React.useState([15000, 85000]);
+  React.useEffect(() => {
+    console.log(selectedBrands,"Brands");
+  }, [selectedBrands]);
+  
+  const handleCategorieChange = (category) => (event) => {
+    const isChecked = event.target.checked;
+    setSelectedCategories((prev) =>
+      isChecked ? [...prev, category] : prev.filter((b) => b !== category)
+    );
+  };
+
+  React.useEffect(() => {
+    console.log(selectedCategories,"Categories");
+  }, [selectedCategories]);
+  
+  const handleCPUChange = (CPU) => (event) => {
+    const isChecked = event.target.checked;
+    setSelectedCPUs((prev) =>
+      isChecked ? [...prev, CPU] : prev.filter((b) => b !== CPU)
+    );
+  };
+
+  React.useEffect(() => {
+    console.log(selectedCPUs,"CPUs");
+  }, [selectedCPUs]);
+  
+  const handleGPUChange = (GPU) => (event) => {
+    const isChecked = event.target.checked;
+    setSelectedGPUs((prev) =>
+      isChecked ? [...prev, GPU] : prev.filter((b) => b !== GPU)
+    );
+  };
+
+  React.useEffect(() => {
+    console.log(selectedGPUs,"GPUs");
+  }, [selectedGPUs]);
+  
+  const handleMemoryChange = (memory) => (event) => {
+    const isChecked = event.target.checked;
+    setSelectedMemory((prev) =>
+      isChecked ? [...prev, memory] : prev.filter((b) => b !== memory)
+    );
+  };
+
+  React.useEffect(() => {
+    console.log(selectedMemory,"Memories");
+  }, [selectedMemory]);
 
   const handleChangeRange = (event, newValue) => {
     setValue(newValue);
-    console.log("Min", [value[0], value[1]], "Max");
+    setPriceRange(newValue);
   };
+
+  React.useEffect(() => {
+    console.log(priceRange,"Price");
+  }, [priceRange[0],priceRange[1]]);
 
   const handleInputChangeMin = (event) => {
     const newValue = event.target.value === "" ? 0 : Number(event.target.value);
     setValue([newValue, value[1]]);
-    console.log("Min:", [newValue]);
+    setPriceRange([newValue, priceRange[1]]);
   };
 
   const handleInputChangeMax = (event) => {
     const newValue = event.target.value === "" ? 0 : Number(event.target.value);
     setValue([value[0], newValue]);
-    console.log("Max:", [newValue]);
+    setPriceRange([priceRange[0], newValue]);
   };
 
   const handleBlur = () => {
     if (value[0] < 0) {
       setValue([0, value[1]]);
+      setPriceRange([0, priceRange[1]]);
     } else if (value[1] > 200000) {
       setValue([value[0], 200000]);
+      setPriceRange([priceRange[0], 200000]);
     } else if (value[0] > value[1]) {
       setValue([value[1], value[0]]);
+      setPriceRange([value[1], value[0]]);
     }
   };
 
@@ -80,7 +173,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleBrandChange("Acer")}
+                  checked={selectedBrands.includes("Acer")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="Acer"
                 />
@@ -95,7 +189,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleBrandChange("Asus")}
+                  checked={selectedBrands.includes("Asus")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="Asus"
                 />
@@ -110,7 +205,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleBrandChange("HP")}
+                  checked={selectedBrands.includes("HP")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="HP"
                 />
@@ -125,7 +221,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleBrandChange("Lenovo")}
+                  checked={selectedBrands.includes("Lenovo")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="Lenovo"
                 />
@@ -140,7 +237,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleBrandChange("MSI")}
+                  checked={selectedBrands.includes("MSI")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="MSI"
                 />
@@ -167,7 +265,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleCategorieChange("โน๊ตบุ้คทั่วไป")}
+                  checked={selectedCategories.includes("โน๊ตบุ้คทั่วไป")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="โน๊ตบุ้คทั่วไป"
                 />
@@ -182,7 +281,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleCategorieChange("โน๊ตบุ้คบางเบา")}
+                  checked={selectedCategories.includes("โน๊ตบุ้คบางเบา")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="โน๊ตบุ้คบางเบา"
                 />
@@ -197,7 +297,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleCategorieChange("โน๊ตบุ้คเกมมิ่ง")}
+                  checked={selectedCategories.includes("โน๊ตบุ้คเกมมิ่ง")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="โน๊ตบุ้คเกมมิ่ง"
                 />
@@ -286,7 +387,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleCPUChange("Intel Core i5")}
+                  checked={selectedCPUs.includes("Intel Core i5")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="Intel Core i5"
                 />
@@ -301,7 +403,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleCPUChange("Intel Core i7")}
+                  checked={selectedCPUs.includes("Intel Core i7")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="Intel Core i7"
                 />
@@ -316,7 +419,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleCPUChange("Intel Core i9")}
+                  checked={selectedCPUs.includes("Intel Core i9")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="Intel Core i9"
                 />
@@ -331,7 +435,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleCPUChange("AMD Ryzen 5")}
+                  checked={selectedCPUs.includes("AMD Ryzen 5")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="AMD Ryzen 5"
                 />
@@ -346,7 +451,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleCPUChange("AMD Ryzen 7")}
+                  checked={selectedCPUs.includes("AMD Ryzen 7")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="AMD Ryzen 7"
                 />
@@ -361,7 +467,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleCPUChange("AMD Ryzen 9")}
+                  checked={selectedCPUs.includes("AMD Ryzen 9")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="AMD Ryzen 9"
                 />
@@ -388,7 +495,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleGPUChange("Intel")}
+                  checked={selectedGPUs.includes("Intel")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="Intel"
                 />
@@ -403,7 +511,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleGPUChange("Nvidia")}
+                  checked={selectedGPUs.includes("Nvidia")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="Nvidia"
                 />
@@ -418,7 +527,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleGPUChange("AMD")}
+                  checked={selectedGPUs.includes("AMD")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="AMD"
                 />
@@ -445,7 +555,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleMemoryChange("8GB")}
+                  checked={selectedMemory.includes("8GB")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="8GB"
                 />
@@ -460,7 +571,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleMemoryChange("16GB")}
+                  checked={selectedMemory.includes("16GB")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="16GB"
                 />
@@ -475,7 +587,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleMemoryChange("32GB")}
+                  checked={selectedMemory.includes("32GB")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="32GB"
                 />
@@ -490,7 +603,8 @@ export default function Sidebar() {
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleChangeChecked}
+                  onChange={handleMemoryChange("64GB")}
+                  checked={selectedMemory.includes("64GB")}
                   inputProps={{ "aria-label": "controlled" }}
                   name="64GB"
                 />
@@ -503,33 +617,4 @@ export default function Sidebar() {
       </CustomAccordion>
     </div>
   );
-}
-
-// สำหรับ hover AccordionSummary
-{
-  /* <AccordionSummary
-  expandIcon={<ArrowDropDownIcon sx={{ color: "success.dark" }} />}
-  aria-controls="panel1a-content"
-  id="panel1a-header"
-  sx={{
-    bgcolor: "success.light",
-
-    color: "success.dark", 
-
-    "&:hover": {
-      bgcolor: "success.dark", 
-
-      color: "success.light",
-
-      "& .MuiAccordionSummary-expandIconWrapper .MuiSvgIcon-root": {
-        color: "success.light",
-      }, 
-    },
-  }}
->
-  <Typography variant="h5" color="inherit">
-    {" "}
-    Accordion 1
-  </Typography>
-</AccordionSummary>; */
 }
