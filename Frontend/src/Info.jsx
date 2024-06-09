@@ -134,7 +134,7 @@ function Info() {
                   Performance Rating
                 </p>
                 <h2 className="w-20 relative bottom-[9rem] left-[6rem] text-yellow-500 text-5xl font-semibold">
-                  {performance_score?.toFixed(1) || "N/A"}
+                  {performance_score?.toFixed(1) }
                 </h2>
                 <Rating
                   className="relative bottom-[8.2rem] left-[3.75rem]"
@@ -154,7 +154,7 @@ function Info() {
                   Service Rating
                 </p>
                 <h2 className="w-20 relative bottom-[9rem] left-[6.5rem] text-yellow-500 text-5xl font-semibold">
-                  {service_score?.toFixed(1) || "N/A"}
+                  {service_score?.toFixed(1)}
                 </h2>
                 <Rating
                   className="relative bottom-[8.2rem] left-[3.75rem]"

@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import Home from "./Home";
 import Article_container from "./Article_container.jsx";
-import Review from "./Review";
+import Recommend from "./Recommend.jsx";
 import SignInSide from "./SignInSide";
 import Advt from "./Advt.jsx";
 import Info from "./Info.jsx";
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "review",
-    element: <Review />,
+    path: "recommend",
+    element: <Recommend />,
   },
   {
     path: "signInSide",

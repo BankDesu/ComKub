@@ -15,8 +15,16 @@ import "./index.css";
 
 function Home() {
   const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+
+  const [sortOption, setSortOption] = useState("");
+  useEffect(() => {
+    const sortedData = sortData(filteredData);
+    setFilteredData(sortedData);
+  }, [sortOption, filteredData]);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
 
   const [selectedBrands, setSelectedBrands] = useState([]);
   const handleSelectedBrands = (e) => {
@@ -50,13 +58,13 @@ function Home() {
     console.log(selectedGPUs, "GPU");
   }, [selectedGPUs]);
 
-  const [selectedMemory, setSelectedMemory] = useState([]);
-  const handleSelectedMemory = (e) => {
-    setSelectedMemory(e);
+  const [selectedRams, setSelectedRams] = useState([]);
+  const handleSelectedRams = (e) => {
+    setSelectedRams(e);
   };
   React.useEffect(() => {
-    console.log(selectedMemory, "Memory");
-  }, [selectedMemory]);
+    console.log(selectedRams, "Ram");
+  }, [selectedRams]);
 
   const [priceRange, setPriceRange] = useState([]);
   const handleSelectedPrice = (e) => {
@@ -75,7 +83,7 @@ function Home() {
 
   const handleClose = (event) => {
     setAnchorEl(null);
-    console.log(event.target.innerText);
+    setSortOption(event.target.innerText);;
   };
 
   const slides = [
@@ -125,7 +133,7 @@ function Home() {
           `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
         );
         setDataN(response.data, "Fetched data");
-        // console.log(response.data);
+        console.log(response.data,"datadata");
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -134,14 +142,29 @@ function Home() {
     fetchData();
   }, []);
 
-  const filteredData = dataN.filter((item) => {
+  const sortData = (data) => {
+    switch (sortOption) {
+      case "Lowest price":
+        return data.sort((a, b) => a.price - b.price);
+      case "Highest price":
+        return data.sort((a, b) => b.price - a.price);
+      case "Name: A-Z":
+        return data.sort((a, b) => a.brand.localeCompare(b.brand));
+      case "Name: Z-A":
+        return data.sort((a, b) => b.brand.localeCompare(a.brand));
+      default:
+        return data;
+    }
+  };
+
+  const filteredData0 = dataN.filter((item) => {
     return (
       (selectedBrands.length === 0 || selectedBrands.includes(item.brand)) &&
       (selectedCategories.length === 0 ||
         selectedCategories.includes(item.category)) &&
       (selectedCPUs.length === 0 || selectedCPUs.includes(item.cpu)) &&
       (selectedGPUs.length === 0 || selectedGPUs.includes(item.gpu)) &&
-      (selectedMemory.length === 0 || selectedMemory.includes(item.memory)) &&
+      (selectedRams.length === 0 || selectedRams.includes(item.ram)) &&
       (priceRange.length === 0 ||
         (item.price >= priceRange[0] && item.price <= priceRange[1])) &&
       (search.toLowerCase() === "" ||
@@ -152,7 +175,7 @@ function Home() {
     );
   });
 
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredData0.length / itemsPerPage);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -161,7 +184,7 @@ function Home() {
   const getPageData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return filteredData.slice(startIndex, endIndex);
+    return filteredData0.slice(startIndex, endIndex);
   };
 
   return (
@@ -223,7 +246,7 @@ function Home() {
             onSelectCategory={handleSelectedCategories}
             onSelectCPU={handleSelectedCPUs}
             onSelectGPU={handleSelectedGPUs}
-            onSelectMemory={handleSelectedMemory}
+            onSelectRam={handleSelectedRams}
             onSelectPrice={handleSelectedPrice}
           />
           <div className="data-wrap w-full h-full">
@@ -251,36 +274,39 @@ function Home() {
               ))}
             </div>
             <div className="pagination-controls flex justify-center mt-4">
-            <Button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className={`prev-next-btn text-white hover:bg-gray-300 hover:text-white ${
-                currentPage === 1 ? "bg-white" : "bg-transparent"
-              }`}
-            >
-              &lt;
-            </Button>
-            {[...Array(totalPages).keys()].map((num) => (
               <Button
-                key={num + 1}
-                onClick={() => setCurrentPage(num + 1)}
-                variant={currentPage === num + 1 ? "contained" : "outlined"}
-                className={`pagination-btn ${
-                  currentPage === num + 1 ? "current-page" : ""
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className={`prev-next-btn text-white hover:bg-gray-300 hover:text-white ${
+                  currentPage === 1 ? "bg-white" : "bg-transparent"
                 }`}
               >
-                {num + 1}
+                &lt;
               </Button>
-            ))}
-            <Button
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className={`prev-next-btn text-white hover:bg-gray-300 hover:text-white ${
-                currentPage === totalPages ? "bg-white" : "bg-transparent"
-              }`}
-            >
-              &gt;
-            </Button>
+              {[...Array(totalPages).keys()].map((num) => (
+                <Button
+                  sx={{ backgroundColor: "grey" }}
+                  key={num + 1}
+                  onClick={() => setCurrentPage(num + 1)}
+                  variant={currentPage === num + 1 ? "contained" : "outlined"}
+                  className={`pagination-btn ${
+                    currentPage === num + 1 ? "current-page" : ""
+                  }`}
+                >
+                  {num + 1}
+                </Button>
+              ))}
+              <Button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                disabled={currentPage === totalPages}
+                className={`prev-next-btn text-white hover:bg-gray-300 hover:text-white ${
+                  currentPage === totalPages ? "bg-white" : "bg-transparent"
+                }`}
+              >
+                &gt;
+              </Button>
             </div>
           </div>
         </div>

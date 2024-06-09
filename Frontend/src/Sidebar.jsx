@@ -32,7 +32,7 @@ export default function Sidebar({
   onSelectCategory,
   onSelectCPU,
   onSelectGPU,
-  onSelectMemory,
+  onSelectRam,
   onSelectPrice,
 }) {
   const [data, setData] = React.useState([]);
@@ -41,7 +41,7 @@ export default function Sidebar({
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [selectedCPUs, setSelectedCPUs] = React.useState([]);
   const [selectedGPUs, setSelectedGPUs] = React.useState([]);
-  const [selectedMemory, setSelectedMemory] = React.useState([]);
+  const [selectedRams, setSelectedRams] = React.useState([]);
   const [priceRange, setPriceRange] = React.useState([0, 200000]);
   const [value, setValue] = React.useState([15000, 85000]);
 
@@ -68,7 +68,7 @@ export default function Sidebar({
         selectedCategories.includes(item.category) &&
         selectedCPUs.includes(item.cpu) &&
         selectedGPUs.includes(item.gpu) &&
-        selectedMemory.includes(item.memory) &&
+        selectedRams.includes(item.Ram) &&
         item.price >= priceRange[0] &&
         item.price <= priceRange[1]
       );
@@ -80,7 +80,7 @@ export default function Sidebar({
     selectedCategories,
     selectedCPUs,
     selectedGPUs,
-    selectedMemory,
+    selectedRams,
     priceRange,
   ]);
 
@@ -128,16 +128,16 @@ export default function Sidebar({
     onSelectGPU(selectedGPUs);
   }, [selectedGPUs]);
 
-  const handleMemoryChange = (memory) => (event) => {
+  const handleRamChange = (Ram) => (event) => {
     const isChecked = event.target.checked;
-    setSelectedMemory((prev) =>
-      isChecked ? [...prev, memory] : prev.filter((b) => b !== memory)
+    setSelectedRams((prev) =>
+      isChecked ? [...prev, Ram] : prev.filter((b) => b !== Ram)
     );
   };
 
   React.useEffect(() => {
-    onSelectMemory(selectedMemory);
-  }, [selectedMemory]);
+    onSelectRam(selectedRams);
+  }, [selectedRams]);
 
   const handleChangeRange = (event, newValue) => {
     setValue(newValue);
@@ -597,7 +597,7 @@ export default function Sidebar({
           expandIcon={<ArrowDropDownIcon />}
           sx={{ backgroundColor: "" }}
         >
-          <Typography className="pl-5">MEMORY</Typography>
+          <Typography className="pl-5">Ram</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup className="mr-7 h-10">
@@ -606,10 +606,10 @@ export default function Sidebar({
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleMemoryChange("8GB")}
-                  checked={selectedMemory.includes("8GB")}
+                  onChange={handleRamChange("8 GB")}
+                  checked={selectedRams.includes("8 GB")}
                   inputProps={{ "aria-label": "controlled" }}
-                  name="8GB"
+                  name="8 GB"
                 />
               }
               label="8GB"
@@ -622,10 +622,10 @@ export default function Sidebar({
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleMemoryChange("16GB")}
-                  checked={selectedMemory.includes("16GB")}
+                  onChange={handleRamChange("16 GB")}
+                  checked={selectedRams.includes("16 GB")}
                   inputProps={{ "aria-label": "controlled" }}
-                  name="16GB"
+                  name="16 GB"
                 />
               }
               label="16GB"
@@ -638,10 +638,10 @@ export default function Sidebar({
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleMemoryChange("32GB")}
-                  checked={selectedMemory.includes("32GB")}
+                  onChange={handleRamChange("32 GB")}
+                  checked={selectedRams.includes("32 GB")}
                   inputProps={{ "aria-label": "controlled" }}
-                  name="32GB"
+                  name="32 GB"
                 />
               }
               label="32GB"
@@ -654,10 +654,10 @@ export default function Sidebar({
               control={
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleMemoryChange("64GB")}
-                  checked={selectedMemory.includes("64GB")}
+                  onChange={handleRamChange("64 GB")}
+                  checked={selectedRams.includes("64 GB")}
                   inputProps={{ "aria-label": "controlled" }}
-                  name="64GB"
+                  name="64 GB"
                 />
               }
               label="64GB"

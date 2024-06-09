@@ -1,10 +1,9 @@
 import React from "react";
 import Nav from "./Nav";
-import Review_data from "./Review_data";
 import About from "./About";
 import { useState } from "react";
 
-function Review() {
+function Recommend() {
   
   return (
     <>
@@ -558,4 +557,4 @@ function Review() {
   );
 }
 
-export default Review;
+export default Recommend;

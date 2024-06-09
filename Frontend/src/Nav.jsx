@@ -55,7 +55,7 @@ function Nav() {
               src={comkub}
             />
           </Link>
-          <Link to="/review" className="review">
+          <Link to="/recommend" className="review">
             <img
               className="review-img mt-1.2 h-14 transition-transform duration-150 hover:transform hover:scale-110 filter invert"
               src="https://cdn-icons-png.flaticon.com/512/2701/2701190.png"
@@ -80,7 +80,7 @@ function Nav() {
             </button>
             {isHovered && (
               <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-4 w-48">
-                <p className="mb-2">{username}</p>
+                <p className="mb-2 text-black">{username}</p>
                 <button
                   onClick={logout}
                   className="bg-zinc-500 text-white px-4 py-2 rounded w-full"
