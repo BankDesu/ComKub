@@ -7,38 +7,45 @@ import About from "./About";
 import Nav from "./Nav";
 
 const apiPATH = import.meta.env.VITE_API_PATH;
-function Info() {
-  const { notebook_id } = useParams(); // Extract notebook_id from the URL
-  const [data, setData] = useState([]);
-  const [avgP, setAvgP] = useState([]);
-  console.log(data);
 
+function Info() {
+  const { notebook_id } = useParams();
+  const [data, setData] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [newReviewValueP, setNewReviewValueP] = useState(3);
+  const [hoverP, setHoverP] = useState(-1);
+  const [newReviewValueS, setNewReviewValueS] = useState(3);
+  const [hoverS, setHoverS] = useState(-1);
+  const [userId, setUserId] = useState([]);
+
+  console.log(isLoggedIn);
+  console.log(userId);
+  console.log(newReviewValueS);
+  console.log(hoverP);
+  console.log(hoverS);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${apiPATH}/notebook/lookupNotebook/${notebook_id}`,
-        );
-        setData(response.data);
+        const response = await axios.get(`${apiPATH}/notebook/lookupNotebook/${notebook_id}`);
+        setData(response.data[0]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
   }, [notebook_id]);
 
   useEffect(() => {
-    const fetchAvgRatings = async () => {
+    const checkLoginStatus = async () => {
       try {
-        const response = await axios.get(`${apiPATH}/notebook/lookupNotebook`);
-        setAvgP(response.data);
+        const response = await axios.get(`${apiPATH}/auth/check`, { withCredentials: true });
+        setIsLoggedIn(true);
+        setUserId(response.data.userid);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        setIsLoggedIn(false);
       }
     };
-
-    fetchAvgRatings();
+    checkLoginStatus();
   }, []);
 
   const labels = {
@@ -48,6 +55,34 @@ function Info() {
     4: "Good",
     5: "Excellent",
   };
+
+  const handleSubmit = async () => {
+    if (!isLoggedIn) {
+      alert("You need to be logged in to submit a review");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${apiPATH}/review/create`,
+        {
+          userid: userId,
+          notebook_id,
+          review_title: "My Review",
+          performance_score: newReviewValueP,
+          service_score: newReviewValueS,
+        },
+        { withCredentials: true }
+      );
+      console.log("Review submitted:", response.data);
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
+  };
+
+  if (!data.notebook_name) {
+    return <div>Loading...</div>;
+  }
 
   const {
     notebook_name,
@@ -62,24 +97,10 @@ function Info() {
     storage,
     os,
     price,
-    link,
     pic_path,
-  } = data[0] || {}; // Change this line to handle array data
-
-  function getLabelText(newReviewValue) {
-    return `${newReviewValue} Star${newReviewValue !== 1 ? "s" : ""}, ${
-      labels[newReviewValue]
-    }`;
-  }
-
-  const [newReviewValueP, setNewReviewValueP] = useState(3);
-  const [hoverP, setHoverP] = useState(-1);
-  const [newReviewValueS, setNewReviewValueS] = useState(3);
-  const [hoverS, setHoverS] = useState(-1);
-
-  if (data.length === 0) {
-    return <div>Loading...</div>;
-  }
+    performance_score,
+    service_score,
+  } = data;
 
   return (
     <>
@@ -99,13 +120,13 @@ function Info() {
                   Performance Rating
                 </p>
                 <h2 className="w-20 relative bottom-[9rem] left-[6.3rem] text-yellow-500 text-5xl font-semibold">
-                  2.5
+                  {performance_score?.toFixed(1) || 'N/A'}
                 </h2>
                 <Rating
                   className="relative bottom-[8.2rem] left-[3.75rem]"
                   name="performance-rating-read"
                   size="large"
-                  defaultValue={2.5}
+                  value={performance_score || 0}
                   precision={0.5}
                   readOnly
                   emptyIcon={
@@ -119,13 +140,13 @@ function Info() {
                   Service Rating
                 </p>
                 <h2 className="w-20 relative bottom-[9rem] left-[6.3rem] text-yellow-500 text-5xl font-semibold">
-                  2.5
+                  {service_score?.toFixed(1) || 'N/A'}
                 </h2>
                 <Rating
                   className="relative bottom-[8.2rem] left-[3.75rem]"
                   name="service-rating-read"
                   size="large"
-                  defaultValue={2.5}
+                  value={service_score || 0}
                   precision={0.5}
                   readOnly
                   emptyIcon={
@@ -137,9 +158,7 @@ function Info() {
           </div>
           <div className="w-[80rem] h-[15rem] flex mx-auto bg-zinc-600/80 border-2 border-gray-300/80 text-white mt-5 rounded-xl">
             <div className="w-full">
-              <p className="text-3xl font-semibold pl-8 pt-4 ">
-                {notebook_name}
-              </p>
+              <p className="text-3xl font-semibold pl-8 pt-4 ">{notebook_name}</p>
               <p className="text-lg pt-4 pl-16">Brand: {brand}</p>
               <p className="text-lg pt-2 pl-16">Model: {model}</p>
               <p className="text-lg pt-2 pl-16">Category: {category}</p>
@@ -156,25 +175,17 @@ function Info() {
               <p className="text-lg pt-2 pl-16">Price: {price}.-</p>
             </div>
           </div>
-          <div className="w-[70rem] h-[9rem] mx-auto mt-5 grid grid-cols-2">
-            <div className="w-11/12 h-[7rem] pt-3 pl-8 bg-zinc-600/80 border-2 border-gray-300/80 text-white rounded-xl mx-auto">
-              <div className="flex">
-                <p className="text-2xl">Rate Performance score</p>
-                <div className="pt-0.5 w-10 h-10 relative left-5 bottom-1 flex justify-center bg-white rounded-full opacity-90">
-                  <img
-                    className="w-8 h-8"
-                    src="https://cdn-icons-png.flaticon.com/128/9751/9751072.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="flex pt-2 pl-24">
+          <div className="w-[80rem] h-[10rem] flex flex-col mx-auto bg-white border-2 border-gray-300/80 mt-5 rounded-xl">
+            <p className="relative w-36 left-8 pt-4 pl-2 text-lg text-black bg-white">
+              Your Rating
+            </p>
+            <div className="flex justify-around">
+              <div className="w-1/2">
+                <p className="text-black">Performance</p>
                 <Rating
-                  className="bg-white rounded-lg px-2 py-1"
-                  name="hover-feedback"
+                  name="hover-feedback-performance"
                   value={newReviewValueP}
-                  size="large"
-                  getLabelText={getLabelText}
+                  precision={1}
                   onChange={(event, newValue) => {
                     setNewReviewValueP(newValue);
                   }}
@@ -186,30 +197,17 @@ function Info() {
                   }
                 />
                 {newReviewValueP !== null && (
-                  <div className="pt-1 ml-5 w-32 text-center text-xl text-white bg-zinc-700 rounded-lg">
+                  <p className="text-sm">
                     {labels[hoverP !== -1 ? hoverP : newReviewValueP]}
-                  </div>
+                  </p>
                 )}
               </div>
-            </div>
-            <div className="w-11/12 h-[7rem] pt-3 pl-8 bg-zinc-600/80 border-2 border-gray-300/80 text-white rounded-xl mx-auto">
-              <div className="flex">
-                <p className="text-2xl">Rate Service score</p>
-                <div className="pt-0.5 w-10 h-10 relative left-5 bottom-1 flex justify-center bg-white rounded-full opacity-90">
-                  <img
-                    className="w-8 h-8"
-                    src="https://cdn-icons-png.flaticon.com/128/2252/2252184.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="flex pt-2 pl-24">
+              <div className="w-1/2">
+                <p className="text-black">Service</p>
                 <Rating
-                  className="bg-white rounded-lg px-2 py-1"
-                  name="hover-feedback"
+                  name="hover-feedback-service"
                   value={newReviewValueS}
-                  size="large"
-                  getLabelText={getLabelText}
+                  precision={1}
                   onChange={(event, newValue) => {
                     setNewReviewValueS(newValue);
                   }}
@@ -221,13 +219,20 @@ function Info() {
                   }
                 />
                 {newReviewValueS !== null && (
-                  <div className="pt-1 ml-5 w-32 text-center text-xl text-white bg-zinc-700 rounded-lg">
+                  <p className="text-sm">
                     {labels[hoverS !== -1 ? hoverS : newReviewValueS]}
-                  </div>
+                  </p>
                 )}
               </div>
             </div>
+            <button
+              className="w-48 mt-5 bg-gradient-to-br from-yellow-300 to-yellow-500 text-white rounded-md p-1 mx-auto"
+              onClick={handleSubmit}
+            >
+              Submit Review
+            </button>
           </div>
+
         </div>
         <About />
       </div>
