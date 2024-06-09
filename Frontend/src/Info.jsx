@@ -133,7 +133,7 @@ function Info() {
                 <p className="relative w-44 bottom-[9.8rem] left-8 pl-2 text-lg text-black bg-white">
                   Performance Rating
                 </p>
-                <h2 className="w-20 relative bottom-[9rem] left-[6rem] text-yellow-500 text-5xl font-semibold">
+                <h2 className="w-20 relative bottom-[9rem] left-[6.5rem] text-yellow-500 text-5xl font-semibold">
                   {performance_score?.toFixed(1) }
                 </h2>
                 <Rating

@@ -5,7 +5,7 @@ function Notebook_data({ data }) {
   return (
     <>
       <div className="border-4 ml-10 m-6 p-2 border-black rounded-lg h-72 w-72 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">
-        <p className="text-sm font-thin font-mono">{brand}</p>
+        <p className="text-base font-thin font-mono">{brand}</p>
         <div className="border-2 mx-auto border-zinc-400 p-2 ml-6 mr-6">
           <img className="w-6/12 h-24 p-0 mx-auto" src={pic_path} alt="" />
         </div>
