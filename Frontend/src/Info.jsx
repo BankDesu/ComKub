@@ -16,13 +16,8 @@ function Info() {
   const [hoverP, setHoverP] = useState(-1);
   const [newReviewValueS, setNewReviewValueS] = useState(3);
   const [hoverS, setHoverS] = useState(-1);
-  const [userId, setUserId] = useState([]);
+  const [userid, setUserid] = useState(null);
 
-  console.log(isLoggedIn);
-  console.log(userId);
-  console.log(newReviewValueS);
-  console.log(hoverP);
-  console.log(hoverS);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,15 +33,21 @@ function Info() {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get(`${apiPATH}/auth/check`, { withCredentials: true });
+        const response = await axios.get(`${apiPATH}/auth/check/`, { withCredentials: true });
+        console.log("Login status response:", response.data);
         setIsLoggedIn(true);
-        setUserId(response.data.userid);
+        setUserid(response.data.userid);
       } catch (error) {
+        console.error("Error checking login status:", error);
         setIsLoggedIn(false);
       }
     };
     checkLoginStatus();
   }, []);
+
+  useEffect(() => {
+    console.log("User ID:", userid); // Debugging to see when userid is set
+  }, [userid]);
 
   const labels = {
     1: "Useless",
@@ -66,9 +67,8 @@ function Info() {
       const response = await axios.post(
         `${apiPATH}/review/create`,
         {
-          userid: userId,
+          userid, // Using correct key
           notebook_id,
-          review_title: "My Review",
           performance_score: newReviewValueP,
           service_score: newReviewValueS,
         },
@@ -88,7 +88,6 @@ function Info() {
     notebook_name,
     brand,
     model,
-    model_year,
     category,
     cpu,
     gpu,
@@ -98,33 +97,18 @@ function Info() {
     os,
     price,
     pic_path,
-    perfromance_score,
+    performance_score,
     service_score,
-  } = data[0] || {}; // Change this line to handle array data
-
-  function getLabelText(newReviewValue) {
-    return `${newReviewValue} Star${newReviewValue !== 1 ? "s" : ""}, ${
-      labels[newReviewValue]
-    }`;
-  }
-
-  const [newReviewValueP, setNewReviewValueP] = useState(3);
-  const [hoverP, setHoverP] = useState(-1);
-  const [newReviewValueS, setNewReviewValueS] = useState(3);
-  const [hoverS, setHoverS] = useState(-1);
-
-  if (data.length === 0) {
-    return <div>Loading...</div>;
-  }
+  } = data;
 
   return (
     <>
-      <div className="box-border bg-gradient-to-br from-zinc-800 to-zinc-700 import text-white">
+      <div className="box-border bg-gradient-to-br from-zinc-800 to-zinc-700 text-white">
         <Nav />
         <div className="mt-5 mr-12 ml-12 mb-32 flex flex-col">
-          <div className="w-full h-full grid grid-cols-2 grid-rows-1">
+          <div className="w-full h-full grid grid-cols-1 md:grid-cols-2">
             <img
-              className="drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] w-[30rem] h-[22rem] ml-32 border-4 border-gray-300/80 rounded-xl"
+              className="drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] w-full md:w-[30rem] h-full md:h-[22rem] mx-auto border-4 border-gray-300/80 rounded-xl"
               src={pic_path}
               alt={notebook_name}
             />
@@ -144,9 +128,7 @@ function Info() {
                   value={performance_score || 0}
                   precision={0.5}
                   readOnly
-                  emptyIcon={
-                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                  }
+                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                 />
               </div>
               <div className="mt-8 w-[17rem] h-[10rem] bg-white border-2 border-gray-300/80 rounded-xl">
@@ -164,16 +146,14 @@ function Info() {
                   value={service_score || 0}
                   precision={0.5}
                   readOnly
-                  emptyIcon={
-                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                  }
+                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                 />
               </div>
             </div>
           </div>
           <div className="w-[80rem] h-[15rem] flex mx-auto bg-zinc-600/80 border-2 border-gray-300/80 text-white mt-5 rounded-xl">
             <div className="w-full">
-              <p className="text-3xl font-semibold pl-8 pt-4 ">{notebook_name}</p>
+              <p className="text-3xl font-semibold pl-8 pt-4">{notebook_name}</p>
               <p className="text-lg pt-4 pl-16">Brand: {brand}</p>
               <p className="text-lg pt-2 pl-16">Model: {model}</p>
               <p className="text-lg pt-2 pl-16">Category: {category}</p>
@@ -190,11 +170,9 @@ function Info() {
               <p className="text-lg pt-2 pl-16">Price: {price}.-</p>
             </div>
           </div>
-          <div className="w-[80rem] h-[10rem] flex flex-col mx-auto bg-white border-2 border-gray-300/80 mt-5 rounded-xl">
-            <p className="relative w-36 left-8 pt-4 pl-2 text-lg text-black bg-white">
-              Your Rating
-            </p>
-            <div className="flex justify-around">
+          <div className="w-[80rem] h-[20rem] flex flex-col mx-auto bg-white border-2 border-gray-300/80 mt-5 rounded-xl p-5">
+            <p className="text-lg text-black mb-4">Your Rating</p>
+            <div className="flex justify-around mb-8">
               <div className="w-1/2">
                 <p className="text-black">Performance</p>
                 <Rating
@@ -207,14 +185,11 @@ function Info() {
                   onChangeActive={(event, newHover) => {
                     setHoverP(newHover);
                   }}
-                  emptyIcon={
-                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                  }
+                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                  size="large"
                 />
                 {newReviewValueP !== null && (
-                  <p className="text-sm">
-                    {labels[hoverP !== -1 ? hoverP : newReviewValueP]}
-                  </p>
+                  <p>{labels[hoverP !== -1 ? hoverP : newReviewValueP]}</p>
                 )}
               </div>
               <div className="w-1/2">
@@ -229,27 +204,25 @@ function Info() {
                   onChangeActive={(event, newHover) => {
                     setHoverS(newHover);
                   }}
-                  emptyIcon={
-                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                  }
+                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                  size="large"
                 />
                 {newReviewValueS !== null && (
-                  <p className="text-sm">
-                    {labels[hoverS !== -1 ? hoverS : newReviewValueS]}
-                  </p>
+                  <p>{labels[hoverS !== -1 ? hoverS : newReviewValueS]}</p>
                 )}
               </div>
             </div>
-            <button
-              className="w-48 mt-5 bg-gradient-to-br from-yellow-300 to-yellow-500 text-white rounded-md p-1 mx-auto"
-              onClick={handleSubmit}
-            >
-              Submit Review
-            </button>
+            <div className="flex justify-center mt-auto">
+              <button
+                className="px-10 py-2 mt-6 bg-gray-300 text-black rounded-lg hover:bg-gray-400"
+                onClick={handleSubmit}
+              >
+                Submit Review
+              </button>
+            </div>
           </div>
-
         </div>
-        <About />
+        <About/>
       </div>
     </>
   );

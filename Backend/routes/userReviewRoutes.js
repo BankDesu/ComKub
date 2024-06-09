@@ -4,23 +4,23 @@ import { deleteReview, lookupReview, lookupReviewByNotebook, newReview, updateRe
 
 const userReviewRoutes = express.Router();
 
-userReviewRoutes.post('/create', authMiddleware, async (req, res) => {
-    const { review_title, performance_score, service_score, notebook_id } = req.body;
-    const { user_id } = req.user; // Fetch user_id from the authenticated user
-
+userReviewRoutes.post('/create', async (req, res) => {
+    const { userid, notebook_id, performance_score, service_score } = req.body;
+    console.log(req.body);
     try {
-        const result = await createReview(user_id, notebook_id, review_title, performance_score, service_score);
-        res.status(200).send(result);
-    } catch (err) {
-        res.status(500).send('Internal Server Error');
+        const result = await newReview(userid, notebook_id, performance_score, service_score);
+        res.status(201).json(result);
+        console.log(result);
+    } catch (error) {
+        console.error('Error creating review:', error); // Add detailed logging
+        res.status(500).json({ error: 'Error creating review' });
     }
 });
 
-
 userReviewRoutes.post('/edit', authMiddleware, async (req, res) => {
-    const { reviewid, notebook_id, review_title, performance_score, service_score } = req.body;
+    const { reviewid, notebook_id, performance_score, service_score } = req.body;
     try {
-        const review = await updateReview(reviewid, notebook_id, review_title, performance_score, service_score);
+        const review = await updateReview(reviewid, notebook_id, performance_score, service_score);
         res.status(200).send(review);
     } catch (err) {
         res.status(500).send('Internal Server Error');
