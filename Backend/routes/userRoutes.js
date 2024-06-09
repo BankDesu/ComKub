@@ -34,7 +34,7 @@ userRoutes.delete('/delete', async (req, res) => {
 });
 
 
-userRoutes.get('/displayUser', async (req, res) => {
+userRoutes.get('/displayUser/:userid', async (req, res) => {
     const { userid } = req.query;
     try {
         const user = await lookupUser(userid);

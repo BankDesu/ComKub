@@ -6,7 +6,7 @@ env.config();
 
 const findUser = async (username) => {
     const [rows] = await db.promise().query(
-        `SELECT username, password FROM user WHERE username = ?`,
+        `SELECT username, password,userid FROM user WHERE username = ?`,
         [username]
     );
     if (rows.length === 0) {

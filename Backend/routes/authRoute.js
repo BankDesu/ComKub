@@ -7,7 +7,7 @@ import { comparePassword, findUser, registerUser } from '../model/auth.js';
 const authRoutes = express.Router();
 dotenv.config();
 
-authRoutes.all("/" ,async (req,res) => {
+authRoutes.all("/", async (req, res) => {
     res.sendStatus(200);
 });
 
@@ -25,7 +25,7 @@ authRoutes.post('/login', async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).send('Invalid password');
         }
-        const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ username: user.username, userid: user.userid }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.cookie('token', token, { httpOnly: true });
         res.status(200).send('Login successful');
     } catch (err) {
@@ -43,7 +43,7 @@ authRoutes.post('/register', async (req, res) => {
       console.error('Registration failed:', err);
       res.status(500).send('Internal Server Error');
     }
-  });
+});
 
 authRoutes.get('/logout', authMiddleware, (req, res) => {
     res.clearCookie('token');
@@ -55,14 +55,12 @@ authRoutes.get('/check', authMiddleware, (req, res) => {
         if (!req.user) {
             return res.status(401).send('Unauthorized');
         }
-        res.status(200).json({ username: req.user.username });
+        res.status(200).json({ username: req.user.username, userid: req.user.userid });
+        console.log(req.user);
     } catch (err) {
         console.error('Error in /check endpoint:', err);
         res.status(500).send('Internal Server Error');
     }
 });
 
-
-
 export default authRoutes;
-
