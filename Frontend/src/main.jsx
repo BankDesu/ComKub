@@ -8,14 +8,12 @@ import Review from "./Review";
 import SignInSide from "./SignInSide";
 import Advt from "./Advt.jsx";
 import Info from "./Info.jsx";
-
-
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <App />,
   },
   {
     path: "review",

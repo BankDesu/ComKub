@@ -13,6 +13,7 @@ import { styled } from "@mui/material/styles";
 import * as React from "react";
 import axios from "axios";
 
+
 const CustomAccordion = styled(Accordion)(({ theme }) => ({
   "&.Mui-expanded": {
     margin: "0 !important",
@@ -27,7 +28,7 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function Sidebar() {
+export default function Sidebar({ setSelectedBrand }) {
   const [data, setData] = React.useState([]);
   const [filteredData, setFilteredData] = React.useState([]);
   const [selectedBrands, setSelectedBrands] = React.useState([]);
