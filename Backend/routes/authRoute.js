@@ -50,13 +50,18 @@ authRoutes.get('/logout', authMiddleware, (req, res) => {
     res.send('Logout successful');
 });
 
-authRoutes.get('/check', async (req, res) => {
+authRoutes.get('/check', authMiddleware, (req, res) => {
     try {
-        res.sendStatus(200);
+        if (!req.user) {
+            return res.status(401).send('Unauthorized');
+        }
+        res.status(200).json({ username: req.user.username });
     } catch (err) {
-        res.sendStatus(500);
+        console.error('Error in /check endpoint:', err);
+        res.status(500).send('Internal Server Error');
     }
 });
+
 
 
 export default authRoutes;
