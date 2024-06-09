@@ -41,7 +41,7 @@ const lookupNotebookByCategory = async (category) => {
 
 const lookupNotebookByCPU = async (cpu) => {
     const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook WHERE cpu LIKE ?',
+        'SELECT * FROM notebook WHERE cpu LIKE ?%',
         [cpu]
     );
     return results;
@@ -49,7 +49,7 @@ const lookupNotebookByCPU = async (cpu) => {
 
 const lookupNotebookByGPU = async (gpu) => {
     const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook WHERE gpu LIKE ?',
+        'SELECT * FROM notebook WHERE gpu LIKE ?%',
         [gpu]
     );
     return results;
@@ -57,41 +57,13 @@ const lookupNotebookByGPU = async (gpu) => {
 
 const lookupNotebookByram = async (ram) => {
     const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook WHERE ram LIKE ?',
+        'SELECT * FROM notebook WHERE ram LIKE ?%',
         [ram]
     );
     return results;
 };
 
-const sortBylowPrice = async () => {
-    const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook ORDER BY price ASC'
-    );
-    return results;
-};
-
-const sortByhighPrice = async () => {
-    const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook ORDER BY price DESC'
-    );
-    return results;
-};
-
-const sortByAtoZ = async () => {
-    const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook ORDER BY brand ASC'
-    );
-    return results;
-};
-
-const sortByZtoA = async () => {
-    const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook ORDER BY brand DESC'
-    );
-    return results;
-};
-
-const lookupTop5 = async (minPrice, maxPrice, limit = 5) => {
+const lookupTop4PriceEqualto20k = async (minPrice = 0, maxPrice = 20000, limit = 4) => {
     const [results, fields] = await db.promise().query(
         `
         SELECT *,
@@ -102,6 +74,48 @@ const lookupTop5 = async (minPrice, maxPrice, limit = 5) => {
         LIMIT ?;
     `
     , [minPrice, maxPrice, limit]);
+    return results;
+};
+
+const lookupTop4PriceBetweenmor20kto50k = async (minPrice = 20001, maxPrice = 50000, limit = 4) => {
+    const [results, fields] = await db.promise().query(
+        `
+        SELECT *,
+        (0.5 * performance_score + 0.5 * service_score) AS total_score
+        FROM notebook 
+        WHERE price BETWEEN ? AND ?
+        ORDER BY total_score DESC
+        LIMIT ?;
+    `
+    , [minPrice, maxPrice, limit]);
+    return results;
+};
+
+const lookupTop4PriceBetweenmor50kto100k = async (minPrice = 50001, maxPrice = 100000, limit = 4) => {
+    const [results, fields] = await db.promise().query(
+        `
+        SELECT *,
+        (0.5 * performance_score + 0.5 * service_score) AS total_score
+        FROM notebook 
+        WHERE price BETWEEN ? AND ?
+        ORDER BY total_score DESC
+        LIMIT ?;
+    `
+    , [minPrice, maxPrice, limit]);
+    return results;
+};
+
+const lookupTop4PriceMorethan100k = async (minPrice = 100001, limit = 4) => {
+    const [results, fields] = await db.promise().query(
+        `
+        SELECT *,
+        (0.5 * performance_score + 0.5 * service_score) AS total_score
+        FROM notebook 
+        WHERE price >= ?
+        ORDER BY total_score DESC
+        LIMIT ?;
+    `
+    , [minPrice, limit]);
     return results;
 };
 
@@ -124,7 +138,7 @@ const searchNotebookByname = async (name) => {
 export {
     lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU,
     lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange,
-    lookupNotebookByram, lookupNotebookall, lookupTop5, searchNotebookByname, sortByAtoZ,
-    sortByZtoA, sortByhighPrice, sortBylowPrice, updatenotebookscore
+    lookupNotebookByram, lookupNotebookall, lookupTop4PriceBetweenmor20kto50k, lookupTop4PriceBetweenmor50kto100k, lookupTop4PriceEqualto20k, lookupTop4PriceMorethan100k, searchNotebookByname,
+    updatenotebookscore
 };
 
