@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
 import axios from "axios";
+import { useState,useEffect } from "react";
 
 const CustomAccordion = styled(Accordion)(({ theme }) => ({
   "&.Mui-expanded": {
@@ -36,7 +37,6 @@ export default function Sidebar({
   onSelectPrice,
 }) {
   const [data, setData] = React.useState([]);
-  // const [filteredData, setFilteredData] = React.useState([]);
   const [selectedBrands, setSelectedBrands] = React.useState([]);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [selectedCPUs, setSelectedCPUs] = React.useState([]);
@@ -52,7 +52,6 @@ export default function Sidebar({
           `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
         );
         setData(response.data);
-        setFilteredData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -60,29 +59,6 @@ export default function Sidebar({
     fetchData();
   }, []);
 
-  // React.useEffect(() => {
-  //   const filteredData = data.filter((item) => {
-  //     // Apply filtering logic here based on selected criteria
-  //     return (
-  //       selectedBrands.includes(item.brand) &&
-  //       selectedCategories.includes(item.category) &&
-  //       selectedCPUs.includes(item.cpu) &&
-  //       selectedGPUs.includes(item.gpu) &&
-  //       selectedRams.includes(item.Ram) &&
-  //       item.price >= priceRange[0] &&
-  //       item.price <= priceRange[1]
-  //     );
-  //   });
-  //   setFilteredData(filteredData);
-  // }, [
-  //   data,
-  //   selectedBrands,
-  //   selectedCategories,
-  //   selectedCPUs,
-  //   selectedGPUs,
-  //   selectedRams,
-  //   priceRange,
-  // ]);
 
   const handleBrandChange = (brand) => (event) => {
     const isChecked = event.target.checked;
@@ -353,7 +329,7 @@ export default function Sidebar({
                   height: 20,
                   width: 20,
                   backgroundColor: "#fff",
-                  border: '2px solid currentColor',
+                  border: "2px solid currentColor",
                   "&:focus, &:hover, &.Mui-active": {
                     boxShadow: "0px 1px 5px 1px rgba(0, 0, 0, 0.5)",
                   },

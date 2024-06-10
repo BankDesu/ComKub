@@ -15,10 +15,21 @@ import "./index.css";
 
 function Home() {
   const [search, setSearch] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
   const [sortOption, setSortOption] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    brands: [],
+    categories: [],
+    cpus: [],
+    gpus: [],
+    rams: [],
+    priceRange: [],
+  });
+
+  
+
 
   const [selectedBrands, setSelectedBrands] = useState([]);
   const handleSelectedBrands = (e) => {
@@ -29,6 +40,7 @@ function Home() {
   }, [selectedBrands]);
 
   const [selectedCategories, setSelectedCategories] = useState([]);
+  
   const handleSelectedCategories = (e) => {
     setSelectedCategories(e);
   };
@@ -137,6 +149,7 @@ function Home() {
     fetchData();
   }, []);
 
+
   const sortData = (data) => {
     switch (sortOption) {
       case "Lowest price":
@@ -144,9 +157,13 @@ function Home() {
       case "Highest price":
         return [...data].sort((a, b) => b.price - a.price);
       case "Name: A-Z":
-        return [...data].sort((a, b) => a.notebook_name.localeCompare(b.notebook_name));
+        return [...data].sort((a, b) =>
+          a.notebook_name.localeCompare(b.notebook_name)
+        );
       case "Name: Z-A":
-        return [...data].sort((a, b) => b.notebook_name.localeCompare(a.notebook_name));
+        return [...data].sort((a, b) =>
+          b.notebook_name.localeCompare(a.notebook_name)
+        );
       default:
         return data;
     }
@@ -182,6 +199,7 @@ function Home() {
     const endIndex = startIndex + itemsPerPage;
     return sortedFilteredData.slice(startIndex, endIndex);
   };
+
 
   return (
     <>
