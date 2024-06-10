@@ -22,18 +22,6 @@ const lookupNotebook = async (notebook_id) => {
       query += ' AND category IN (?)';
       params.push(category.split(','));
     }
-    if (cpu) {
-      query += ' AND cpu IN (?)';
-      params.push(cpu.split(','));
-    }
-    if (gpu) {
-      query += ' AND gpu IN (?)';
-      params.push(gpu.split(','));
-    }
-    if (ram) {
-      query += ' AND ram IN (?)';
-      params.push(ram.split(','));
-    }
     if (minPrice) {
       query += ' AND price >= ?';
       params.push(Number(minPrice));

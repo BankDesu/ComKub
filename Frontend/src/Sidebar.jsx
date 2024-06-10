@@ -29,16 +29,10 @@ function valuetext(value) {
 export default function Sidebar({
   onSelectBrand,
   onSelectCategory,
-  onSelectCPU,
-  onSelectGPU,
-  onSelectRam,
   onSelectPrice,
 }) {
   const [selectedBrands, setSelectedBrands] = React.useState([]);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
-  const [selectedCPUs, setSelectedCPUs] = React.useState([]);
-  const [selectedGPUs, setSelectedGPUs] = React.useState([]);
-  const [selectedRams, setSelectedRams] = React.useState([]);
   const [priceRange, setPriceRange] = React.useState([0, 200000]);
   const [value, setValue] = React.useState([15000, 85000]);
 
@@ -49,18 +43,6 @@ export default function Sidebar({
   React.useEffect(() => {
     onSelectCategory(selectedCategories);
   }, [selectedCategories]);
-
-  React.useEffect(() => {
-    onSelectCPU(selectedCPUs);
-  }, [selectedCPUs]);
-
-  React.useEffect(() => {
-    onSelectGPU(selectedGPUs);
-  }, [selectedGPUs]);
-
-  React.useEffect(() => {
-    onSelectRam(selectedRams);
-  }, [selectedRams]);
 
   React.useEffect(() => {
     onSelectPrice(priceRange);

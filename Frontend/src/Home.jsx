@@ -23,9 +23,6 @@ function Home() {
   const [dataN, setDataN] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedCPUs, setSelectedCPUs] = useState([]);
-  const [selectedGPUs, setSelectedGPUs] = useState([]);
-  const [selectedRams, setSelectedRams] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 200000]);
 
   const slides = [
@@ -87,15 +84,6 @@ function Home() {
       if (selectedCategories.length > 0) {
         params.category = selectedCategories.join(",");
       }
-      if (selectedCPUs.length > 0) {
-        params.cpu = selectedCPUs.join(",");
-      }
-      if (selectedGPUs.length > 0) {
-        params.gpu = selectedGPUs.join(",");
-      }
-      if (selectedRams.length > 0) {
-        params.ram = selectedRams.join(",");
-      }
       if (priceRange.length > 0) {
         params.minPrice = priceRange[0];
         params.maxPrice = priceRange[1];
@@ -117,7 +105,7 @@ function Home() {
 
   useEffect(() => {
     fetchFilteredData();
-  }, [selectedBrands, selectedCategories, selectedCPUs, selectedGPUs, selectedRams, priceRange]);
+  }, [selectedBrands, selectedCategories, priceRange]);
 
   const sortData = (data) => {
     switch (sortOption) {
@@ -222,9 +210,6 @@ function Home() {
           <Sidebar
             onSelectBrand={setSelectedBrands}
             onSelectCategory={setSelectedCategories}
-            onSelectCPU={setSelectedCPUs}
-            onSelectGPU={setSelectedGPUs}
-            onSelectRam={setSelectedRams}
             onSelectPrice={setPriceRange}
           />
           <div className="data-wrap w-full h-full">
