@@ -95,7 +95,7 @@ function Recommend() {
           </div>
           <div className="flex">
             {dataTop20k.map((data) => (
-              <div className="border-4 ml-10 m-6 p-2 border-black rounded-lg h-72 w-72 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">
+              <div className="border-4 ml-10 m-6 p-2 border-black rounded-lg h-72 w-88 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">
                 <div className="flex justify-between">
                   <p className="text-base font-thin font-mono">{data.brand}</p>
                   <Rating

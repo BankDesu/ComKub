@@ -10,6 +10,35 @@ function Nav() {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
+  const confirmDelete = async () => {
+    setShowSuccessDialog(true);
+// kjh
+    try {
+        await axios.get(`${apiPATH}/auth/delete`, {
+            withCredentials: true,
+        });
+
+        if (response.status === 200) {
+            navigate("/SignInSide");
+            console.log("Account Deleted");
+        } else {
+            console.error("Failed to delete user. Server responded with status:", response.status);
+        }
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            if (error.response && error.response.status === 500) {
+                console.error("Internal Server Error. Please try again later.");
+            } else {
+                console.error("Error logging out:", error.message);
+            }
+        } else {
+            console.error("Unexpected error logging out:", error);
+        }
+    }
+
+    setShowConfirmDialog(false);
+};
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
