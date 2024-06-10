@@ -7,13 +7,34 @@ const lookupNotebook = async (notebook_id) => {
     );
     return results;
   };
-
-const lookupNotebookall = async () => {
-    const [results, fields] = await db.promise().query(
-        'SELECT * FROM notebook order by notebook_id asc'
-    );
+  
+  const lookupNotebookall = async (filters) => {
+    const { brand, category, cpu, gpu, ram, minPrice, maxPrice } = filters;
+  
+    let query = 'SELECT * FROM notebook WHERE 1=1';
+    let params = [];
+  
+    if (brand) {
+      query += ' AND brand IN (?)';
+      params.push(brand.split(','));
+    }
+    if (category) {
+      query += ' AND category IN (?)';
+      params.push(category.split(','));
+    }
+    if (minPrice) {
+      query += ' AND price >= ?';
+      params.push(Number(minPrice));
+    }
+    if (maxPrice) {
+      query += ' AND price <= ?';
+      params.push(Number(maxPrice));
+    }
+  
+    const [results, fields] = await db.promise().query(query, params);
     return results;
-}
+  };
+  
 
 const lookupNotebookByBrand = async (brand) => {
     const [results, fields] = await db.promise().query(

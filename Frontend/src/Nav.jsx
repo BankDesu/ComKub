@@ -12,7 +12,7 @@ function Nav() {
 
   const confirmDelete = async () => {
     setShowSuccessDialog(true);
-
+// kjh
     try {
         await axios.get(`${apiPATH}/auth/delete`, {
             withCredentials: true,

@@ -16,9 +16,10 @@ import {
 const notebookRoutes = express.Router();
 
 notebookRoutes.get("/displayNotebook", async (req, res) => {
-  const {} = req.query;
+  const { brand, category, cpu, gpu, ram, minPrice, maxPrice } = req.query;
   try {
-    const notebook = await lookupNotebookall();
+    const filters = { brand, category, cpu, gpu, ram, minPrice, maxPrice };
+    const notebook = await lookupNotebookall(filters);
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
