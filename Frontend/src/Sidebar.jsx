@@ -80,27 +80,6 @@ export default function Sidebar({
     );
   };
 
-  const handleCPUChange = (CPU) => (event) => {
-    const isChecked = event.target.checked;
-    setSelectedCPUs((prev) =>
-      isChecked ? [...prev, CPU] : prev.filter((b) => b !== CPU)
-    );
-  };
-
-  const handleGPUChange = (GPU) => (event) => {
-    const isChecked = event.target.checked;
-    setSelectedGPUs((prev) =>
-      isChecked ? [...prev, GPU] : prev.filter((b) => b !== GPU)
-    );
-  };
-
-  const handleRamChange = (Ram) => (event) => {
-    const isChecked = event.target.checked;
-    setSelectedRams((prev) =>
-      isChecked ? [...prev, Ram] : prev.filter((b) => b !== Ram)
-    );
-  };
-
   const handleChangeRange = (event, newValue) => {
     setValue(newValue);
     setPriceRange(newValue);
@@ -294,7 +273,7 @@ export default function Sidebar({
           <Typography className="pl-5">PRICE RANGE</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Box sx={{ width: 220, ml: 1 }}>
+          <Box sx={{ width: 205, ml: 1 }}>
             <Slider
               getAriaLabel={() => "Price range"}
               value={value}
@@ -306,7 +285,7 @@ export default function Sidebar({
               max={200000}
               sx={{
                 color: "#545454",
-                height: 5,
+                height: 6,
                 "& .MuiSlider-thumb": {
                   height: 20,
                   width: 20,
@@ -343,7 +322,7 @@ export default function Sidebar({
                 justifyContent: "space-between",
                 mt: 2,
                 mr: 2,
-                ml: 1,
+                ml: 2,
               }}
             >
               <Input
@@ -377,250 +356,6 @@ export default function Sidebar({
               />
             </Box>
           </Box>
-        </AccordionDetails>
-      </CustomAccordion>
-
-      <CustomAccordion className="w-60 m-0!important">
-        <AccordionSummary
-          className="max-h-10"
-          expandIcon={<ArrowDropDownIcon />}
-          sx={{ backgroundColor: "" }}
-        >
-          <Typography className="pl-5">CPU</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleCPUChange("Intel Core i5")}
-                  checked={selectedCPUs.includes("Intel Core i5")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="Intel Core i5"
-                />
-              }
-              label="Intel Core i5"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleCPUChange("Intel Core i7")}
-                  checked={selectedCPUs.includes("Intel Core i7")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="Intel Core i7"
-                />
-              }
-              label="Intel Core i7"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleCPUChange("Intel Core i9")}
-                  checked={selectedCPUs.includes("Intel Core i9")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="Intel Core i9"
-                />
-              }
-              label="Intel Core i9"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleCPUChange("AMD Ryzen 5")}
-                  checked={selectedCPUs.includes("AMD Ryzen 5")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="AMD Ryzen 5"
-                />
-              }
-              label="AMD Ryzen 5"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleCPUChange("AMD Ryzen 7")}
-                  checked={selectedCPUs.includes("AMD Ryzen 7")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="AMD Ryzen 7"
-                />
-              }
-              label="AMD Ryzen 7"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleCPUChange("AMD Ryzen 9")}
-                  checked={selectedCPUs.includes("AMD Ryzen 9")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="AMD Ryzen 9"
-                />
-              }
-              label="AMD Ryzen 9"
-              labelPlacement="start"
-            />
-          </FormGroup>
-        </AccordionDetails>
-      </CustomAccordion>
-
-      <CustomAccordion className="w-60 m-0!important">
-        <AccordionSummary
-          className="max-h-10"
-          expandIcon={<ArrowDropDownIcon />}
-          sx={{ backgroundColor: "" }}
-        >
-          <Typography className="pl-5">GPU</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleGPUChange("Intel")}
-                  checked={selectedGPUs.includes("Intel")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="Intel"
-                />
-              }
-              label="Intel"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleGPUChange("NVIDIA")}
-                  checked={selectedGPUs.includes("NVIDIA")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="NVIDIA"
-                />
-              }
-              label="NVIDIA"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleGPUChange("AMD")}
-                  checked={selectedGPUs.includes("AMD")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="AMD"
-                />
-              }
-              label="AMD"
-              labelPlacement="start"
-            />
-          </FormGroup>
-        </AccordionDetails>
-      </CustomAccordion>
-
-      <CustomAccordion className="w-60 m-0!important">
-        <AccordionSummary
-          className="max-h-10"
-          expandIcon={<ArrowDropDownIcon />}
-          sx={{ backgroundColor: "" }}
-        >
-          <Typography className="pl-5">Ram</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleRamChange("8 GB")}
-                  checked={selectedRams.includes("8 GB")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="8 GB"
-                />
-              }
-              label="8GB"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleRamChange("16 GB")}
-                  checked={selectedRams.includes("16 GB")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="16 GB"
-                />
-              }
-              label="16GB"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleRamChange("32 GB")}
-                  checked={selectedRams.includes("32 GB")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="32 GB"
-                />
-              }
-              label="32GB"
-              labelPlacement="start"
-            />
-          </FormGroup>
-          <FormGroup className="mr-7 h-10">
-            <FormControlLabel
-              className="border-b-2"
-              control={
-                <Checkbox
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
-                  onChange={handleRamChange("64 GB")}
-                  checked={selectedRams.includes("64 GB")}
-                  inputProps={{ "aria-label": "controlled" }}
-                  name="64 GB"
-                />
-              }
-              label="64GB"
-              labelPlacement="start"
-            />
-          </FormGroup>
         </AccordionDetails>
       </CustomAccordion>
     </div>
