@@ -20,66 +20,13 @@ function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
+  const [dataN, setDataN] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
-  const handleSelectedBrands = (e) => {
-    setSelectedBrands(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedBrands, "Brand");
-  }, [selectedBrands]);
-
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const handleSelectedCategories = (e) => {
-    setSelectedCategories(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedCategories, "Categories");
-  }, [selectedCategories]);
-
   const [selectedCPUs, setSelectedCPUs] = useState([]);
-  const handleSelectedCPUs = (e) => {
-    setSelectedCPUs(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedCPUs, "CPU");
-  }, [selectedCPUs]);
-
   const [selectedGPUs, setSelectedGPUs] = useState([]);
-  const handleSelectedGPUs = (e) => {
-    setSelectedGPUs(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedGPUs, "GPU");
-  }, [selectedGPUs]);
-
   const [selectedRams, setSelectedRams] = useState([]);
-  const handleSelectedRams = (e) => {
-    setSelectedRams(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedRams, "Ram");
-  }, [selectedRams]);
-
-  const [priceRange, setPriceRange] = useState([]);
-  const handleSelectedPrice = (e) => {
-    setPriceRange(e);
-  };
-  React.useEffect(() => {
-    console.log(priceRange, "Price");
-  }, [priceRange]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
-
-  const handleClickOrder = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (event) => {
-    setAnchorEl(null);
-    const selectedSortOption = event.target.innerText;
-    setSortOption(event.target.innerText);
-  };
+  const [priceRange, setPriceRange] = useState([0, 200000]);
 
   const slides = [
     {
@@ -119,23 +66,58 @@ function Home() {
     },
   ];
 
-  const [dataN, setDataN] = useState([]);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
+      );
+      setDataN(response.data);
+      console.log(response.data, "Fetched data");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const fetchFilteredData = async () => {
+    try {
+      const params = {};
+      if (selectedBrands.length > 0) {
+        params.brand = selectedBrands.join(",");
+      }
+      if (selectedCategories.length > 0) {
+        params.category = selectedCategories.join(",");
+      }
+      if (selectedCPUs.length > 0) {
+        params.cpu = selectedCPUs.join(",");
+      }
+      if (selectedGPUs.length > 0) {
+        params.gpu = selectedGPUs.join(",");
+      }
+      if (selectedRams.length > 0) {
+        params.ram = selectedRams.join(",");
+      }
+      if (priceRange.length > 0) {
+        params.minPrice = priceRange[0];
+        params.maxPrice = priceRange[1];
+      }
+
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`,
+        { params }
+      );
+      setDataN(response.data);
+    } catch (error) {
+      console.error("Error fetching filtered data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
-        );
-        setDataN(response.data, "Fetched data");
-        console.log(response.data, "data");
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
     fetchData();
   }, []);
+
+  useEffect(() => {
+    fetchFilteredData();
+  }, [selectedBrands, selectedCategories, selectedCPUs, selectedGPUs, selectedRams, priceRange]);
 
   const sortData = (data) => {
     switch (sortOption) {
@@ -154,14 +136,6 @@ function Home() {
 
   const filteredData0 = dataN.filter((item) => {
     return (
-      (selectedBrands.length === 0 || selectedBrands.includes(item.brand)) &&
-      (selectedCategories.length === 0 ||
-        selectedCategories.includes(item.category)) &&
-      (selectedCPUs.length === 0 || selectedCPUs.includes(item.cpu)) &&
-      (selectedGPUs.length === 0 || selectedGPUs.includes(item.gpu)) &&
-      (selectedRams.length === 0 || selectedRams.includes(item.ram)) &&
-      (priceRange.length === 0 ||
-        (item.price >= priceRange[0] && item.price <= priceRange[1])) &&
       (search.toLowerCase() === "" ||
         item.notebook_name.toLowerCase().includes(search) ||
         item.cpu.toLowerCase().includes(search) ||
@@ -169,9 +143,11 @@ function Home() {
         item.ram.toLowerCase().includes(search))
     );
   });
-  const sortedFilteredData = sortData(filteredData0);
 
+  const sortedFilteredData = sortData(filteredData0);
+  const itemsPerPage = 12;
   const totalPages = Math.ceil(filteredData0.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -212,7 +188,7 @@ function Home() {
               aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
-              onClick={handleClickOrder}
+              onClick={(e) => setAnchorEl(e.currentTarget)}
             >
               <img
                 className="order w-8 h-7 absolute left-3 top-2 transition-transform duration-150 hover:transform hover:scale-110 filter invert"
@@ -224,26 +200,32 @@ function Home() {
               id="basic-menu"
               anchorEl={anchorEl}
               open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
+              onClose={() => setAnchorEl(null)}
+              MenuListProps={{ "aria-labelledby": "basic-button" }}
             >
-              <MenuItem onClick={handleClose}>Lowest price</MenuItem>
-              <MenuItem onClick={handleClose}>Highest price</MenuItem>
-              <MenuItem onClick={handleClose}>Name: A-Z</MenuItem>
-              <MenuItem onClick={handleClose}>Name: Z-A</MenuItem>
+              <MenuItem onClick={(e) => setSortOption(e.target.innerText)}>
+                Lowest price
+              </MenuItem>
+              <MenuItem onClick={(e) => setSortOption(e.target.innerText)}>
+                Highest price
+              </MenuItem>
+              <MenuItem onClick={(e) => setSortOption(e.target.innerText)}>
+                Name: A-Z
+              </MenuItem>
+              <MenuItem onClick={(e) => setSortOption(e.target.innerText)}>
+                Name: Z-A
+              </MenuItem>
             </Menu>
           </div>
         </div>
         <div className="container flex w-full mb-32">
           <Sidebar
-            onSelectBrand={handleSelectedBrands}
-            onSelectCategory={handleSelectedCategories}
-            onSelectCPU={handleSelectedCPUs}
-            onSelectGPU={handleSelectedGPUs}
-            onSelectRam={handleSelectedRams}
-            onSelectPrice={handleSelectedPrice}
+            onSelectBrand={setSelectedBrands}
+            onSelectCategory={setSelectedCategories}
+            onSelectCPU={setSelectedCPUs}
+            onSelectGPU={setSelectedGPUs}
+            onSelectRam={setSelectedRams}
+            onSelectPrice={setPriceRange}
           />
           <div className="data-wrap w-full h-full">
             <div className="slideset1 h-56 w-full relative overflow-hidden">

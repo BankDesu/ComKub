@@ -7,11 +7,10 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import MuiInput from "@mui/material/Input";
-import Slider, { SliderThumb } from "@mui/material/Slider";
+import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
-import axios from "axios";
 
 const CustomAccordion = styled(Accordion)(({ theme }) => ({
   "&.Mui-expanded": {
@@ -35,8 +34,6 @@ export default function Sidebar({
   onSelectRam,
   onSelectPrice,
 }) {
-  const [data, setData] = React.useState([]);
-  // const [filteredData, setFilteredData] = React.useState([]);
   const [selectedBrands, setSelectedBrands] = React.useState([]);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [selectedCPUs, setSelectedCPUs] = React.useState([]);
@@ -46,43 +43,28 @@ export default function Sidebar({
   const [value, setValue] = React.useState([15000, 85000]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
-        );
-        setData(response.data);
-        setFilteredData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+    onSelectBrand(selectedBrands);
+  }, [selectedBrands]);
 
-  // React.useEffect(() => {
-  //   const filteredData = data.filter((item) => {
-  //     // Apply filtering logic here based on selected criteria
-  //     return (
-  //       selectedBrands.includes(item.brand) &&
-  //       selectedCategories.includes(item.category) &&
-  //       selectedCPUs.includes(item.cpu) &&
-  //       selectedGPUs.includes(item.gpu) &&
-  //       selectedRams.includes(item.Ram) &&
-  //       item.price >= priceRange[0] &&
-  //       item.price <= priceRange[1]
-  //     );
-  //   });
-  //   setFilteredData(filteredData);
-  // }, [
-  //   data,
-  //   selectedBrands,
-  //   selectedCategories,
-  //   selectedCPUs,
-  //   selectedGPUs,
-  //   selectedRams,
-  //   priceRange,
-  // ]);
+  React.useEffect(() => {
+    onSelectCategory(selectedCategories);
+  }, [selectedCategories]);
+
+  React.useEffect(() => {
+    onSelectCPU(selectedCPUs);
+  }, [selectedCPUs]);
+
+  React.useEffect(() => {
+    onSelectGPU(selectedGPUs);
+  }, [selectedGPUs]);
+
+  React.useEffect(() => {
+    onSelectRam(selectedRams);
+  }, [selectedRams]);
+
+  React.useEffect(() => {
+    onSelectPrice(priceRange);
+  }, [priceRange]);
 
   const handleBrandChange = (brand) => (event) => {
     const isChecked = event.target.checked;
@@ -91,20 +73,12 @@ export default function Sidebar({
     );
   };
 
-  React.useEffect(() => {
-    onSelectBrand(selectedBrands);
-  }, [selectedBrands]);
-
   const handleCategorieChange = (category) => (event) => {
     const isChecked = event.target.checked;
     setSelectedCategories((prev) =>
       isChecked ? [...prev, category] : prev.filter((b) => b !== category)
     );
   };
-
-  React.useEffect(() => {
-    onSelectCategory(selectedCategories);
-  }, [selectedCategories]);
 
   const handleCPUChange = (CPU) => (event) => {
     const isChecked = event.target.checked;
@@ -113,20 +87,12 @@ export default function Sidebar({
     );
   };
 
-  React.useEffect(() => {
-    onSelectCPU(selectedCPUs);
-  }, [selectedCPUs]);
-
   const handleGPUChange = (GPU) => (event) => {
     const isChecked = event.target.checked;
     setSelectedGPUs((prev) =>
       isChecked ? [...prev, GPU] : prev.filter((b) => b !== GPU)
     );
   };
-
-  React.useEffect(() => {
-    onSelectGPU(selectedGPUs);
-  }, [selectedGPUs]);
 
   const handleRamChange = (Ram) => (event) => {
     const isChecked = event.target.checked;
@@ -135,18 +101,10 @@ export default function Sidebar({
     );
   };
 
-  React.useEffect(() => {
-    onSelectRam(selectedRams);
-  }, [selectedRams]);
-
   const handleChangeRange = (event, newValue) => {
     setValue(newValue);
     setPriceRange(newValue);
   };
-
-  React.useEffect(() => {
-    onSelectPrice(priceRange);
-  }, [priceRange[0], priceRange[1]]);
 
   const handleInputChangeMin = (event) => {
     const newValue = event.target.value === "" ? 0 : Number(event.target.value);
@@ -174,7 +132,7 @@ export default function Sidebar({
   };
 
   return (
-    <div className="sidebar-content bg-#A1C4FD z-10 mt-4 ml-4 relative ">
+    <div className="sidebar-content bg-#A1C4FD z-10 mt-4 ml-4 relative">
       <CustomAccordion className="w-60 m-0 !important">
         <AccordionSummary
           className="max-h-10"
@@ -414,7 +372,6 @@ export default function Sidebar({
                   min: 0,
                   max: 200000,
                   type: "number",
-
                   "aria-labelledby": "input-slider",
                 }}
               />
