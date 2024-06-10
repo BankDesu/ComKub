@@ -11,11 +11,6 @@ import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
-<<<<<<< HEAD
-import axios from "axios";
-import { useState,useEffect } from "react";
-=======
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
 
 const CustomAccordion = styled(Accordion)(({ theme }) => ({
   "&.Mui-expanded": {
@@ -36,31 +31,12 @@ export default function Sidebar({
   onSelectCategory,
   onSelectPrice,
 }) {
-<<<<<<< HEAD
-  const [data, setData] = React.useState([]);
-=======
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
   const [selectedBrands, setSelectedBrands] = React.useState([]);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [priceRange, setPriceRange] = React.useState([0, 200000]);
   const [value, setValue] = React.useState([15000, 85000]);
 
   React.useEffect(() => {
-<<<<<<< HEAD
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
-        );
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
-=======
     onSelectBrand(selectedBrands);
   }, [selectedBrands]);
 
@@ -117,7 +93,7 @@ export default function Sidebar({
   };
 
   return (
-    <div className="sidebar-content bg-#A1C4FD z-10 mt-4 ml-4 w-[20rem]">
+    <div className="sidebar-content bg-#A1C4FD z-10 mt-4 ml-4 relative">
       <CustomAccordion className="w-60 m-0 !important">
         <AccordionSummary
           className="max-h-10"

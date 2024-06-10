@@ -20,79 +20,10 @@ function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-<<<<<<< HEAD
-  const [selectedFilters, setSelectedFilters] = useState({
-    brands: [],
-    categories: [],
-    cpus: [],
-    gpus: [],
-    rams: [],
-    priceRange: [],
-  });
-
-  
-
-
-=======
   const [dataN, setDataN] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-<<<<<<< HEAD
-  
-  const handleSelectedCategories = (e) => {
-    setSelectedCategories(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedCategories, "Categories");
-  }, [selectedCategories]);
-
-  const [selectedCPUs, setSelectedCPUs] = useState([]);
-  const handleSelectedCPUs = (e) => {
-    setSelectedCPUs(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedCPUs, "CPU");
-  }, [selectedCPUs]);
-
-  const [selectedGPUs, setSelectedGPUs] = useState([]);
-  const handleSelectedGPUs = (e) => {
-    setSelectedGPUs(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedGPUs, "GPU");
-  }, [selectedGPUs]);
-
-  const [selectedRams, setSelectedRams] = useState([]);
-  const handleSelectedRams = (e) => {
-    setSelectedRams(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedRams, "Ram");
-  }, [selectedRams]);
-
-  const [priceRange, setPriceRange] = useState([]);
-  const handleSelectedPrice = (e) => {
-    setPriceRange(e);
-  };
-  React.useEffect(() => {
-    console.log(priceRange, "Price");
-  }, [priceRange]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
-
-  const handleClickOrder = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (event) => {
-    setAnchorEl(null);
-    const selectedSortOption = event.target.innerText;
-    setSortOption(event.target.innerText);
-  };
-=======
   const [priceRange, setPriceRange] = useState([0, 200000]);
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
 
   const slides = [
     {
@@ -175,7 +106,6 @@ function Home() {
   useEffect(() => {
     fetchFilteredData();
   }, [selectedBrands, selectedCategories, priceRange]);
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
 
   const sortData = (data) => {
     switch (sortOption) {
@@ -203,7 +133,9 @@ function Home() {
   });
 
   const sortedFilteredData = sortData(filteredData0);
+  const itemsPerPage = 12;
   const totalPages = Math.ceil(filteredData0.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
