@@ -19,7 +19,6 @@ function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-<<<<<<< HEAD
   const [selectedFilters, setSelectedFilters] = useState({
     brands: [],
     categories: [],
@@ -29,15 +28,9 @@ function Home() {
     priceRange: [],
   });
 
-  
-
-
-=======
   const [dataN, setDataN] = useState([]);
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-<<<<<<< HEAD
   
   const handleSelectedCategories = (e) => {
     setSelectedCategories(e);
@@ -90,9 +83,7 @@ function Home() {
     const selectedSortOption = event.target.innerText;
     setSortOption(event.target.innerText);
   };
-=======
-  const [priceRange, setPriceRange] = useState([0, 200000]);
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
+
 
   const slides = [
     {
@@ -172,12 +163,10 @@ function Home() {
     fetchData();
   }, []);
 
-<<<<<<< HEAD
-=======
   useEffect(() => {
     fetchFilteredData();
   }, [selectedBrands, selectedCategories, priceRange]);
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
+
 
   const sortData = (data) => {
     switch (sortOption) {
@@ -209,9 +198,7 @@ function Home() {
   });
 
   const sortedFilteredData = sortData(filteredData0);
-  const itemsPerPage = 12;
   const totalPages = Math.ceil(filteredData0.length / itemsPerPage);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
