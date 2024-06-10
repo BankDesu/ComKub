@@ -15,84 +15,15 @@ import "./index.css";
 
 function Home() {
   const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
   const [sortOption, setSortOption] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-<<<<<<< HEAD
-  const [selectedFilters, setSelectedFilters] = useState({
-    brands: [],
-    categories: [],
-    cpus: [],
-    gpus: [],
-    rams: [],
-    priceRange: [],
-  });
-
-  
-
-
-=======
   const [dataN, setDataN] = useState([]);
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-<<<<<<< HEAD
-  
-  const handleSelectedCategories = (e) => {
-    setSelectedCategories(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedCategories, "Categories");
-  }, [selectedCategories]);
-
-  const [selectedCPUs, setSelectedCPUs] = useState([]);
-  const handleSelectedCPUs = (e) => {
-    setSelectedCPUs(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedCPUs, "CPU");
-  }, [selectedCPUs]);
-
-  const [selectedGPUs, setSelectedGPUs] = useState([]);
-  const handleSelectedGPUs = (e) => {
-    setSelectedGPUs(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedGPUs, "GPU");
-  }, [selectedGPUs]);
-
-  const [selectedRams, setSelectedRams] = useState([]);
-  const handleSelectedRams = (e) => {
-    setSelectedRams(e);
-  };
-  React.useEffect(() => {
-    console.log(selectedRams, "Ram");
-  }, [selectedRams]);
-
-  const [priceRange, setPriceRange] = useState([]);
-  const handleSelectedPrice = (e) => {
-    setPriceRange(e);
-  };
-  React.useEffect(() => {
-    console.log(priceRange, "Price");
-  }, [priceRange]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
-
-  const handleClickOrder = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (event) => {
-    setAnchorEl(null);
-    const selectedSortOption = event.target.innerText;
-    setSortOption(event.target.innerText);
-  };
-=======
   const [priceRange, setPriceRange] = useState([0, 200000]);
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
 
   const slides = [
     {
@@ -172,12 +103,9 @@ function Home() {
     fetchData();
   }, []);
 
-<<<<<<< HEAD
-=======
   useEffect(() => {
     fetchFilteredData();
   }, [selectedBrands, selectedCategories, priceRange]);
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
 
   const sortData = (data) => {
     switch (sortOption) {
@@ -186,13 +114,9 @@ function Home() {
       case "Highest price":
         return [...data].sort((a, b) => b.price - a.price);
       case "Name: A-Z":
-        return [...data].sort((a, b) =>
-          a.notebook_name.localeCompare(b.notebook_name)
-        );
+        return [...data].sort((a, b) => a.notebook_name.localeCompare(b.notebook_name));
       case "Name: Z-A":
-        return [...data].sort((a, b) =>
-          b.notebook_name.localeCompare(a.notebook_name)
-        );
+        return [...data].sort((a, b) => b.notebook_name.localeCompare(a.notebook_name));
       default:
         return data;
     }
@@ -222,7 +146,6 @@ function Home() {
     const endIndex = startIndex + itemsPerPage;
     return sortedFilteredData.slice(startIndex, endIndex);
   };
-
 
   return (
     <>

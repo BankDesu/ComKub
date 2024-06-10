@@ -11,11 +11,6 @@ import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
-<<<<<<< HEAD
-import axios from "axios";
-import { useState,useEffect } from "react";
-=======
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
 
 const CustomAccordion = styled(Accordion)(({ theme }) => ({
   "&.Mui-expanded": {
@@ -36,31 +31,12 @@ export default function Sidebar({
   onSelectCategory,
   onSelectPrice,
 }) {
-<<<<<<< HEAD
-  const [data, setData] = React.useState([]);
-=======
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
   const [selectedBrands, setSelectedBrands] = React.useState([]);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [priceRange, setPriceRange] = React.useState([0, 200000]);
   const [value, setValue] = React.useState([15000, 85000]);
 
   React.useEffect(() => {
-<<<<<<< HEAD
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/displayNotebook`
-        );
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
-=======
     onSelectBrand(selectedBrands);
   }, [selectedBrands]);
 
@@ -71,7 +47,6 @@ export default function Sidebar({
   React.useEffect(() => {
     onSelectPrice(priceRange);
   }, [priceRange]);
->>>>>>> e2b63b96a3b57b72dfb151e573cc76ab7bae6695
 
   const handleBrandChange = (brand) => (event) => {
     const isChecked = event.target.checked;
@@ -297,7 +272,7 @@ export default function Sidebar({
                   height: 20,
                   width: 20,
                   backgroundColor: "#fff",
-                  border: "2px solid currentColor",
+                  border: '2px solid currentColor',
                   "&:focus, &:hover, &.Mui-active": {
                     boxShadow: "0px 1px 5px 1px rgba(0, 0, 0, 0.5)",
                   },

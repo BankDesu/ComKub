@@ -37,7 +37,7 @@ authRoutes.post('/login', async (req, res) => {
 authRoutes.post('/register', async (req, res) => {
     const { username, password, email } = req.body;
     try {
-      const user = await registerUser(username, password, email);
+      await registerUser(username, password, email);
       res.status(200).send('Registration successful');
     } catch (err) {
       console.error('Registration failed:', err);
@@ -58,23 +58,6 @@ authRoutes.get('/check', authMiddleware, (req, res) => {
         res.status(200).json({ username: req.user.username, userid: req.user.userid });
     } catch (err) {
         console.error('Error in /check endpoint:', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-authRoutes.get('/delete', authMiddleware, async (req, res) => {
-    try {
-        if (!req.user) {
-            return res.status(401).send('Unauthorized');
-        }
-        const success = await deleteUser(req.user.userid);
-        if (!success) {
-            return res.status(500).send('Internal Server Error');
-        }
-        res.clearCookie('token');
-        res.status(200).send('User deleted');
-    } catch (err) {
-        console.error('Error in /delete endpoint:', err);
         res.status(500).send('Internal Server Error');
     }
 });
