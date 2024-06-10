@@ -1,10 +1,9 @@
-import React from "react";
-import Nav from "./Nav";
-import About from "./About";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
+import Rating from "@mui/material/Rating";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import About from "./About";
+import Nav from "./Nav";
 
 function Recommend() {
   const [dataTop20k, setDataTop20k] = useState([]);
@@ -13,7 +12,7 @@ function Recommend() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_PATH}/notebook/displayTop4PriceEqualto20k`
+          `${import.meta.env.VITE_API_PATH}/notebook/displayTop5PriceEqualto20k`
         );
         setDataTop20k(response.data, "Fetched data");
         console.log(response.data, "data20k");
@@ -33,7 +32,7 @@ function Recommend() {
         const response = await axios.get(
           `${
             import.meta.env.VITE_API_PATH
-          }/notebook/displayTop4PriceBetweenmor20kto50k`
+          }/notebook/displayTop5PriceBetweenmor20kto50k`
         );
         setDataTop20_50k(response.data, "Fetched data");
         console.log(response.data, "data20_50k");
@@ -53,7 +52,7 @@ function Recommend() {
         const response = await axios.get(
           `${
             import.meta.env.VITE_API_PATH
-          }/notebook/displayTop4PriceBetweenmor50kto100k`
+          }/notebook/displayTop5PriceBetweenmor50kto100k`
         );
         setDataTop50_100k(response.data, "Fetched data");
         console.log(response.data, "data50_100k");
@@ -73,7 +72,7 @@ function Recommend() {
         const response = await axios.get(
           `${
             import.meta.env.VITE_API_PATH
-          }/notebook/displayTop4PriceMorethan100k`
+          }/notebook/displayTop5PriceMorethan100k`
         );
         setDataTop100_200k(response.data, "Fetched data");
         console.log(response.data, "data100_200k");
@@ -95,7 +94,7 @@ function Recommend() {
           </div>
           <div className="flex">
             {dataTop20k.map((data) => (
-              <div className="border-4 ml-10 m-6 p-2 border-black rounded-lg h-72 w-88 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">
+              <div className="border-4 ml-10 m-6 p-2 border-black rounded-lg h-72 w-72 data-home hover:transform hover:scale-105 hover:bg-white hover:drop-shadow-[15px_15px_3px_rgba(0,0,0,0.30)] bg-white">
                 <div className="flex justify-between">
                   <p className="text-base font-thin font-mono">{data.brand}</p>
                   <Rating

@@ -84,7 +84,7 @@ const lookupNotebookByram = async (ram) => {
     return results;
 };
 
-const lookupTop4PriceEqualto20k = async (minPrice = 0, maxPrice = 20000, limit = 4) => {
+const lookupTop5PriceEqualto20k = async (minPrice = 0, maxPrice = 20000, limit = 5) => {
     const [results, fields] = await db.promise().query(
         `
         SELECT *,
@@ -98,7 +98,7 @@ const lookupTop4PriceEqualto20k = async (minPrice = 0, maxPrice = 20000, limit =
     return results;
 };
 
-const lookupTop4PriceBetweenmor20kto50k = async (minPrice = 20001, maxPrice = 50000, limit = 4) => {
+const lookupTop5PriceBetweenmor20kto50k = async (minPrice = 20001, maxPrice = 50000, limit = 5) => {
     const [results, fields] = await db.promise().query(
         `
         SELECT *,
@@ -112,7 +112,7 @@ const lookupTop4PriceBetweenmor20kto50k = async (minPrice = 20001, maxPrice = 50
     return results;
 };
 
-const lookupTop4PriceBetweenmor50kto100k = async (minPrice = 50001, maxPrice = 100000, limit = 4) => {
+const lookupTop5PriceBetweenmor50kto100k = async (minPrice = 50001, maxPrice = 100000, limit = 5) => {
     const [results, fields] = await db.promise().query(
         `
         SELECT *,
@@ -126,7 +126,7 @@ const lookupTop4PriceBetweenmor50kto100k = async (minPrice = 50001, maxPrice = 1
     return results;
 };
 
-const lookupTop4PriceMorethan100k = async (minPrice = 100001, limit = 4) => {
+const lookupTop5PriceMorethan100k = async (minPrice = 100001, limit = 5) => {
     const [results, fields] = await db.promise().query(
         `
         SELECT *,
@@ -159,7 +159,7 @@ const searchNotebookByname = async (name) => {
 export {
     lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU,
     lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange,
-    lookupNotebookByram, lookupNotebookall, lookupTop4PriceBetweenmor20kto50k, lookupTop4PriceBetweenmor50kto100k, lookupTop4PriceEqualto20k, lookupTop4PriceMorethan100k, searchNotebookByname,
+    lookupNotebookByram, lookupNotebookall, lookupTop5PriceBetweenmor20kto50k, lookupTop5PriceBetweenmor50kto100k, lookupTop5PriceEqualto20k, lookupTop5PriceMorethan100k, searchNotebookByname,
     updatenotebookscore
 };
 

@@ -4,10 +4,10 @@ import {
   lookupNotebook, lookupNotebookByBrand, lookupNotebookByCPU,
   lookupNotebookByCategory, lookupNotebookByGPU, lookupNotebookByPriceRange,
   lookupNotebookByram, lookupNotebookall,
-  lookupTop4PriceBetweenmor20kto50k,
-  lookupTop4PriceBetweenmor50kto100k,
-  lookupTop4PriceEqualto20k,
-  lookupTop4PriceMorethan100k,
+  lookupTop5PriceBetweenmor20kto50k,
+  lookupTop5PriceBetweenmor50kto100k,
+  lookupTop5PriceEqualto20k,
+  lookupTop5PriceMorethan100k,
   searchNotebookByname,
   updatenotebookscore
 } from "../model/notebook.js";
@@ -97,36 +97,36 @@ notebookRoutes.get("/ram", async (req, res) => {
 });
 
 
-notebookRoutes.get("/displayTop4PriceEqualto20k", async (req, res) => {
+notebookRoutes.get("/displayTop5PriceEqualto20k", async (req, res) => {
   try {
-    const notebook = await lookupTop4PriceEqualto20k();
+    const notebook = await lookupTop5PriceEqualto20k();
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }
 });
 
-notebookRoutes.get("/displayTop4PriceBetweenmor20kto50k", async (req, res) => {
+notebookRoutes.get("/displayTop5PriceBetweenmor20kto50k", async (req, res) => {
   try {
-    const notebook = await lookupTop4PriceBetweenmor20kto50k();
+    const notebook = await lookupTop5PriceBetweenmor20kto50k();
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }
 });
 
-notebookRoutes.get("/displayTop4PriceBetweenmor50kto100k", async (req, res) => {
+notebookRoutes.get("/displayTop5PriceBetweenmor50kto100k", async (req, res) => {
   try {
-    const notebook = await lookupTop4PriceBetweenmor50kto100k();
+    const notebook = await lookupTop5PriceBetweenmor50kto100k();
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }
 });
 
-notebookRoutes.get("/displayTop4PriceMorethan100k", async (req, res) => {
+notebookRoutes.get("/displayTop5PriceMorethan100k", async (req, res) => {
   try {
-    const notebook = await lookupTop4PriceMorethan100k();
+    const notebook = await lookupTop5PriceMorethan100k();
     res.send(notebook);
   } catch (err) {
     res.status(500).send("Internal Server Error");
