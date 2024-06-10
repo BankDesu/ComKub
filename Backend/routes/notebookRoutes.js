@@ -35,7 +35,7 @@ notebookRoutes.get("/lookupNotebook/:notebook_id", async (req, res) => {
   }
 });
 
-notebookRoutes.get("/displayNotebookByBrand", async (req, res) => {
+notebookRoutes.get("/Brand", async (req, res) => {
   const { brand } = req.query;
   try {
     const notebook = await lookupNotebookByBrand(brand);
@@ -45,7 +45,7 @@ notebookRoutes.get("/displayNotebookByBrand", async (req, res) => {
   }
 });
 
-notebookRoutes.get("/displayNotebookByPriceRange", async (req, res) => {
+notebookRoutes.get("/Price", async (req, res) => {
   const { minPrice, maxPrice } = req.query;
   try {
     const notebook = await lookupNotebookByPriceRange(minPrice, maxPrice);
@@ -55,7 +55,7 @@ notebookRoutes.get("/displayNotebookByPriceRange", async (req, res) => {
   }
 });
 
-notebookRoutes.get("/displayNotebookByCategory", async (req, res) => {
+notebookRoutes.get("/Category", async (req, res) => {
   const { category } = req.query;
   try {
     const notebook = await lookupNotebookByCategory(category);
@@ -65,7 +65,7 @@ notebookRoutes.get("/displayNotebookByCategory", async (req, res) => {
   }
 });
 
-notebookRoutes.get("/displayNotebookByCPU", async (req, res) => {
+notebookRoutes.get("/cpu", async (req, res) => {
   const { cpu } = req.query;
   try {
     const notebook = await lookupNotebookByCPU(cpu);
@@ -75,7 +75,7 @@ notebookRoutes.get("/displayNotebookByCPU", async (req, res) => {
   }
 });
 
-notebookRoutes.get("/displayNotebookByGPU", async (req, res) => {
+notebookRoutes.get("/gpu", async (req, res) => {
   const { gpu } = req.query;
   try {
     const notebook = await lookupNotebookByGPU(gpu);
@@ -85,7 +85,7 @@ notebookRoutes.get("/displayNotebookByGPU", async (req, res) => {
   }
 });
 
-notebookRoutes.get("/displayNotebookByRam", async (req, res) => {
+notebookRoutes.get("/ram", async (req, res) => {
   const { ram } = req.query;
   try {
     const notebook = await lookupNotebookByram(ram);

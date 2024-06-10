@@ -62,4 +62,21 @@ authRoutes.get('/check', authMiddleware, (req, res) => {
     }
 });
 
+authRoutes.get('/delete', authMiddleware, async (req, res) => {
+    try {
+        if (!req.user) {
+            return res.status(401).send('Unauthorized');
+        }
+        const success = await deleteUser(req.user.userid);
+        if (!success) {
+            return res.status(500).send('Internal Server Error');
+        }
+        res.clearCookie('token');
+        res.status(200).send('User deleted');
+    } catch (err) {
+        console.error('Error in /delete endpoint:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 export default authRoutes;

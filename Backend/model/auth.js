@@ -28,9 +28,15 @@ const comparePassword = async (password, hashedPassword) => {
     return await bcrypt.compare(password, hashedPassword);
 };
 
+const deleteUser = async (userid) => {
+    const [result] = await db.promise().query("DELETE FROM user WHERE userid = ?", [userid]);
+    return result.affectedRows > 0;
+}
+
 export {
     comparePassword,
     findUser,
-    registerUser
+    registerUser,
+    deleteUser
 };
 
